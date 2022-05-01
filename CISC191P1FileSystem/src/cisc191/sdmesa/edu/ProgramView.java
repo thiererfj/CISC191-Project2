@@ -191,10 +191,10 @@ public class ProgramView extends JFrame
 		enterName.setForeground(Color.white);
 		add(enterName);
 		//Player Name Text Box
-		JTextArea playerName = new JTextArea("Username here");
-		playerName.setBounds(250, 550, 500, 50);
-		playerName.setFont(new Font("Times New Roman", Font.BOLD, 30));
-		add(playerName);
+		JTextArea userName = new JTextArea("Username here");
+		userName.setBounds(250, 550, 500, 50);
+		userName.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		add(userName);
 		
 		
 		
@@ -203,11 +203,12 @@ public class ProgramView extends JFrame
 		enterPassword.setBounds(250, 600, 150, 50);
 		enterPassword.setForeground(Color.white);
 		add(enterPassword);
+		
 		//Player Password Text Box
-		JTextArea playerPassword = new JTextArea("Password here");
-		playerPassword.setBounds(250, 650, 500, 50);
-		playerPassword.setFont(new Font("Times New Roman", Font.BOLD, 30));
-		add(playerPassword);
+		JTextArea userPassword = new JTextArea("Password here");
+		userPassword.setBounds(250, 650, 500, 50);
+		userPassword.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		add(userPassword);
 
 
 
