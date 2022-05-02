@@ -9,45 +9,40 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.Timer;
 
 public class ProgramView extends JFrame
 {
-	String accountType = "";
+	private final String VERSION = "1.1";
+	private final Database DATABASE;
+	private String accountType = "";
 	
     
-    public ProgramView()
+    public ProgramView(Database DATABASE)
     {
-        setSize(1000, 1000);
-        
+        this.DATABASE = DATABASE;
+		setSize(1000, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        getContentPane().setBackground(Color.black);
         setLayout(null);
-
-        
-        
+        setTitle("Angry File System - Version: " + VERSION);
 
         //For the first frame
         //Program Title --> 
         //Create Account/Log in to User Account / View User Accounts / Quit Program
-
     }
     
     public void printMainMenu() 
     {
-    	JLabel programTitle = new JLabel("Angry File System");
-        programTitle.setHorizontalAlignment(JLabel.CENTER);
-        programTitle.setOpaque(true);
-        programTitle.setBackground(Color.lightGray);
-        programTitle.setBounds(250, 100, 500, 200);
-        programTitle.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        programTitle.setForeground(Color.white);
-        
-        // Add title label to main window
-        add(programTitle);
+    	// Set black background here so sub frame doesn't change it when going back to main menu
+    	getContentPane().setBackground(Color.black);
+    	
+    	// Add title JLabel to window
+    	addTitleLabel("Angry File System", Color.LIGHT_GRAY, Color.WHITE);
         
         JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 20, 20));
         buttonPanel.setOpaque(true);
@@ -58,6 +53,9 @@ public class ProgramView extends JFrame
         createAccountButton.setBackground(Color.gray);
         createAccountButton.setFocusable(false);
         buttonPanel.add(createAccountButton);
+        
+        // Add button panel to main window
+        add(buttonPanel);
 
         createAccountButton.addActionListener(new ActionListener()
 	    {
@@ -106,14 +104,11 @@ public class ProgramView extends JFrame
 		      }
 		});
         
-        // Add button panel to main window
-        add(buttonPanel);
+        
         
         // Make main window visible
         setVisible(true);
     }
-
-    
 
     public void createAccountVisuals()
     {
@@ -122,14 +117,11 @@ public class ProgramView extends JFrame
         getContentPane().setBackground(Color.black);
         //GUI Visual Code for creating an account goes here
         
-        JLabel createAccountTitle = new JLabel("Create Account");
-        createAccountTitle.setHorizontalAlignment(JLabel.CENTER);
-        createAccountTitle.setOpaque(true);
-        createAccountTitle.setBackground(Color.lightGray);
-        createAccountTitle.setBounds(250, 100, 500, 200);
-        createAccountTitle.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        createAccountTitle.setForeground(Color.white);
-        add(createAccountTitle);
+        // Add back to main menu button functionality
+        addBackButton();
+        
+        // Add title JLabel to window
+        addTitleLabel("Create Account", Color.LIGHT_GRAY, Color.WHITE);
         
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 20, 20));
         buttonPanel.setOpaque(true);
@@ -166,6 +158,9 @@ public class ProgramView extends JFrame
 		});
 
         buttonPanel.add(basicUserButton);
+        
+        // Add button panel to window
+        add(buttonPanel);
 
       
         // SuperUser Button, if clicked --> userType = Super
@@ -186,11 +181,12 @@ public class ProgramView extends JFrame
 
 
         //Asking for Username
-		JLabel enterName = new JLabel("Create a Username");
+		JLabel enterName = new JLabel("Create a Username:");
 		enterName.setBounds(250, 500, 150, 50);
 		enterName.setForeground(Color.white);
 		add(enterName);
-		//Player Name Text Box
+		
+		//Username Text Box
 		JTextArea userName = new JTextArea("Username here");
 		userName.setBounds(250, 550, 500, 50);
 		userName.setFont(new Font("Times New Roman", Font.BOLD, 30));
@@ -199,20 +195,16 @@ public class ProgramView extends JFrame
 		
 		
 		//Asking for Password
-		JLabel enterPassword = new JLabel("Create a Password");
+		JLabel enterPassword = new JLabel("Create a Password:");
 		enterPassword.setBounds(250, 600, 150, 50);
 		enterPassword.setForeground(Color.white);
 		add(enterPassword);
 		
-		//Player Password Text Box
+		//User password Text Box
 		JTextArea userPassword = new JTextArea("Password here");
 		userPassword.setBounds(250, 650, 500, 50);
 		userPassword.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		add(userPassword);
-
-
-
-
 
         //JTextArea userNameArea = new JTextArea("Username Here");
 
@@ -228,13 +220,9 @@ public class ProgramView extends JFrame
         //Set Username / Set Password TextBoxes
         //Basic and SuperUser JButtons      (Which will disable if Super User is already created)
         
-        
-        add(buttonPanel);
-        setVisible(true);
 
         getContentPane().repaint();
     }
-
 
     public void loginVisuals()
     {
@@ -242,48 +230,79 @@ public class ProgramView extends JFrame
 
         getContentPane().setBackground(Color.orange);
         //GUI Visual Code for creating an account goes here
-
-
-
-        JLabel loginTitle = new JLabel("Login");
-        loginTitle.setHorizontalAlignment(JLabel.CENTER);
-        loginTitle.setOpaque(true);
-        loginTitle.setBackground(Color.lightGray);
-        loginTitle.setBounds(250, 100, 500, 200);
-        loginTitle.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        loginTitle.setForeground(Color.white);
-
-
+        
+        // Add back to main menu button functionality
+        addBackButton();
+        
+        // Add title JLabel to window
+        addTitleLabel("Login", Color.LIGHT_GRAY, Color.WHITE);
 
         //Set Username / Set Password TextBoxes
         //Basic and SuperUser JButtons      (Which will disable if Super User is already created)
 
-
         getContentPane().repaint();
     }
-    
-   
    
    public void viewUserAccountsVisuals()
     {
         getContentPane().removeAll();
 
-        getContentPane().setBackground(Color.blue);
+        getContentPane().setBackground(Color.PINK);
         //GUI Visual Code for creating an account goes here
-
-
-        JLabel loginTitle = new JLabel("Accounts");
-        loginTitle.setHorizontalAlignment(JLabel.CENTER);
-        loginTitle.setOpaque(true);
-        loginTitle.setBackground(Color.lightGray);
-        loginTitle.setBounds(250, 100, 500, 200);
-        loginTitle.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        loginTitle.setForeground(Color.white);
-
+        
+        // Add back to main menu button functionality
+        addBackButton();
+        
+        // Add title JLabel to window
+        addTitleLabel("Accounts", Color.LIGHT_GRAY, Color.WHITE);
 
         //Set Username / Set Password TextBoxes
         //Basic and SuperUser JButtons      (Which will disable if Super User is already created)
-
+        
+        // Super user account label
+        JLabel superUserLabel = new JLabel("Super User Account:");
+		superUserLabel.setBounds(200, 400, 150, 50);
+		superUserLabel.setForeground(Color.white);
+		add(superUserLabel);
+		
+		if (DATABASE.users[0] == null) 
+		{
+			JLabel noSuperUserExistsLabel = new JLabel("No super user exists...");
+			noSuperUserExistsLabel.setFont(new Font("Times New Roman", Font.BOLD, 22));
+			noSuperUserExistsLabel.setBounds(160, 450, 250, 50);
+			noSuperUserExistsLabel.setForeground(Color.BLACK);
+			add(noSuperUserExistsLabel);
+		}
+		else 
+		{
+			// Fix this
+			JList<Object> superUserList = new JList<Object>(DATABASE.getUsers());
+			superUserList.setBounds(180, 450, 150, 200);
+			add(superUserList);
+		}
+		
+		// Basic user account label
+		JLabel basicUsersLabel = new JLabel("Basic User Accounts:");
+		basicUsersLabel.setBounds(650, 400, 150, 50);
+		basicUsersLabel.setForeground(Color.white);
+		add(basicUsersLabel);
+		
+		if (DATABASE.users[1] == null) 
+		{
+			JLabel noBasicUserExistsLabel = new JLabel("No basic user exists...");
+			noBasicUserExistsLabel.setFont(new Font("Times New Roman", Font.BOLD, 22));
+			noBasicUserExistsLabel.setBounds(610, 450, 250, 50);
+			noBasicUserExistsLabel.setForeground(Color.BLACK);
+			add(noBasicUserExistsLabel);
+		}
+		else 
+		{
+			// This might work
+			JList<Object> superUserList = new JList<Object>(DATABASE.getUsers());
+			superUserList.setBounds(180, 450, 150, 200);
+			add(superUserList);
+		}
+        
 
         getContentPane().repaint();
     }
@@ -292,33 +311,76 @@ public class ProgramView extends JFrame
     {
         getContentPane().removeAll();
 
-
         getContentPane().setBackground(Color.black);
+        
+        // 5 second countdown to close program, if user does not click "X" to exit
+        Timer timer = new Timer(5000, new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				dispose();
+				System.exit(0);
+			}
+		});
+        
+        timer.start();
 
-        JLabel goodByeMessage = new JLabel("See you later friend! ;)");
-        goodByeMessage.setForeground(Color.white);
+        JLabel goodByeMessage = new JLabel("See you later, friend! ;)");
+        goodByeMessage.setBackground(Color.black);
+        goodByeMessage.setForeground(Color.green);
+        goodByeMessage.setOpaque(true);
         goodByeMessage.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        goodByeMessage.setBounds(100,500, 900, 900);
+        goodByeMessage.setBounds(100, 100, 800, 800);
+        
         add(goodByeMessage);
+        
         getContentPane().repaint();
-        try
-		{
-			Thread.sleep(5000);
-		}
-		catch (InterruptedException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        dispose();
+        
+//        try
+//		{
+//			Thread.sleep(5000);
+//		}
+//		catch (InterruptedException e)
+//		{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//        
+//        dispose();
 
-
-
-
-       
     }
-
-
+    
+    public void addBackButton() 
+    {
+    	JButton backButton = new JButton("Back");
+        backButton.setBackground(Color.lightGray);
+        backButton.setFocusable(false);
+        backButton.setBounds(20, 20, 70, 40);
+        add(backButton);
+        
+        backButton.addActionListener(new ActionListener()
+	    {
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  getContentPane().removeAll();
+		    	  getContentPane().repaint();
+		    	  printMainMenu(); 
+		      }
+		});
+    }
+    
+    public void addTitleLabel(String title, Color backgroundColor, Color foregroundColor) 
+    {
+    	JLabel titleLabel = new JLabel(title);
+        titleLabel.setHorizontalAlignment(JLabel.CENTER);
+        titleLabel.setOpaque(true);
+        titleLabel.setBackground(backgroundColor);
+        titleLabel.setBounds(250, 100, 500, 200);
+        titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 40));
+        titleLabel.setForeground(foregroundColor);
+        add(titleLabel);
+    }
 
 }   
 

@@ -23,7 +23,6 @@ import java.util.Scanner;
  * <<add more references here>>
  *  
  *  
- *  
  * Version/date: 2.4 04/05/2022
  * 
  * Responsibilities of class:
@@ -52,7 +51,7 @@ public class ProgramMenu
 		dataLoader.loadSavedData();
 		
 		// Create JFrame object to display window
-		ProgramView mainWindow = new ProgramView();
+		ProgramView mainWindow = new ProgramView(DATABASE);
 		
 		//Creates a Scanner object for receiving input, will be passed around to all methods requiring input
 		Scanner userInput = new Scanner(System.in);
@@ -88,8 +87,8 @@ public class ProgramMenu
 							break;
 							
 							//If the user clicks 3 viewUserAccounts() is called
-					case 3: viewUserAccounts();
-							break;
+//					case 3: viewUserAccounts();
+//							break;
 							
 							//If the user clicks 4 exitProgram() is called
 					case 4: exitProgram();
@@ -275,20 +274,20 @@ public class ProgramMenu
 		}
 	}
 	
-	/**
-	 * Purpose: To view the created user accounts
-	 * 
-	 */
-	public void viewUserAccounts()
-	{
-		// Print header
-		System.out.println("-----------------------------");
-		System.out.println("--- Viewing user accounts ---");
-		System.out.println("-----------------------------\n");
-		
-		// Call method to print users
-		DATABASE.viewUsers();
-	}
+//	/**
+//	 * Purpose: To view the created user accounts
+//	 * 
+//	 */
+//	public void viewUserAccounts()
+//	{
+//		// Print header
+//		System.out.println("-----------------------------");
+//		System.out.println("--- Viewing user accounts ---");
+//		System.out.println("-----------------------------\n");
+//		
+//		// Call method to print users
+//		DATABASE.viewUsers();
+//	}
 	
 	/**
 	 * Purpose: To run the current users FileSystemMenu
