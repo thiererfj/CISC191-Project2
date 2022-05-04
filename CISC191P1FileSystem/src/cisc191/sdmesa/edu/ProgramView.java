@@ -408,9 +408,9 @@ public class ProgramView extends JFrame
 		else 
 		{
 			// This might work
-			JList<Object> superUserList = new JList<Object>(DATABASE.getUsers());
-			superUserList.setBounds(180, 450, 150, 200);
-			add(superUserList);
+			JList<Object> basicUserList = new JList<Object>(DATABASE.getUsers());
+			basicUserList.setBounds(640, 450, 150, 200);
+			add(basicUserList);
 		}
         
 
