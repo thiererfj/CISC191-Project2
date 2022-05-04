@@ -19,6 +19,7 @@ public class ProgramView extends JFrame
 {
 	private final String VERSION = "1.1";
 	private final Database DATABASE;
+	private UserFactory factory = new UserFactory();
 	private String accountType = "";
 	
     
@@ -49,21 +50,26 @@ public class ProgramView extends JFrame
         buttonPanel.setBackground(Color.black);
         buttonPanel.setBounds(100, 600, 800, 100);
         
-        JButton createAccountButton = new JButton("Create Account");
-        createAccountButton.setBackground(Color.gray);
-        createAccountButton.setFocusable(false);
-        buttonPanel.add(createAccountButton);
         
-        // Add button panel to main window
-        add(buttonPanel);
+        if(DATABASE.getUsers()[9] == null)
+        {
+        	JButton createAccountButton = new JButton("Create Account");
+            createAccountButton.setBackground(Color.gray);
+            createAccountButton.setFocusable(false);
+            buttonPanel.add(createAccountButton);
+            
+            // Add button panel to main window
+            add(buttonPanel);
 
-        createAccountButton.addActionListener(new ActionListener()
-	    {
-		      public void actionPerformed(ActionEvent e)
-		      {
-		    	createAccountVisuals();
-		      }
-		});
+            createAccountButton.addActionListener(new ActionListener()
+    	    {
+    		      public void actionPerformed(ActionEvent e)
+    		      {
+    		    	createAccountVisuals();
+    		      }
+    		});
+        }
+        
 
         JButton loginButton = new JButton("Log In");
         loginButton.setBackground(Color.gray);
@@ -110,6 +116,13 @@ public class ProgramView extends JFrame
         setVisible(true);
     }
 
+    
+    
+    //Stuff that we need to instantiate for this method
+    JButton basicUserButton;
+    JButton superUserButton;
+    JButton accountInstanceButton;
+    
     public void createAccountVisuals()
     {
         getContentPane().removeAll();
@@ -126,26 +139,41 @@ public class ProgramView extends JFrame
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 20, 20));
         buttonPanel.setOpaque(true);
         buttonPanel.setBackground(Color.black);
-        buttonPanel.setBounds(300, 400, 400, 50);
+        buttonPanel.setBounds(300, 325, 400, 50);
         
-        //Click if you want to make super user account
-        JButton superUserButton = new JButton("Super User");
-        superUserButton.setBackground(Color.gray);
-        superUserButton.setFocusable(false);
-        buttonPanel.add(superUserButton);    
+        //If no super user
+        if(DATABASE.users[0] == null)
+        {
+        	superUserButton = new JButton("Super User");
+            superUserButton.setBackground(Color.gray);
+            superUserButton.setFocusable(false);
+            buttonPanel.add(superUserButton);
+            superUserButton.addActionListener(new ActionListener()
+    	    {
+    		      public void actionPerformed(ActionEvent e)
+    		      {
+    		    	  superUserButton.setEnabled(false);
+    		    	  basicUserButton.setEnabled(true);
+    		    	  accountInstanceButton.setEnabled(true);
+                    
+    		    	 
+    		      }
+    		});
+            
+        	
+        }
+        
+//        superUserButton = new JButton("Super User");
+//        superUserButton.setBackground(Color.gray);
+//        superUserButton.setFocusable(false);
+//        buttonPanel.add(superUserButton);    
 
-        superUserButton.addActionListener(new ActionListener()
-	    {
-		      public void actionPerformed(ActionEvent e)
-		      {
-		    	accountType = "Super";
-                
-		    	 
-		      }
-		});
+        
+        
+        
 
         //Click if you want to make basic user account
-        JButton basicUserButton = new JButton("Basic User");
+        basicUserButton = new JButton("Basic User");
         basicUserButton.setBackground(Color.gray);
         basicUserButton.setFocusable(false);
 
@@ -153,7 +181,14 @@ public class ProgramView extends JFrame
 	    {
 		      public void actionPerformed(ActionEvent e)
 		      {
-		    	 accountType = "basic";
+		    	 basicUserButton.setEnabled(false);
+		    	 accountInstanceButton.setEnabled(true);
+		    	 
+		    	 if(DATABASE.users[0] == null)
+		    	 {
+		    		 superUserButton.setEnabled(true);
+		    	 }
+		    	 
 		      }
 		});
 
@@ -182,13 +217,13 @@ public class ProgramView extends JFrame
 
         //Asking for Username
 		JLabel enterName = new JLabel("Create a Username:");
-		enterName.setBounds(250, 500, 150, 50);
+		enterName.setBounds(250, 375, 150, 50);
 		enterName.setForeground(Color.white);
 		add(enterName);
 		
 		//Username Text Box
-		JTextArea userName = new JTextArea("Username here");
-		userName.setBounds(250, 550, 500, 50);
+		JTextArea userName = new JTextArea();
+		userName.setBounds(250, 425, 500, 50);
 		userName.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		add(userName);
 		
@@ -196,13 +231,13 @@ public class ProgramView extends JFrame
 		
 		//Asking for Password
 		JLabel enterPassword = new JLabel("Create a Password:");
-		enterPassword.setBounds(250, 600, 150, 50);
+		enterPassword.setBounds(250, 475, 150, 50);
 		enterPassword.setForeground(Color.white);
 		add(enterPassword);
 		
 		//User password Text Box
-		JTextArea userPassword = new JTextArea("Password here");
-		userPassword.setBounds(250, 650, 500, 50);
+		JTextArea userPassword = new JTextArea();
+		userPassword.setBounds(250, 525, 500, 50);
 		userPassword.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		add(userPassword);
 
@@ -210,7 +245,82 @@ public class ProgramView extends JFrame
 
         //JTextArea passwordArea = new JTextArea("Password Here");
 
-        JButton accountInstanceButton = new JButton("Create Account");
+        accountInstanceButton = new JButton("Create Account");
+        accountInstanceButton.setBounds(400, 600, 200, 50);
+        accountInstanceButton.setEnabled(false);
+        accountInstanceButton.setBackground(Color.gray);
+        accountInstanceButton.setFocusable(false);
+        accountInstanceButton.addActionListener(new ActionListener()
+	    {
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  //Somehow we want a user object to be made.
+		    	  String userType = "";
+		    	  String username = userName.getText();
+		    	  String password = userPassword.getText();
+		    	  //If basic user Button is disabled   (I.E. We are creating a basic user)
+		    	  if(!basicUserButton.isEnabled())
+		    	  {
+		    		  userType = "basic";
+		    	  }
+		    	  else
+		    	  {
+		    		  userType = "super";
+		    	  }
+		    	  
+		    	  
+		    	  //FOR LATER  --> If username and password input is allowed  --> Add user to database
+		    	  if(DATABASE.findUsername(username)== null)
+		    	  {
+		    		  
+		    		  if(username.equals(""))
+		    		  {
+		    			  JTextArea enterUsername = new JTextArea("Please enter a Username");
+		    			  enterUsername.setBounds(775, 433, 150, 50);
+		    			  enterUsername.setBackground(Color.black);
+		    			  enterUsername.setForeground(Color.red);
+		    			  add(enterUsername);
+		    			  getContentPane().repaint();
+		    		  }
+		    		  if(password.equals(""))
+		    		  {
+		    			  JTextArea enterPassword = new JTextArea("Please enter a Password");
+		    			  enterPassword.setBounds(775, 533, 150, 50);
+		    			  enterPassword.setBackground(Color.black);
+		    			  enterPassword.setForeground(Color.red);
+		    			  add(enterPassword);
+		    			  getContentPane().repaint();
+		    		  }
+		    		  
+		    		  
+		    		  if(!username.equals("") && !password.equals(""))
+		    		  {
+		    			  DATABASE.addUser(factory.buildUser(userType, username, password, DATABASE), userType);
+				    	  getContentPane().removeAll();
+				    	  getContentPane().repaint();
+				    	  //System.out.println(DATABASE.getUsers()[0].getUsername());
+				    	  printMainMenu(); 
+		    		  }
+		    		  
+		    		  
+		    	  }
+		    	  else
+		    	  {
+		    		 JTextArea userNameAlreadyTaken = new JTextArea("That Username has \nalready been taken");
+		    		 userNameAlreadyTaken.setBounds(775, 433, 150, 50);
+		    		 userNameAlreadyTaken.setBackground(Color.black);
+		    		 userNameAlreadyTaken.setForeground(Color.red);
+		    		 add(userNameAlreadyTaken);
+		    		 getContentPane().repaint();
+		    	  }
+		    	
+		    	  
+		    	  
+		 
+		    	  
+		      }
+		});
+        add(accountInstanceButton);
         
         
         //String username = userNameArea.getText(); 
@@ -220,7 +330,7 @@ public class ProgramView extends JFrame
         //Set Username / Set Password TextBoxes
         //Basic and SuperUser JButtons      (Which will disable if Super User is already created)
         
-
+        setVisible(true);
         getContentPane().repaint();
     }
 
@@ -337,17 +447,6 @@ public class ProgramView extends JFrame
         
         getContentPane().repaint();
         
-//        try
-//		{
-//			Thread.sleep(5000);
-//		}
-//		catch (InterruptedException e)
-//		{
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//        
-//        dispose();
 
     }
     
@@ -383,4 +482,3 @@ public class ProgramView extends JFrame
     }
 
 }   
-
