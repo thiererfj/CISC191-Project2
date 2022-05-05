@@ -202,5 +202,40 @@ public class Database
 	{
 		return users;
 	}
+
+	public String[] getSuperUsername() 
+	{
+		String[] superUsername = new String[1];
+
+		if (users[0] == null) 
+		{
+			superUsername[0] = "null";
+		}
+		else 
+		{
+			superUsername[0] = users[0].getUsername();
+		}
+		
+		return superUsername;
+	}
+
+	public String[] getBasicUsernames() 
+	{
+		String[] basicUsernames = new String[9];
+
+		for (int i = 1; i < users.length; i++) 
+		{
+			if (users[i] == null) 
+			{
+				basicUsernames[i - 1] = "null";
+			}
+			else 
+			{
+				basicUsernames[i - 1] = users[i].getUsername();
+			}
+		}
+
+		return basicUsernames;
+	}
 	
 }
