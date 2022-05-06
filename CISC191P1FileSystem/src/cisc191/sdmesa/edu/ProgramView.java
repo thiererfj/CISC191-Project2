@@ -149,6 +149,63 @@ public class ProgramView extends JFrame
     {
 	   ViewUserAccountsView viewUserAccountsView = new ViewUserAccountsView(this, DATABASE);
 	   viewUserAccountsView.printView();
+        getContentPane().removeAll();
+
+        getContentPane().setBackground(Color.PINK);
+        //GUI Visual Code for creating an account goes here
+        
+        // Add back to main menu button functionality
+        addBackButton();
+        
+        // Add title JLabel to window
+        addTitleLabel("Accounts", Color.LIGHT_GRAY, Color.WHITE);
+
+        //Set Username / Set Password TextBoxes
+        //Basic and SuperUser JButtons      (Which will disable if Super User is already created)
+        
+        // Super user account label
+        JLabel superUserLabel = new JLabel("Super User Account:");
+		superUserLabel.setBounds(200, 400, 150, 50);
+		superUserLabel.setForeground(Color.white);
+		add(superUserLabel);
+		
+		if (DATABASE.users[0] == null) 
+		{
+			JLabel noSuperUserExistsLabel = new JLabel("No super user exists...");
+			noSuperUserExistsLabel.setFont(new Font("Times New Roman", Font.BOLD, 22));
+			noSuperUserExistsLabel.setBounds(160, 450, 250, 50);
+			noSuperUserExistsLabel.setForeground(Color.BLACK);
+			add(noSuperUserExistsLabel);
+		}
+		else 
+		{
+			// Fix this
+			JList<Object> superUserList = new JList<Object>(DATABASE.getUsers());
+			superUserList.setBounds(180, 450, 150, 200);
+			add(superUserList);
+		}
+		
+		// Basic user account label
+		JLabel basicUsersLabel = new JLabel("Basic User Accounts:");
+		basicUsersLabel.setBounds(650, 400, 150, 50);
+		basicUsersLabel.setForeground(Color.white);
+		add(basicUsersLabel);
+		
+		if (DATABASE.users[1] == null) 
+		{
+			JLabel noBasicUserExistsLabel = new JLabel("No basic user exists...");
+			noBasicUserExistsLabel.setFont(new Font("Times New Roman", Font.BOLD, 22));
+			noBasicUserExistsLabel.setBounds(610, 450, 250, 50);
+			noBasicUserExistsLabel.setForeground(Color.BLACK);
+			add(noBasicUserExistsLabel);
+		}
+		else 
+		{
+			// This might work
+			JList<Object> basicUserList = new JList<Object>(DATABASE.getUsers());
+			basicUserList.setBounds(640, 450, 150, 200);
+			add(basicUserList);
+		}
         
 
     }
