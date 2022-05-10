@@ -16,7 +16,6 @@ public class ViewUserAccountsView
 	private JList superUserList;
 	private JList basicUserList;
 
-
     public ViewUserAccountsView(ProgramView programWindow, Database DATABASE) 
     {
         this.programWindow = programWindow;
@@ -75,37 +74,6 @@ public class ViewUserAccountsView
 		}
 
         programWindow.getContentPane().repaint();
-    }
-
-    public void addBackButton() 
-    {
-    	JButton backButton = new JButton("Back");
-        backButton.setBackground(Color.lightGray);
-        backButton.setFocusable(false);
-        backButton.setBounds(20, 20, 70, 40);
-        programWindow.add(backButton);
-        
-        backButton.addActionListener(new ActionListener()
-	    {
-		      public void actionPerformed(ActionEvent e)
-		      {
-		    	  programWindow.getContentPane().removeAll();
-		    	  programWindow.getContentPane().repaint();
-		    	  programWindow.printMainMenu(); 
-		      }
-		});
-    }
-
-    public void addTitleLabel(String title, Color backgroundColor, Color foregroundColor) 
-    {
-    	JLabel titleLabel = new JLabel(title);
-        titleLabel.setHorizontalAlignment(JLabel.CENTER);
-        titleLabel.setOpaque(true);
-        titleLabel.setBackground(backgroundColor);
-        titleLabel.setBounds(250, 100, 500, 200);
-        titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        titleLabel.setForeground(foregroundColor);
-        programWindow.add(titleLabel);
     }
 
 }

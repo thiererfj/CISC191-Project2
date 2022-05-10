@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +20,7 @@ public class ProgramView extends JFrame
 {
 	private final String VERSION = "1.3";
 	private final Database DATABASE;
+	private ProgramMenu programMenu;
 	private UserFactory factory = new UserFactory();
 	private String accountType = "";
 	private User currentUser;
@@ -27,12 +29,14 @@ public class ProgramView extends JFrame
      * Purpose: Constructor for ProgramView that sets information for the JFrame
      * @param DATABASE
      */
-    public ProgramView(Database DATABASE)
+    public ProgramView(ProgramMenu programMenu, Database DATABASE)
     {
-        this.DATABASE = DATABASE;
+        this.programMenu = programMenu;
+    	this.DATABASE = DATABASE;
 		setSize(1000, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
+        setLocationRelativeTo(null);
         setLayout(null);
         setTitle("Angry File System - Version: " + VERSION);
 
@@ -114,7 +118,14 @@ public class ProgramView extends JFrame
 	    {
 		      public void actionPerformed(ActionEvent e)
 		      {
-		    	closeProgramVisuals(); 
+		    	try
+				{
+					closeProgramVisuals();
+				}
+				catch (IOException e1)
+				{
+					e1.printStackTrace();
+				} 
 		      }
 		});
         
@@ -212,14 +223,12 @@ public class ProgramView extends JFrame
 
    /**
     * Purpose: Terminates the program 
+ * @throws IOException 
     */
-    public void closeProgramVisuals()
+    public void closeProgramVisuals() throws IOException
     {
-    	QuitView quitView = new QuitView(this);
+    	QuitView quitView = new QuitView(this, programMenu);
     	quitView.printView();
-
-        
-
     }
     
     /**

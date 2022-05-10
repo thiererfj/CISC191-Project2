@@ -51,7 +51,7 @@ public class ProgramMenu
 		dataLoader.loadSavedData();
 		
 		// Create JFrame object to display window
-		ProgramView mainWindow = new ProgramView(DATABASE);
+		ProgramView mainWindow = new ProgramView(this, DATABASE);
 		
 		//Creates a Scanner object for receiving input, will be passed around to all methods requiring input
 		Scanner userInput = new Scanner(System.in);
@@ -91,8 +91,8 @@ public class ProgramMenu
 //							break;
 							
 							//If the user clicks 4 exitProgram() is called
-					case 4: exitProgram();
-							break;
+//					case 4: exitProgram();
+//							break;
 					
 							//If default is reached, the while loop will restart, thus printing out the main menu again
 					default: System.out.println("\\_(>_<)_/ --> Enter a valid menu option, STUPID!!!\n");
@@ -108,10 +108,10 @@ public class ProgramMenu
 				// Clear bad input
 				userInput.nextLine();
 			}
-			catch (IOException e2) 
-			{
-				System.out.println("\\_(>_<)_/ --> DAMN. I guess I messed this one up. Your data didn't get saved. Deal with it.");
-			}
+//			catch (IOException e2) 
+//			{
+//				System.out.println("\\_(>_<)_/ --> DAMN. I guess I messed this one up. Your data didn't get saved. Deal with it.");
+//			}
 		}
 	}
 	
@@ -308,10 +308,11 @@ public class ProgramMenu
 	}
 	
 	/**
-	 * Purpose: Exits the whole entire program
+	 * Saves the created accounts and files from this session to the program's utility files
+	 * 
 	 * @throws IOException 
 	 */
-	public void exitProgram() throws IOException 
+	public void saveDataBeforeExit() throws IOException 
 	{
 		//Says bye bye
 		System.out.println("\\_(o_o)_/ --> I thought you would never leave! By the way, I saved your data for next time. You're not welcome...");
