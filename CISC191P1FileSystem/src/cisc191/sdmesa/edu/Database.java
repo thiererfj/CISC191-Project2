@@ -96,58 +96,6 @@ public class Database
 		}
 	}
 	
-//	/**
-//	 * Purpose: To print out a list of users that have been created
-//	 * 
-//	 */
-//	public void viewUsers() 
-//	{
-//		// If no super user exists
-//		if (users[0] == null) 
-//		{
-//			// Tell users that no super user exists yet
-//			System.out.println("\\_(o_o)_/ --> What's that? No super user exists... there goes another second I won't get back.\n");
-//		}
-//		// Print out super user
-//		else 
-//		{
-//			// Print sub-header
-//			System.out.println("Super user account: ");
-//			
-//			// Print active superUser username
-//			System.out.println(users[0].getUsername());
-//			
-//			// Print nothing for spacing
-//			System.out.println();
-//		}
-//		
-//		// If no basic users exist
-//		if (users[1] == null) 
-//		{
-//			System.out.println("\\_(o_o)_/ --> Let me retrieve the basic users for you! JK, there are none.\n");
-//		}
-//		// Print out basic users
-//		else 
-//		{
-//			// Print sub-header
-//			System.out.println("Basic user accounts: ");
-//			
-//			// Start at 1 to loop through only basic users in users[] 
-//			for (int i = 1; i < users.length; i++) 
-//			{
-//				// If basicUser at index exists
-//				if (users[i] != null) 
-//				{
-//					// Print current basicUser username
-//					System.out.println(users[i].getUsername());
-//				}
-//			}
-//			
-//			// Print nothing for spacing
-//			System.out.println();
-//		}
-//	}
-	
 	/**
 	 * Purpose: To find if the userName given has been taken by an instance of a User object
 	 * 
@@ -218,7 +166,13 @@ public class Database
 		
 		return superUsername;
 	}
-
+	
+	
+	
+	
+	
+	
+	
 	public String[] getBasicUsernames() 
 	{
 		String[] basicUsernames = new String[9];
@@ -236,6 +190,26 @@ public class Database
 		}
 
 		return basicUsernames;
+	}
+
+	public boolean superUserExists() 
+	{
+		if (users[0] != null)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean basicUsersExist() 
+	{
+		if (users[1] != null) 
+		{
+			return true;
+		}
+
+		return false;
 	}
 	
 }

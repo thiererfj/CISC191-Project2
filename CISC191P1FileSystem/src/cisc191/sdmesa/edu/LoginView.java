@@ -10,10 +10,25 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
-public class LoginView {
+public class LoginView 
+{
 	
-	
-	LoginView(ProgramView programView, Database DATABASE)
+	// LoginView has a ProgramView
+	private ProgramView programView;
+
+	// LoginView had a ProgramModel
+	private ProgramModel programModel;
+
+	// Constructor
+	LoginView (ProgramView programView, ProgramModel programModel)
+	{
+		this.programView = programView;
+		this.programModel = programModel;
+		printView();
+	}
+
+	// Print the login view
+	public void printView() 
 	{
 		programView.getContentPane().removeAll();
 
@@ -41,8 +56,6 @@ public class LoginView {
       	userName.setFont(new Font("Times New Roman", Font.BOLD, 30));
       	programView.add(userName);
       		
-      		
-      		
       	//Asking for Password
       	JLabel enterPassword = new JLabel("Enter Password:");
       	enterPassword.setBounds(250, 475, 150, 50);
@@ -54,9 +67,6 @@ public class LoginView {
       	userPassword.setBounds(250, 525, 500, 50);
       	userPassword.setFont(new Font("Times New Roman", Font.BOLD, 30));
       	programView.add(userPassword);
-
-      	
-      	
       	
       	JTextArea usernameError = new JTextArea();
 		usernameError.setBounds(775, 433, 150, 50);
@@ -70,71 +80,50 @@ public class LoginView {
 		passwordError.setForeground(Color.red);
 		programView.add(passwordError);
       	
-      	
-      	
-      	
-      	
-      	
-      	
-      	
-      	
-      	
       	JButton loginButton = new JButton("Login");
       	loginButton.setBounds(400, 600, 200, 50);
       	loginButton.setBackground(Color.gray);
       	loginButton.setFocusable(false);
       	loginButton.addActionListener(new ActionListener()
 	    {
-		      public void actionPerformed(ActionEvent e)
+		      // If user clicks log in button
+			  public void actionPerformed(ActionEvent e)
 		      {
-		    	  //Somehow we want a user object to be made.
-		    	  String userType = "";
+		    	  // Store login parameters
 		    	  String username = userName.getText();
 		    	  String password = userPassword.getText();
 		    	  
-		    	  
-		    	  
-		    	  
-		    	  User loginAttempt = DATABASE.findUsername(username);
-		    	  
-		    	  if (Objects.isNull(loginAttempt))
+				  // Check if login tries to access an accoun that doesn't exist
+		    	  if (programModel.logIntoUser(username, password) == "That account does not exist")
 		    	  {
 		    		  usernameError.setText("That account doesn't exist");
 		    		  passwordError.setText("");
 	    			  programView.getContentPane().repaint();
 		    	  }
-		    	  
-		    	  else
-		    	  {
-		    		  usernameError.setText("");
-		    		  
-		    		  if(password.equalsIgnoreCase(loginAttempt.getPassword()))
-		    		  {
-		    			  programView.setCurrentUser(loginAttempt);
-		    			  programView.getCurrentUser().setIsActive(true); //At the moment I don't remember why we need this
-		    			  
-		    			  BasicUserMenuView userMenuView = new BasicUserMenuView(programView);
-		    		  }
-		    		  else
-		    		  {
-		    			  passwordError.setText("That password is incorrect!");
-		    			  programView.getContentPane().repaint();
-		    		  }
-		    	  }
+
+				  // Check if login has a bad password
+				  else if (programModel.logIntoUser(username, password) == "That password is incorrect!")
+				  {
+					  usernameError.setText("");
+					  passwordError.setText("That password is incorrect!");
+					  programView.getContentPane().repaint();
+				  }
+				  // Otherwise log into user account
+				  else 
+				  {
+					  // Model logs the user in to their account
+					  programModel.logIntoUser(username, password);
+
+					  // Logging in to a user account resets GUI to show their file system options
+					  UserMenuView userMenuView = new UserMenuView(programView);
+				  }
 		      }
 		});
       	
-      	
-      	
-  
-     		
-     		
-      	
-      	
-      	
-      	
+		// Adds login button to view
       	programView.add(loginButton);
-      	
+
+		// Update GUI
         programView.getContentPane().repaint();
 	}
 }

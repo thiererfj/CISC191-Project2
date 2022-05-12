@@ -18,13 +18,13 @@ import javax.swing.Timer;
 public class QuitView 
 {
     private ProgramView programWindow;
-    private ProgramMenu programMenu;
+    private ProgramModel programModel;
     private int userCloseOption;
 
-    public QuitView(ProgramView programWindow, ProgramMenu programMenu) 
+    public QuitView(ProgramView programWindow, ProgramModel programModel) 
     {
 		this.programWindow = programWindow;
-		this.programMenu = programMenu;
+		this.programModel = programModel;
     }
 
     public void printView() throws IOException 
@@ -37,7 +37,7 @@ public class QuitView
         
         if (userCloseOption == JOptionPane.YES_OPTION)
         {
-        	programMenu.saveDataBeforeExit();
+        	programModel.saveDataBeforeExit();
         	programWindow.dispatchEvent(new WindowEvent(programWindow, WindowEvent.WINDOW_CLOSING));
         }
         else if (userCloseOption == JOptionPane.NO_OPTION)

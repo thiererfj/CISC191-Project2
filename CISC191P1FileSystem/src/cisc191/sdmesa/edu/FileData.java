@@ -25,7 +25,7 @@ package cisc191.sdmesa.edu;
  */
 public class FileData 
 {
-	private String fileName;
+	private String fileName = "Empty";    //I changed this, originally it wasn't initialized
 	private String contents;
 	
 	/**

@@ -36,7 +36,7 @@ public class Main
 	public static void main(String[] args) throws IOException 
 	{	
 		// Create ProgramMenu object, which begins the File System
-		ProgramMenu fileProgram = new ProgramMenu();
+		ProgramModel fileProgram = new ProgramModel();
 		
 		// Print sweet title art
 //		System.out.println(	

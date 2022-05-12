@@ -13,25 +13,33 @@ import javax.swing.JTextArea;
 
 public class CreateAccountView {
 
-	ProgramView programView;
-	Database DATABASE;
-	JButton basicUserButton;
-    JButton superUserButton;
-    JButton accountInstanceButton;
-    private UserFactory factory;
+	//CreateAccountView has a programView
+	private ProgramView programView;
+	//CreateAccountView has a programModel
+	private ProgramModel programModel;
+	//CreateAccountView has a basicUserButton
+	private JButton basicUserButton;
+	//CreateAccountView has a superUserButton
+    private JButton superUserButton;
+    //CreateAccountView has an accountInstanceButton
+    private JButton accountInstanceButton;
 	
-	CreateAccountView(ProgramView programView, Database DATABASE, UserFactory factory)
+	/**
+	 * Purpose: Constructor for CreateAccountView
+	 * @param programView
+	 * @param programModel
+	 */
+    CreateAccountView(ProgramView programView, ProgramModel programModel)
 	{
 		this.programView = programView;
-		this.DATABASE = DATABASE;
-		this.factory = factory;
+		this.programModel = programModel;
+		//Calls the method that shows CreateAccountView's GUI components
 		createAccountVisuals();
 	}
-	
-	
     
-    
-    
+    /**
+     * Purpose: Creates the components for the GUI of the CreateAccountView
+     */
     public void createAccountVisuals()
     {
         programView.getContentPane().removeAll();
@@ -51,7 +59,7 @@ public class CreateAccountView {
         buttonPanel.setBounds(300, 325, 400, 50);
         
         //If no super user
-        if(DATABASE.users[0] == null)
+        if(!programModel.getDatabase().superUserExists())
         {
         	superUserButton = new JButton("Super User");
             superUserButton.setBackground(Color.gray);
@@ -73,9 +81,6 @@ public class CreateAccountView {
         }
         
         
-        
-        
-        
         //Click if you want to make basic user account
         basicUserButton = new JButton("Basic User");
         basicUserButton.setBackground(Color.gray);
@@ -88,7 +93,8 @@ public class CreateAccountView {
 		    	 basicUserButton.setEnabled(false);
 		    	 accountInstanceButton.setEnabled(true);
 		    	 
-		    	 if(DATABASE.users[0] == null)
+		    	 // If no super user exists
+				 if(!programModel.getDatabase().superUserExists())
 		    	 {
 		    		 superUserButton.setEnabled(true);
 		    	 }
@@ -100,9 +106,6 @@ public class CreateAccountView {
         
         // Add button panel to window
         programView.add(buttonPanel);
-
-      
-       
 
 
         //Asking for Username
@@ -130,10 +133,6 @@ public class CreateAccountView {
 		userPassword.setBounds(250, 525, 500, 50);
 		userPassword.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		programView.add(userPassword);
-
-        //JTextArea userNameArea = new JTextArea("Username Here");
-
-        //JTextArea passwordArea = new JTextArea("Password Here");
 
 		JTextArea usernameError = new JTextArea("");
         usernameError.setBounds(775, 433, 150, 50);
@@ -173,7 +172,7 @@ public class CreateAccountView {
 		    	  
 		    	  
 		    	  //FOR LATER  --> If username and password input is allowed  --> Add user to database
-		    	  if(DATABASE.findUsername(username)== null)
+		    	  if(programModel.getDatabase().findUsername(username)== null)
 		    	  {
 		    		  
 		    		  if(username.equals(""))
@@ -205,15 +204,31 @@ public class CreateAccountView {
 		    			  programView.getContentPane().repaint();
 		    		  }
 		    		  
-		    		  
-		    		  if(!username.equals("") && !password.equals(""))
+		    		  if(username.length() > 15)
 		    		  {
-		    			  DATABASE.addUser(factory.buildUser(userType, username, password, DATABASE), userType);
+		    			  usernameError.setText("Username cannot be greater\n than 15 characters");
+		    			  
+		    			  if(password.equals(""))
+		    			  {
+		    				  passwordError.setText("Please enter a password");
+		    			  }
+		    			  else
+		    			  {
+		    				  passwordError.setText("");
+		    			  }
+		    			  programView.getContentPane().repaint();
+		    		  }
+		    		  
+		    		  if(!username.equals("") && !password.equals("") && username.length() < 16)
+		    		  {
+		    			  programModel.createNewAccount(userType, username, password);
 				    	  programView.getContentPane().removeAll();
 				    	  programView.getContentPane().repaint();
 				    	  //System.out.println(DATABASE.getUsers()[0].getUsername());
 				    	  programView.printMainMenu(); 
 		    		  }
+		    		  
+		    		  
 		    		  
 		    		  
 		    	  }

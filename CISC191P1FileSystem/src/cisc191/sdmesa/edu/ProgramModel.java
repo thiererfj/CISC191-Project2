@@ -29,7 +29,7 @@ import java.util.Scanner;
  * ProgramMenu is designed to run the File System Program's overarching user interface. It initially allows users to manipulate user accounts within the database,
  * and once logged in, facilitates a unique User's filing system operations.    
  */
-public class ProgramMenu 
+public class ProgramModel 
 {
 	// Singleton design pattern, only have ONE database instance throughout program
 	private final Database DATABASE = Database.getInstance();
@@ -39,6 +39,21 @@ public class ProgramMenu
 	
 	// Program menu has a UserFactory to create users
 	private UserFactory factory = new UserFactory();
+
+	public Database getDatabase() 
+	{
+		return DATABASE;
+	}
+
+	public UserFactory getUserFactory() 
+	{
+		return factory;
+	}
+
+	public User getCurrentUser() 
+	{
+		return currentUser;
+	}
 	
 	/**
 	 * Purpose: To create a main menu for the user to interact with
@@ -51,7 +66,7 @@ public class ProgramMenu
 		dataLoader.loadSavedData();
 		
 		// Create JFrame object to display window
-		ProgramView mainWindow = new ProgramView(this, DATABASE);
+		ProgramView mainWindow = new ProgramView(this);
 		
 		//Creates a Scanner object for receiving input, will be passed around to all methods requiring input
 		Scanner userInput = new Scanner(System.in);
@@ -83,7 +98,7 @@ public class ProgramMenu
 							
 							//If the user clicks 2 logIntoUser() is called
 					case 2: userInput.nextLine();                       
-							logIntoUser(userInput);
+							//logIntoUser(userInput);
 							break;
 							
 							//If the user clicks 3 viewUserAccounts() is called
@@ -122,86 +137,10 @@ public class ProgramMenu
 	 * 
 	 * @param userInput
 	 */
-	public void createNewAccount(Scanner userInput, String username, String password) 
+	public void createNewAccount(String userType, String username, String password) 
 	{
-		//Sets variables that we will need to set based on the users input
-		String userType; 
-		String username1 = null;  
-		String password1 = null;
-		
-		// If no super user created yet, ask user which account type to create
-		if (DATABASE.users[0] == null) 
-		{
-			//Asking the user if they want to create a super account or a basic account
-			System.out.println("Is this a super user account or a basic user account?");
-			
-			// Holds type of User to be created
-			userType = userInput.nextLine();
-			
-			// Handle invalid type input
-			if (!userType.equalsIgnoreCase("super") && !userType.equalsIgnoreCase("basic"))
-			{
-				// Print error message
-				System.out.println("\\_(>_<)_/ --> I ONLY GAVE YOU TWO OPTIONS DAMN IT!!! CAN YOU NOT SPELL!?!");
-				
-				// Exit method
-				return;
-			}
-		}
-		// Otherwise force basic account creation
-		else 
-		{
-			// Set type of User being created to basic
-			userType = "basic";
-		}
-		
-		// Disallow basic user creation after all 9 basic user accounts have been created (basicUsersSerialNUmber will == 10)
-		if (factory.getBasicUsersSerialNumber() == 10) 
-		{
-			// Print error message
-			System.out.println("The max amount of basic users have already been created!");
-			System.out.println("\\_(>_<)_/ --> DAMN HOW MANY USERS DID YOU WANT!?\n");
-			
-			// Exit method
-			return;
-		}
-		
-		// Print header
-		System.out.println("------------------------");
-		System.out.println("--- Creating account ---");
-		System.out.println("------------------------\n");
-		
-		// Ask user to set the account username
-		System.out.println("\\_(>_<)_/ --> Enter your stupid username: ");
-		
-		// Holds account username
-		username = userInput.nextLine();
-		
-		// Check if username has already been created
-		// Create User object as temp User to compare account usernames, Database returns matching User or null if no match
-		User createAttempt = DATABASE.findUsername(username);
-					
-		// If Database returned an already created account with input username
-		if (Objects.nonNull(createAttempt))
-		{
-			// Print error message
-			System.out.println("\\_(>_<)_/ --> THAT USERNAME IS ALREADY TAKEN! GET YOUR OWN NAME!!!\n");
-						
-			// Exit method
-			return;
-		}
-		
-		// Ask user to set account password
-		System.out.println("Enter your password (AND DON'T GIVE IT TO YOUR MOM!!!): ");
-		
-		// Holds account password
-		password = userInput.nextLine();
-		
 		// Create User object with UserFactory build method, then store User in DATABASE with add user method
 		DATABASE.addUser(factory.buildUser(userType, username, password, DATABASE), userType);
-		
-		// Print success message
-		System.out.println("\\_(O_O)_/ --> Success! Account has been created. You finally did something right...\n");
 	}
 	
 	/**
@@ -209,85 +148,50 @@ public class ProgramMenu
 	 * 
 	 * @param userInput
 	 */
-	public void logIntoUser(Scanner userInput)
+	public String logIntoUser(String username, String password)
 	{
-		//If no account have been made...
-		if (DATABASE.users[0] == null && DATABASE.users[1] == null)
-		{
-			// Print error message
-			System.out.println("\\_(>_<)_/ --> YOU HAVE TO CREATE AN ACCOUNT FIRST IDIOT!!!\n");
-			
-			//the return statement marks the end of the method, it will then go back to the while loop and print out the main menu again
-			return;
-		}
-		
-		// Print header
-		System.out.println("------------------");
-		System.out.println("--- Logging in ---");
-		System.out.println("------------------\n");
-		
-		//Asking the user to enter a username of an already created account
-		System.out.println("Enter your stupid username: ");
-		
-		// Holds username for login attempt
-		String username = userInput.nextLine();
-		
 		// Create intermediary User object, check Database for matching username 
 		User loginAttempt = DATABASE.findUsername(username);
 		
 		// If input username does not match any Database User, loginAttempt will be null
 		if (Objects.isNull(loginAttempt)) 
 		{
-			// Print error message
-			System.out.println("\\_(>_<)_/ --> That account doesn't exist! WHAT THE HELL ARE YOU DOING!?\n");
-			
-			// Exit method
-			return;
+			return "That account does not exist";
 		}
-		
-		// If input username matches intermediary User username, ask user for password
-		System.out.println("Enter your stupid password: ");
-		
-		// Holds password for login attempt
-		String password = userInput.nextLine();
-		
-		// If input password matches intermediary User password
-		if (password.equalsIgnoreCase(loginAttempt.getPassword()))
+		else if (!password.equalsIgnoreCase(loginAttempt.getPassword()))
+		{
+			return "That password is incorrect!";
+		}
+		else 
 		{
 			// Assign current user to new verified login
 			currentUser = loginAttempt;
 			
 			// Set user activity so File System program can end on log out
 			currentUser.setIsActive(true);
-			
-			// Print success message
-			System.out.println("\\_(o_o)_/ --> Success! You logged in, I am mildly pleased... ");
-			
-			// Run the File System menu for this user, uses Scanner object as param to keep one Scanner throughout program
-			runUserFileSystem(userInput);
-		}
-		// If input password does not match intermediary User password
-		else 
-		{
-			// Print error message, end of method so return to main menu 
-			System.out.println("\\_(o_o)_/ --> That's not the correct password!\nCan you do anything right???\n");
+
+			return null;
 		}
 	}
 	
-//	/**
-//	 * Purpose: To view the created user accounts
-//	 * 
-//	 */
-//	public void viewUserAccounts()
-//	{
-//		// Print header
-//		System.out.println("-----------------------------");
-//		System.out.println("--- Viewing user accounts ---");
-//		System.out.println("-----------------------------\n");
-//		
-//		// Call method to print users
-//		DATABASE.viewUsers();
-//	}
+	/**
+	 * Purpose: To create a string of the created user accounts in order to display it in the GUI
+	 * 
+	 */
+	public String viewUserAccounts()
+	{
+		String users = "";
+		
+		for (int i = 0; i < getDatabase().getUsers().length; i++)
+		{
+			if(getDatabase().getUsers()[i] != null)
+			{
+				users = users + "\n	" + getDatabase().getUsers()[i].getUsername();
+			}
+		}
+		
+		return users;
+	}
 	
 	/**
 	 * Purpose: To run the current users FileSystemMenu
@@ -324,4 +228,6 @@ public class ProgramMenu
 		//Terminates the program
 		System.exit(0);
 	}
+
+	
 }

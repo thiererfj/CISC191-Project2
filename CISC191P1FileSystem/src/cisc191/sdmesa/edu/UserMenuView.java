@@ -8,20 +8,14 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class BasicUserMenuView {
+public class UserMenuView 
+{
 
-	BasicUserMenuView(ProgramView programView)
+
+
+	UserMenuView(ProgramView programView)
 	{
 		programView.getContentPane().removeAll();
-		
-		
-		
-		
-		
-		
-		
-		
-		
     	
     	// Add title JLabel to window
     	programView.addTitleLabel("User Menu", Color.LIGHT_GRAY, Color.WHITE);
@@ -45,7 +39,8 @@ public class BasicUserMenuView {
    	    {
         	public void actionPerformed(ActionEvent e)
         	{
-        		
+        		UploadFileView uploadFileView = new UploadFileView(programView);
+        		System.out.println("Clicked");
         	}
     	});
        
@@ -106,74 +101,11 @@ public class BasicUserMenuView {
 		      {
 		    	programView.getContentPane().removeAll();
 		    	programView.repaint();
-		    	programView.setCurrentUser(null);  //I'm pretty sure I would set it to null......
 		    	programView.printMainMenu();
 		      }
 		});
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		programView.addTitleLabel("User Menu", Color.lightGray, Color.white);
-//		
-//		
-//		
-//		
-//		
-//		
-//		JButton uploadFileButton = new JButton();
-//		uploadFileButton.setBounds(, 100);
-//		uploadFileButton.setBackground(Color.gray);
-//		
-//		JButton saveFileButton = new JButton();
-//		saveFileButton.setSize(50, 100);
-//		saveFileButton.setBackground(Color.gray);
-//		
-//		JButton deleteFileButton = new JButton();
-//		deleteFileButton.setSize(50, 100);
-//		deleteFileButton.setBackground(Color.gray);
-//		
-//		JButton viewFilesButton = new JButton();
-//		viewFilesButton.setSize(50, 100);
-//		viewFilesButton.setBackground(Color.gray);
-//		
-//		JButton logOutButton = new JButton();
-//		logOutButton.setSize(50, 100);
-//		logOutButton.setBackground(Color.gray);
-//		
-//		JPanel buttonPanel = new JPanel(new GridLayout(1, 5, 20, 20));
-//        buttonPanel.setOpaque(true);
-//        buttonPanel.setBackground(Color.black);
-//        buttonPanel.setBounds(100, 600, 800, 100);
-//		buttonPanel.add(uploadFileButton);
-//		buttonPanel.add(saveFileButton);
-//		buttonPanel.add(deleteFileButton);
-//		buttonPanel.add(viewFilesButton);
-//		buttonPanel.add(logOutButton);
-//		
-//		programView.add(buttonPanel);
-//		
 		
 		//BasicUser Options
 		System.out.println("1) Upload a file to the database");
