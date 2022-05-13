@@ -16,19 +16,16 @@ public class LoginView
 	// LoginView has a ProgramView
 	private ProgramView programView;
 
-	// LoginView had a ProgramModel
-	private ProgramModel programModel;
-
 	// Constructor
-	LoginView (ProgramView programView, ProgramModel programModel)
+	public LoginView (ProgramView programView)
 	{
 		this.programView = programView;
-		this.programModel = programModel;
+		
 		printView();
 	}
 
 	// Print the login view
-	public void printView() 
+	private void printView() 
 	{
 		programView.getContentPane().removeAll();
 
@@ -93,30 +90,31 @@ public class LoginView
 		    	  String username = userName.getText();
 		    	  String password = userPassword.getText();
 		    	  
-				  // Check if login tries to access an accoun that doesn't exist
-		    	  if (programModel.logIntoUser(username, password) == "That account does not exist")
+		    	  String loginError = programView.getProgramModel().logIntoUser(username, password);
+		    	  
+		    	  // Check if login did not return error message (loginError is null)
+		    	  if (Objects.isNull(loginError))
 		    	  {
-		    		  usernameError.setText("That account doesn't exist");
+					// Logging in to a user account resets GUI to show their file system options
+					UserMenuView userMenuView = new UserMenuView(programView);
+					
+					// Print logged in user's menu view
+					userMenuView.printView();
+		    	  }
+		    	  // Else if login returned account does not exist error message
+		    	  else if (loginError.equals("That account does not exist"))
+		    	  {
+		    		  usernameError.setText(loginError);
 		    		  passwordError.setText("");
 	    			  programView.getContentPane().repaint();
 		    	  }
-
-				  // Check if login has a bad password
-				  else if (programModel.logIntoUser(username, password) == "That password is incorrect!")
-				  {
-					  usernameError.setText("");
+		    	  // Else if login returned password incorrect error message
+		    	  else if (loginError.equals("That password is incorrect!"))
+		    	  {
+		    		  usernameError.setText("");
 					  passwordError.setText("That password is incorrect!");
 					  programView.getContentPane().repaint();
-				  }
-				  // Otherwise log into user account
-				  else 
-				  {
-					  // Model logs the user in to their account
-					  programModel.logIntoUser(username, password);
-
-					  // Logging in to a user account resets GUI to show their file system options
-					  UserMenuView userMenuView = new UserMenuView(programView);
-				  }
+		    	  }
 		      }
 		});
       	

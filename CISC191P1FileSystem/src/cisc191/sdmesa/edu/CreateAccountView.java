@@ -15,12 +15,13 @@ public class CreateAccountView {
 
 	//CreateAccountView has a programView
 	private ProgramView programView;
-	//CreateAccountView has a programModel
-	private ProgramModel programModel;
+	
 	//CreateAccountView has a basicUserButton
 	private JButton basicUserButton;
+	
 	//CreateAccountView has a superUserButton
     private JButton superUserButton;
+    
     //CreateAccountView has an accountInstanceButton
     private JButton accountInstanceButton;
 	
@@ -29,18 +30,18 @@ public class CreateAccountView {
 	 * @param programView
 	 * @param programModel
 	 */
-    CreateAccountView(ProgramView programView, ProgramModel programModel)
+    public CreateAccountView(ProgramView programView)
 	{
 		this.programView = programView;
-		this.programModel = programModel;
+		
 		//Calls the method that shows CreateAccountView's GUI components
-		createAccountVisuals();
+		printView();
 	}
     
     /**
      * Purpose: Creates the components for the GUI of the CreateAccountView
      */
-    public void createAccountVisuals()
+    private void printView()
     {
         programView.getContentPane().removeAll();
 
@@ -58,8 +59,8 @@ public class CreateAccountView {
         buttonPanel.setBackground(Color.black);
         buttonPanel.setBounds(300, 325, 400, 50);
         
-        //If no super user
-        if(!programModel.getDatabase().superUserExists())
+        // If no super user
+        if(!programView.getProgramModel().getDatabase().superUserExists())
         {
         	superUserButton = new JButton("Super User");
             superUserButton.setBackground(Color.gray);
@@ -72,7 +73,6 @@ public class CreateAccountView {
     		    	  superUserButton.setEnabled(false);
     		    	  basicUserButton.setEnabled(true);
     		    	  accountInstanceButton.setEnabled(true);
-                    
     		    	 
     		      }
     		});
@@ -94,7 +94,7 @@ public class CreateAccountView {
 		    	 accountInstanceButton.setEnabled(true);
 		    	 
 		    	 // If no super user exists
-				 if(!programModel.getDatabase().superUserExists())
+				 if(!programView.getProgramModel().getDatabase().superUserExists())
 		    	 {
 		    		 superUserButton.setEnabled(true);
 		    	 }
@@ -120,8 +120,6 @@ public class CreateAccountView {
 		userName.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		programView.add(userName);
 		
-		
-		
 		//Asking for Password
 		JLabel enterPassword = new JLabel("Create a Password:");
 		enterPassword.setBounds(250, 475, 150, 50);
@@ -146,7 +144,6 @@ public class CreateAccountView {
         passwordError.setForeground(Color.red);
         programView.add(passwordError);
 		
-		
         accountInstanceButton = new JButton("Create Account");
         accountInstanceButton.setBounds(400, 600, 200, 50);
         accountInstanceButton.setEnabled(false);
@@ -160,6 +157,7 @@ public class CreateAccountView {
 		    	  String userType = "";
 		    	  String username = userName.getText();
 		    	  String password = userPassword.getText();
+		    	  
 		    	  //If basic user Button is disabled   (I.E. We are creating a basic user)
 		    	  if(!basicUserButton.isEnabled())
 		    	  {
@@ -172,7 +170,8 @@ public class CreateAccountView {
 		    	  
 		    	  
 		    	  //FOR LATER  --> If username and password input is allowed  --> Add user to database
-		    	  if(programModel.getDatabase().findUsername(username)== null)
+		    	  // What is this for?
+		    	  if(programView.getProgramModel().getDatabase().findUsername(username) == null)
 		    	  {
 		    		  
 		    		  if(username.equals(""))
@@ -221,15 +220,12 @@ public class CreateAccountView {
 		    		  
 		    		  if(!username.equals("") && !password.equals("") && username.length() < 16)
 		    		  {
-		    			  programModel.createNewAccount(userType, username, password);
+		    			  programView.getProgramModel().createNewAccount(userType, username, password);
 				    	  programView.getContentPane().removeAll();
 				    	  programView.getContentPane().repaint();
 				    	  //System.out.println(DATABASE.getUsers()[0].getUsername());
 				    	  programView.printMainMenu(); 
 		    		  }
-		    		  
-		    		  
-		    		  
 		    		  
 		    	  }
 		    	  else
@@ -242,10 +238,6 @@ public class CreateAccountView {
 		    		 programView.getContentPane().repaint();
 		    	  }
 		    	
-		    	  
-		    	  
-		 
-		    	  
 		      }
 		});
         programView.add(accountInstanceButton);

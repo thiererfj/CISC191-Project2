@@ -13,22 +13,20 @@ import javax.swing.JTextArea;
 public class ViewUserAccountsView
 {
     private ProgramView programView;
-	private JList<String> superUserList;
-	private JList<String> basicUserList;
 
     public ViewUserAccountsView(ProgramView programView) 
     {
         this.programView = programView;
+        
         printView();
     }
 
-    public void printView() 
+    private void printView() 
     {
         programView.getContentPane().removeAll();
         programView.getContentPane().setBackground(Color.black);
         programView.addBackButton();
         programView.addTitleLabel("Accounts", Color.LIGHT_GRAY, Color.WHITE);
-        
         
         JTextArea userList = new JTextArea(programView.getProgramModel().viewUserAccounts());
         userList.setBounds(250,325, 500, 375);

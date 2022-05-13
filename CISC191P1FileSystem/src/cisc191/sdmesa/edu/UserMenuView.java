@@ -10,10 +10,14 @@ import javax.swing.JPanel;
 
 public class UserMenuView 
 {
-
-
-
-	UserMenuView(ProgramView programView)
+	private ProgramView programView;
+	
+	public UserMenuView (ProgramView programView)
+	{
+		this.programView = programView;
+	}
+	
+	public void printView() 
 	{
 		programView.getContentPane().removeAll();
     	
@@ -24,8 +28,6 @@ public class UserMenuView
         buttonPanel.setOpaque(true);
         buttonPanel.setBackground(Color.black);
         buttonPanel.setBounds(100, 600, 800, 100);
-        
-        
         
         JButton uploadFileButton = new JButton("Upload File");
         uploadFileButton.setBackground(Color.gray);
@@ -39,15 +41,14 @@ public class UserMenuView
    	    {
         	public void actionPerformed(ActionEvent e)
         	{
-        		UploadFileView uploadFileView = new UploadFileView(programView);
-        		System.out.println("Clicked");
+        		uploadFileVisuals();
+//        		System.out.println("Clicked");
         	}
     	});
        
         //GOODDDDDD
-        
 
-        JButton saveFileButton = new JButton("Receive File");
+        JButton saveFileButton = new JButton("Save File");
         saveFileButton.setBackground(Color.gray);
         saveFileButton.setFocusable(false);
         buttonPanel.add(saveFileButton);
@@ -56,7 +57,7 @@ public class UserMenuView
 	    {
 		      public void actionPerformed(ActionEvent e)
 		      {
-		    
+		    	  saveFileVisuals();
 		      }
 		});
         
@@ -106,14 +107,12 @@ public class UserMenuView
 		});
 		
 		
-		
 		//BasicUser Options
 		System.out.println("1) Upload a file to the database");
 		System.out.println("2) Save a database file to your machine");
 		System.out.println("3) Delete a file in the database");
 		System.out.println("4) View your database files");
 		System.out.println("5) Log out of current user");
-		
 		
 		
 		//SuperUser Options
@@ -127,5 +126,39 @@ public class UserMenuView
 		
 		programView.repaint();
 		programView.setVisible(true);
+	}
+	
+	private void uploadFileVisuals() 
+	{
+		UploadFileView uploadFileView = new UploadFileView(this, programView);
+	}
+	
+	private void saveFileVisuals() 
+	{
+		SaveFileView saveFileView = new SaveFileView(this, programView);
+	}
+	
+	/**
+	 * Purpose: To add a back button to a certain menu view
+	 */
+	public void addBackButton()
+	{
+		JButton backButton = new JButton("Back");
+		backButton.setBackground(Color.lightGray);
+		backButton.setFocusable(false);
+		backButton.setBounds(20, 20, 70, 40);
+
+		// Add widget to this window
+		programView.add(backButton);
+
+		backButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				programView.getContentPane().removeAll();
+				programView.getContentPane().repaint();
+				printView();
+			}
+		});
 	}
 }

@@ -68,66 +68,7 @@ public class ProgramModel
 		// Create JFrame object to display window
 		ProgramView mainWindow = new ProgramView(this);
 		
-		//Creates a Scanner object for receiving input, will be passed around to all methods requiring input
-		Scanner userInput = new Scanner(System.in);
-		
-		//If the end of this while block is reached, no matter what it will keep reprinting the menu
-		while (true)
-		{
-			// Options... 
-//			System.out.println("-------------------------------");
-//			System.out.println("--- User Accounts Main Menu ---");
-//			System.out.println("-------------------------------\n");
-//			System.out.println("1) Create new account");
-//			System.out.println("2) Log in to account");
-//			System.out.println("3) View user accounts");
-//			System.out.println("4) Quit program... because you quit at everything");
-//			System.out.println("\nEnter a menu option: ");
-			
-			mainWindow.printMainMenu();
-			
-			try 
-			{
-				//Switch statement using Scanner object with nextInt() in order to select one of the 4 options
-				switch (userInput.nextInt()) 
-				{
-							//If the user clicks 1 createNewAccount() is called
-					case 1: userInput.nextLine();
-//							createNewAccount(userInput);
-							break;
-							
-							//If the user clicks 2 logIntoUser() is called
-					case 2: userInput.nextLine();                       
-							//logIntoUser(userInput);
-							break;
-							
-							//If the user clicks 3 viewUserAccounts() is called
-//					case 3: viewUserAccounts();
-//							break;
-							
-							//If the user clicks 4 exitProgram() is called
-//					case 4: exitProgram();
-//							break;
-					
-							//If default is reached, the while loop will restart, thus printing out the main menu again
-					default: System.out.println("\\_(>_<)_/ --> Enter a valid menu option, STUPID!!!\n");
-							break;
-				}
-			} 
-			//If input isn't an int, then it will display an error message, the while loop will then restart, thus printing out the main menu again
-			catch (InputMismatchException e) 
-			{	
-				// Print error message
-				System.out.println("\\_(>_<)_/ --> ENTER A NUMBER YOU IDIOT!!! CAN YOU NOT COUNT TO 4???!!!\n");
-				
-				// Clear bad input
-				userInput.nextLine();
-			}
-//			catch (IOException e2) 
-//			{
-//				System.out.println("\\_(>_<)_/ --> DAMN. I guess I messed this one up. Your data didn't get saved. Deal with it.");
-//			}
-		}
+		mainWindow.printMainMenu();
 	}
 	
 	/**
@@ -156,10 +97,12 @@ public class ProgramModel
 		// If input username does not match any Database User, loginAttempt will be null
 		if (Objects.isNull(loginAttempt)) 
 		{
+			// Return account does not exist error message
 			return "That account does not exist";
 		}
 		else if (!password.equalsIgnoreCase(loginAttempt.getPassword()))
 		{
+			// Return password incorrect error message
 			return "That password is incorrect!";
 		}
 		else 
@@ -169,7 +112,8 @@ public class ProgramModel
 			
 			// Set user activity so File System program can end on log out
 			currentUser.setIsActive(true);
-
+			
+			// Return null for successful login
 			return null;
 		}
 	}
@@ -182,11 +126,25 @@ public class ProgramModel
 	{
 		String users = "";
 		
-		for (int i = 0; i < getDatabase().getUsers().length; i++)
+		if (DATABASE.getUsers()[0] == null) 
 		{
-			if(getDatabase().getUsers()[i] != null)
+			users = "\nNo accounts have been created yet";
+		}
+		else 
+		{
+			for (int i = 0; i < getDatabase().getUsers().length; i++)
 			{
-				users = users + "\n	" + getDatabase().getUsers()[i].getUsername();
+				if(getDatabase().getUsers()[i] != null)
+				{
+					if (i == 0) 
+					{
+						users = users + "\n" + getDatabase().getUsers()[i].getUsername() + " - (Super User)";
+					}
+					else 
+					{
+						users = users + "\n	" + getDatabase().getUsers()[i].getUsername();
+					}
+				}
 			}
 		}
 		

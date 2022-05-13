@@ -50,9 +50,6 @@ public class Main
 //				"                 |___/      |___/                        |___/                       \n"
 //				);
 		
-		// Greet user
-//		System.out.println("\n\\_(o_o)_/ --> Hello, user! Welcome to The AngryFileSystem! Don't mess up...\n");
-		
 		// Run ProgramMenu mainMenu()
 		fileProgram.mainMenu();
 	}

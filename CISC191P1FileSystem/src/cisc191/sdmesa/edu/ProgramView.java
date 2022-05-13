@@ -16,20 +16,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
-public class ProgramView extends JFrame 
+public class ProgramView extends JFrame
 {
 	private final String VERSION = "1.5";
 	private ProgramModel programModel;
 	private User currentUser;
-	
 
 	/**
 	 * Purpose: Constructor for ProgramView that sets information for the JFrame
 	 * 
 	 * @param DATABASE
 	 */
-	public ProgramView(ProgramModel programModel) 
-  {
+	public ProgramView(ProgramModel programModel)
+	{
 		this.programModel = programModel;
 		setSize(1000, 1000);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,16 +39,21 @@ public class ProgramView extends JFrame
 
 		// For the first frame
 		// Program Title -->
-		// Create Account/Log in to User Account / View User Accounts / Quit Program
+		// Create Account/Log in to User Account / View User Accounts / Quit
+		// Program
+	}
+
+	public ProgramModel getProgramModel()
+	{
+		return programModel;
 	}
 
 	/**
 	 * Purpose: Changes view to the PrintMainMenu Menu
 	 */
-	public void printMainMenu() 
-  {
-		// Set black background here so sub frame doesn't change it when going back to
-		// main menu
+	public void printMainMenu()
+	{
+		// Set black background here so sub frame doesn't change it when going back to main menu
 		getContentPane().setBackground(Color.black);
 
 		// Add title JLabel to window
@@ -60,7 +64,9 @@ public class ProgramView extends JFrame
 		buttonPanel.setBackground(Color.black);
 		buttonPanel.setBounds(100, 600, 800, 100);
 
-		if (programModel.getDatabase().getUsers()[9] == null) {
+		// Maybe we can rework this? What if there are 9 basic users but no super user
+		if (programModel.getDatabase().getUsers()[9] == null)
+		{
 			JButton createAccountButton = new JButton("Create Account");
 			createAccountButton.setBackground(Color.gray);
 			createAccountButton.setFocusable(false);
@@ -69,8 +75,10 @@ public class ProgramView extends JFrame
 			// Add button panel to main window
 			add(buttonPanel);
 
-			createAccountButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
+			createAccountButton.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
 					createAccountVisuals();
 				}
 			});
@@ -81,8 +89,10 @@ public class ProgramView extends JFrame
 		loginButton.setFocusable(false);
 		buttonPanel.add(loginButton);
 
-		loginButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		loginButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				loginVisuals();
 			}
 		});
@@ -92,22 +102,29 @@ public class ProgramView extends JFrame
 		viewUserAccountsButton.setFocusable(false);
 		buttonPanel.add(viewUserAccountsButton);
 
-		viewUserAccountsButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		viewUserAccountsButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
 				viewUserAccountsVisuals();
 			}
 		});
 
-		JButton quitProgramButton = new JButton("Quit Program");
+		JButton quitProgramButton = new JButton("Quit Program (Save Data)");
 		quitProgramButton.setBackground(Color.gray);
 		quitProgramButton.setFocusable(false);
 		buttonPanel.add(quitProgramButton);
 
-		quitProgramButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
+		quitProgramButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				try
+				{
 					closeProgramVisuals();
-				} catch (IOException e1) {
+				}
+				catch (IOException e1)
+				{
 					e1.printStackTrace();
 				}
 			}
@@ -120,24 +137,24 @@ public class ProgramView extends JFrame
 	/**
 	 * Purpose: Changes view to the CreateAccountVisuals Menu
 	 */
-	public void createAccountVisuals() 
-  {
-		CreateAccountView createAccountView = new CreateAccountView(this, programModel);
+	private void createAccountVisuals()
+	{
+		CreateAccountView createAccountView = new CreateAccountView(this);
 	}
 
 	/**
 	 * Purpose: Changes view to the LoginVisuals Menu
 	 */
-	public void loginVisuals() 
-  {
-		LoginView loginView = new LoginView(this, programModel);
+	private void loginVisuals()
+	{
+		LoginView loginView = new LoginView(this);
 	}
 
 	/**
 	 * Purpose: Changes view to the ViewUserAccounts Menu
 	 */
-	public void viewUserAccountsVisuals() 
-  {
+	private void viewUserAccountsVisuals()
+	{
 		// Create new VUAV object to display user accounts info
 		ViewUserAccountsView viewUserAccountsView = new ViewUserAccountsView(this);
 	}
@@ -145,30 +162,29 @@ public class ProgramView extends JFrame
 	/**
 	 * Purpose: Terminates the program
 	 * 
-	 * @throws IOException
+	 * @throws IOException (should never happen)
 	 */
-	public void closeProgramVisuals() throws IOException 
-  {
-		QuitView quitView = new QuitView(this, programModel);
-		quitView.printView();
+	private void closeProgramVisuals() throws IOException
+	{
+		QuitView quitView = new QuitView(this);
 	}
 
 	/**
 	 * Purpose: To add a back button to a certain menu view
 	 */
-	public void addBackButton() 
+	public void addBackButton()
 	{
 		JButton backButton = new JButton("Back");
 		backButton.setBackground(Color.lightGray);
 		backButton.setFocusable(false);
 		backButton.setBounds(20, 20, 70, 40);
-        
+
 		// Add widget to this window
 		add(backButton);
-    
-		backButton.addActionListener(new ActionListener() 
+
+		backButton.addActionListener(new ActionListener()
 		{
-			public void actionPerformed(ActionEvent e) 
+			public void actionPerformed(ActionEvent e)
 			{
 				getContentPane().removeAll();
 				getContentPane().repaint();
@@ -184,8 +200,8 @@ public class ProgramView extends JFrame
 	 * @param backgroundColor
 	 * @param foregroundColor
 	 */
-	public void addTitleLabel(String title, Color backgroundColor, Color foregroundColor) 
-  {
+	public void addTitleLabel(String title, Color backgroundColor, Color foregroundColor)
+	{
 		JLabel titleLabel = new JLabel(title);
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
 		titleLabel.setOpaque(true);
@@ -194,11 +210,6 @@ public class ProgramView extends JFrame
 		titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		titleLabel.setForeground(foregroundColor);
 		add(titleLabel);
-	}
-
-	public ProgramModel getProgramModel() 
-  {
-		return programModel;
 	}
 
 }

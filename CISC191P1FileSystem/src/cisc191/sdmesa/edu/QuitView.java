@@ -17,34 +17,44 @@ import javax.swing.Timer;
 
 public class QuitView 
 {
-    private ProgramView programWindow;
-    private ProgramModel programModel;
+    private ProgramView programView;
     private int userCloseOption;
 
-    public QuitView(ProgramView programWindow, ProgramModel programModel) 
+    public QuitView(ProgramView programView) throws IOException 
     {
-		this.programWindow = programWindow;
-		this.programModel = programModel;
+		this.programView = programView;
+		
+		printView();
     }
 
-    public void printView() throws IOException 
+    private void printView() throws IOException 
     {
-        programWindow.getContentPane().removeAll();
-        programWindow.getContentPane().setBackground(Color.black);
-        programWindow.getContentPane().repaint();
+        programView.getContentPane().removeAll();
+        programView.getContentPane().setBackground(Color.black);
+        programView.getContentPane().repaint();
         
+        // Prompt user for program close confirmation
         userCloseOption = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit the program?", "Quit Program", JOptionPane.YES_NO_OPTION);
         
+        // If user clicks yes
         if (userCloseOption == JOptionPane.YES_OPTION)
         {
-        	programModel.saveDataBeforeExit();
-        	programWindow.dispatchEvent(new WindowEvent(programWindow, WindowEvent.WINDOW_CLOSING));
+        	programView.getProgramModel().saveDataBeforeExit();
+        	programView.dispatchEvent(new WindowEvent(programView, WindowEvent.WINDOW_CLOSING));
         }
+        // If user clicks no
         else if (userCloseOption == JOptionPane.NO_OPTION)
         {
-        	programWindow.getContentPane().removeAll();
-        	programWindow.getContentPane().repaint();
-        	programWindow.printMainMenu(); 
+        	programView.getContentPane().removeAll();
+        	programView.getContentPane().repaint();
+        	programView.printMainMenu(); 
+        }
+        // If user clicks dialog box "x"
+        else 
+        {
+        	programView.getContentPane().removeAll();
+        	programView.getContentPane().repaint();
+        	programView.printMainMenu(); 
         }
     }
 	
