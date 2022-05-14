@@ -61,221 +61,200 @@ public class UploadFileView
 		// Loop to make file buttons
 		for (int i = 0; i < 10; i++) 
 		{
-			fileButtons[i] = new JButton(Integer.toString(i));
+			fileButtons[i] = new JButton(Integer.toString(i + 1));
 			fileButtons[i].setBackground(Color.gray);
 			fileButtons[i].setFocusable(false);
 		}
 		
-//		fileButton1.addActionListener(new ActionListener() 
-//		{
-//			public void actionPerformed(ActionEvent e) 
-//			{
-//				
-//				fileButton1.setEnabled(false);
-//				fileButton2.setEnabled(true);
-//				fileButton3.setEnabled(true);
-//				fileButton4.setEnabled(true);
-//				fileButton5.setEnabled(true);
-//				fileButton6.setEnabled(true);
-//				fileButton7.setEnabled(true);
-//				fileButton8.setEnabled(true);
-//				fileButton9.setEnabled(true);
-//				fileButton10.setEnabled(true);
-//				
-//				programView.getContentPane().repaint();
-//				
-//			}
-//		});
-//		
-//		fileButton2.addActionListener(new ActionListener() 
-//		{
-//			public void actionPerformed(ActionEvent e) 
-//			{
-//				
-//				
-//				fileButton1.setEnabled(true);
-//				fileButton2.setEnabled(false);
-//				fileButton3.setEnabled(true);
-//				fileButton4.setEnabled(true);
-//				fileButton5.setEnabled(true);
-//				fileButton6.setEnabled(true);
-//				fileButton7.setEnabled(true);
-//				fileButton8.setEnabled(true);
-//				fileButton9.setEnabled(true);
-//				fileButton10.setEnabled(true);
-//				
-//				programView.getContentPane().repaint();
-//				
-//			}
-//		});
-//		
-//		fileButton3.addActionListener(new ActionListener() 
-//		{
-//			public void actionPerformed(ActionEvent e) 
-//			{
-//				
-//				fileButton1.setEnabled(true);
-//				fileButton2.setEnabled(true);
-//				fileButton3.setEnabled(false);
-//				fileButton4.setEnabled(true);
-//				fileButton5.setEnabled(true);
-//				fileButton6.setEnabled(true);
-//				fileButton7.setEnabled(true);
-//				fileButton8.setEnabled(true);
-//				fileButton9.setEnabled(true);
-//				fileButton10.setEnabled(true);
-//				
-//				programView.getContentPane().repaint();
-//				
-//			}
-//		});
-//		
-//		fileButton4.addActionListener(new ActionListener() 
-//		{
-//			public void actionPerformed(ActionEvent e) 
-//			{
-//				
-//				fileButton1.setEnabled(true);
-//				fileButton2.setEnabled(true);
-//				fileButton3.setEnabled(true);
-//				fileButton4.setEnabled(false);
-//				fileButton5.setEnabled(true);
-//				fileButton6.setEnabled(true);
-//				fileButton7.setEnabled(true);
-//				fileButton8.setEnabled(true);
-//				fileButton9.setEnabled(true);
-//				fileButton10.setEnabled(true);
-//				
-//				programView.getContentPane().repaint();
-//				
-//			}
-//		});
-//		
-//		fileButton5.addActionListener(new ActionListener() 
-//		{
-//			public void actionPerformed(ActionEvent e) 
-//			{
-//				
-//				fileButton1.setEnabled(true);
-//				fileButton2.setEnabled(true);
-//				fileButton3.setEnabled(true);
-//				fileButton4.setEnabled(true);
-//				fileButton5.setEnabled(false);
-//				fileButton6.setEnabled(true);
-//				fileButton7.setEnabled(true);
-//				fileButton8.setEnabled(true);
-//				fileButton9.setEnabled(true);
-//				fileButton10.setEnabled(true);
-//				
-//				programView.getContentPane().repaint();
-//				
-//			}
-//		});
-//		
-//		fileButton6.addActionListener(new ActionListener() 
-//		{
-//			public void actionPerformed(ActionEvent e) 
-//			{
-//				
-//				fileButton1.setEnabled(true);
-//				fileButton2.setEnabled(true);
-//				fileButton3.setEnabled(true);
-//				fileButton4.setEnabled(true);
-//				fileButton5.setEnabled(true);
-//				fileButton6.setEnabled(false);
-//				fileButton7.setEnabled(true);
-//				fileButton8.setEnabled(true);
-//				fileButton9.setEnabled(true);
-//				fileButton10.setEnabled(true);
-//				
-//				programView.getContentPane().repaint();
-//				
-//			}
-//		});
-//		
-//		fileButton7.addActionListener(new ActionListener() 
-//		{
-//			public void actionPerformed(ActionEvent e) 
-//			{
-//				
-//				fileButton1.setEnabled(true);
-//				fileButton2.setEnabled(true);
-//				fileButton3.setEnabled(true);
-//				fileButton4.setEnabled(true);
-//				fileButton5.setEnabled(true);
-//				fileButton6.setEnabled(true);
-//				fileButton7.setEnabled(false);
-//				fileButton8.setEnabled(true);
-//				fileButton9.setEnabled(true);
-//				fileButton10.setEnabled(true);
-//				
-//				programView.getContentPane().repaint();
-//				
-//			}
-//		});
-//		
-//		fileButton8.addActionListener(new ActionListener() 
-//		{
-//			public void actionPerformed(ActionEvent e) 
-//			{
-//				
-//				fileButton1.setEnabled(true);
-//				fileButton2.setEnabled(true);
-//				fileButton3.setEnabled(true);
-//				fileButton4.setEnabled(true);
-//				fileButton5.setEnabled(true);
-//				fileButton6.setEnabled(true);
-//				fileButton7.setEnabled(true);
-//				fileButton8.setEnabled(false);
-//				fileButton9.setEnabled(true);
-//				fileButton10.setEnabled(true);
-//				
-//				programView.getContentPane().repaint();
-//				
-//			}
-//		});
-//		
-//		fileButton9.addActionListener(new ActionListener() 
-//		{
-//			public void actionPerformed(ActionEvent e) 
-//			{
-//				
-//				fileButton1.setEnabled(true);
-//				fileButton2.setEnabled(true);
-//				fileButton3.setEnabled(true);
-//				fileButton4.setEnabled(true);
-//				fileButton5.setEnabled(true);
-//				fileButton6.setEnabled(true);
-//				fileButton7.setEnabled(true);
-//				fileButton8.setEnabled(true);
-//				fileButton9.setEnabled(false);
-//				fileButton10.setEnabled(true);
-//				
-//				programView.getContentPane().repaint();
-//				
-//			}
-//		});
-//		
-//		fileButton10.addActionListener(new ActionListener() 
-//		{
-//			public void actionPerformed(ActionEvent e) 
-//			{
-//				
-//				fileButton1.setEnabled(true);
-//				fileButton2.setEnabled(true);
-//				fileButton3.setEnabled(true);
-//				fileButton4.setEnabled(true);
-//				fileButton5.setEnabled(true);
-//				fileButton6.setEnabled(true);
-//				fileButton7.setEnabled(true);
-//				fileButton8.setEnabled(true);
-//				fileButton9.setEnabled(true);
-//				fileButton10.setEnabled(false);
-//				
-//				programView.getContentPane().repaint();
-//				
-//			}
-//		});
+		fileButtons[0].addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				fileButtons[0].setEnabled(false);
+				fileButtons[1].setEnabled(true);
+				fileButtons[2].setEnabled(true);
+				fileButtons[3].setEnabled(true);
+				fileButtons[4].setEnabled(true);
+				fileButtons[5].setEnabled(true);
+				fileButtons[6].setEnabled(true);
+				fileButtons[7].setEnabled(true);
+				fileButtons[8].setEnabled(true);
+				fileButtons[9].setEnabled(true);
+				
+				programView.getContentPane().repaint();
+			}
+		});
+		
+		fileButtons[1].addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				fileButtons[0].setEnabled(true);
+				fileButtons[1].setEnabled(false);
+				fileButtons[2].setEnabled(true);
+				fileButtons[3].setEnabled(true);
+				fileButtons[4].setEnabled(true);
+				fileButtons[5].setEnabled(true);
+				fileButtons[6].setEnabled(true);
+				fileButtons[7].setEnabled(true);
+				fileButtons[8].setEnabled(true);
+				fileButtons[9].setEnabled(true);
+				
+				programView.getContentPane().repaint();
+			}
+		});
+		
+		fileButtons[2].addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				fileButtons[0].setEnabled(true);
+				fileButtons[1].setEnabled(true);
+				fileButtons[2].setEnabled(false);
+				fileButtons[3].setEnabled(true);
+				fileButtons[4].setEnabled(true);
+				fileButtons[5].setEnabled(true);
+				fileButtons[6].setEnabled(true);
+				fileButtons[7].setEnabled(true);
+				fileButtons[8].setEnabled(true);
+				fileButtons[9].setEnabled(true);
+				
+				programView.getContentPane().repaint();
+			}
+		});
+		
+		fileButtons[3].addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				fileButtons[0].setEnabled(true);
+				fileButtons[1].setEnabled(true);
+				fileButtons[2].setEnabled(true);
+				fileButtons[3].setEnabled(false);
+				fileButtons[4].setEnabled(true);
+				fileButtons[5].setEnabled(true);
+				fileButtons[6].setEnabled(true);
+				fileButtons[7].setEnabled(true);
+				fileButtons[8].setEnabled(true);
+				fileButtons[9].setEnabled(true);
+				
+				programView.getContentPane().repaint();
+			}
+		});
+		
+		fileButtons[4].addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				fileButtons[0].setEnabled(true);
+				fileButtons[1].setEnabled(true);
+				fileButtons[2].setEnabled(true);
+				fileButtons[3].setEnabled(true);
+				fileButtons[4].setEnabled(false);
+				fileButtons[5].setEnabled(true);
+				fileButtons[6].setEnabled(true);
+				fileButtons[7].setEnabled(true);
+				fileButtons[8].setEnabled(true);
+				fileButtons[9].setEnabled(true);
+				
+				programView.getContentPane().repaint();
+			}
+		});
+		
+		fileButtons[5].addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				fileButtons[0].setEnabled(true);
+				fileButtons[1].setEnabled(true);
+				fileButtons[2].setEnabled(true);
+				fileButtons[3].setEnabled(true);
+				fileButtons[4].setEnabled(true);
+				fileButtons[5].setEnabled(false);
+				fileButtons[6].setEnabled(true);
+				fileButtons[7].setEnabled(true);
+				fileButtons[8].setEnabled(true);
+				fileButtons[9].setEnabled(true);
+				
+				programView.getContentPane().repaint();
+			}
+		});
+		
+		fileButtons[6].addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				fileButtons[0].setEnabled(true);
+				fileButtons[1].setEnabled(true);
+				fileButtons[2].setEnabled(true);
+				fileButtons[3].setEnabled(true);
+				fileButtons[4].setEnabled(true);
+				fileButtons[5].setEnabled(true);
+				fileButtons[6].setEnabled(false);
+				fileButtons[7].setEnabled(true);
+				fileButtons[8].setEnabled(true);
+				fileButtons[9].setEnabled(true);
+				
+				programView.getContentPane().repaint();
+			}
+		});
+		
+		fileButtons[7].addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				fileButtons[0].setEnabled(true);
+				fileButtons[1].setEnabled(true);
+				fileButtons[2].setEnabled(true);
+				fileButtons[3].setEnabled(true);
+				fileButtons[4].setEnabled(true);
+				fileButtons[5].setEnabled(true);
+				fileButtons[6].setEnabled(true);
+				fileButtons[7].setEnabled(false);
+				fileButtons[8].setEnabled(true);
+				fileButtons[9].setEnabled(true);
+				
+				programView.getContentPane().repaint();
+			}
+		});
+		
+		fileButtons[8].addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				fileButtons[0].setEnabled(true);
+				fileButtons[1].setEnabled(true);
+				fileButtons[2].setEnabled(true);
+				fileButtons[3].setEnabled(true);
+				fileButtons[4].setEnabled(true);
+				fileButtons[5].setEnabled(true);
+				fileButtons[6].setEnabled(true);
+				fileButtons[7].setEnabled(true);
+				fileButtons[8].setEnabled(false);
+				fileButtons[9].setEnabled(true);
+				
+				programView.getContentPane().repaint();
+			}
+		});
+		
+		fileButtons[9].addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				fileButtons[0].setEnabled(true);
+				fileButtons[1].setEnabled(true);
+				fileButtons[2].setEnabled(true);
+				fileButtons[3].setEnabled(true);
+				fileButtons[4].setEnabled(true);
+				fileButtons[5].setEnabled(true);
+				fileButtons[6].setEnabled(true);
+				fileButtons[7].setEnabled(true);
+				fileButtons[8].setEnabled(true);
+				fileButtons[9].setEnabled(false);
+				
+				programView.getContentPane().repaint();
+			}
+		});
 		
 		fileButtonPanel = new JPanel();
 		fileButtonPanel.setBounds(300, 350, 50, 250); //last bound was 500
