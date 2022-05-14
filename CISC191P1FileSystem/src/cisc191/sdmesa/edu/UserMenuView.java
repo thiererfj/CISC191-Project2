@@ -1,23 +1,41 @@
 package cisc191.sdmesa.edu;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 public class UserMenuView 
 {
 	private ProgramView programView;
+	private boolean currentUserIsSuper;
 	
 	public UserMenuView (ProgramView programView)
 	{
 		this.programView = programView;
+		setUserType();
 		printView();
+	}
+	
+	private void setUserType() 
+	{
+		if (programView.getProgramModel().getCurrentUser() instanceof SuperUser) 
+		{
+			currentUserIsSuper = true;
+		}
+		else 
+		{
+			currentUserIsSuper = false;
+		}
 	}
 	
 	public void printView() 
@@ -88,19 +106,64 @@ public class UserMenuView
 				deleteFileVisuals();
 			}
 		});
-
-		JButton viewFilesButton = new JButton("View Your Files");
-		viewFilesButton.setBackground(Color.gray);
-		viewFilesButton.setFocusable(false);
-		buttonPanel.add(viewFilesButton);
-
-		viewFilesButton.addActionListener(new ActionListener()
+		
+		// Add extra button if current user is super
+		if (currentUserIsSuper)
 		{
-			public void actionPerformed(ActionEvent e)
+			JButton viewFilesButton = new JButton();
+			viewFilesButton.setLayout(new BoxLayout(viewFilesButton, BoxLayout.Y_AXIS));
+			JLabel firstLine = new JLabel("View Your");
+			firstLine.setHorizontalAlignment(SwingConstants.CENTER);
+			JLabel secondLine = new JLabel("Files");
+			secondLine.setHorizontalAlignment(SwingConstants.CENTER);
+			viewFilesButton.add(firstLine);
+			viewFilesButton.add(secondLine);
+			viewFilesButton.setBackground(Color.gray);
+			viewFilesButton.setFocusable(false);
+			buttonPanel.add(viewFilesButton);
+			
+			viewFilesButton.addActionListener(new ActionListener()
 			{
-				viewCurrentUserFilesVisuals();
-			}
-		});
+				public void actionPerformed(ActionEvent e)
+				{
+					viewCurrentUserFilesVisuals();
+				}
+			});
+			
+			JButton viewAnotherUsersFilesButton = new JButton();
+			viewAnotherUsersFilesButton.setLayout(new BorderLayout());
+			firstLine = new JLabel("View Another");
+			secondLine = new JLabel("User's Files");
+			viewAnotherUsersFilesButton.add(BorderLayout.NORTH, firstLine);
+			viewAnotherUsersFilesButton.add(BorderLayout.SOUTH, secondLine);
+			viewAnotherUsersFilesButton.setBackground(Color.gray);
+			viewAnotherUsersFilesButton.setFocusable(false);
+			buttonPanel.add(viewAnotherUsersFilesButton);
+			
+			viewAnotherUsersFilesButton.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					viewSelectedUsersFilesVisuals();
+				}
+			});
+		}
+		// Otherwise don't add extra button
+		else 
+		{
+			JButton viewFilesButton = new JButton("View Your Files");
+			viewFilesButton.setBackground(Color.gray);
+			viewFilesButton.setFocusable(false);
+			buttonPanel.add(viewFilesButton);
+			
+			viewFilesButton.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					viewCurrentUserFilesVisuals();
+				}
+			});
+		}
         
         JButton logOutButton = new JButton("Log Out");
         logOutButton.setBackground(Color.gray);
@@ -157,6 +220,11 @@ public class UserMenuView
 	private void viewCurrentUserFilesVisuals() 
 	{
 		ViewFilesView viewFilesView = new ViewFilesView(this, programView, 1);
+	}
+	
+	private void viewSelectedUsersFilesVisuals() 
+	{
+		ViewFilesView viewFilesView = new ViewFilesView(this, programView, 2);
 	}
 	
 	/**
