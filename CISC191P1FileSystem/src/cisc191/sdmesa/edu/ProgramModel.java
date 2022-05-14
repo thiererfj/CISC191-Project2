@@ -111,7 +111,7 @@ public class ProgramModel
 			currentUser = loginAttempt;
 			
 			// Set user activity so File System program can end on log out
-			currentUser.setIsActive(true);
+//			currentUser.setIsActive(true);
 			
 			// Return null for successful login
 			return null;
@@ -149,24 +149,6 @@ public class ProgramModel
 		}
 		
 		return users;
-	}
-	
-	/**
-	 * Purpose: To run the current users FileSystemMenu
-	 * 
-	 * @param userInput
-	 */
-	public void runUserFileSystem(Scanner userInput) 
-	{
-		// Loop File System sub-program while User account is active
-		while (currentUser.getIsActive()) 
-		{
-			//Prints out the File System Options
-			currentUser.printFileSystemOptions();
-			
-			//Runs the File System Option, which is basically a switch statement
-			currentUser.runFileSystemOption(userInput);
-		}
 	}
 	
 	/**

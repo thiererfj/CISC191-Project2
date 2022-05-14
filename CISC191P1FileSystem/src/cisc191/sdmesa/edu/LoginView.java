@@ -68,18 +68,19 @@ public class LoginView
       	
 		// Add Tab key listener to username JTextArea so you can type username
 		// and then hit tab to switch to password JTextArea
-		userName.addKeyListener(new KeyAdapter()
-		{
-			@Override
-			public void keyPressed(KeyEvent e)
-			{
-				if (e.getKeyCode() == KeyEvent.VK_TAB)
-				{
-					userPassword.requestFocus();
-				}
-				e.consume();
-			}
-		});
+      	// not working quite right
+//		userName.addKeyListener(new KeyAdapter()
+//		{
+//			@Override
+//			public void keyPressed(KeyEvent e)
+//			{
+//				if (e.getKeyCode() == KeyEvent.VK_TAB)
+//				{
+//					userPassword.requestFocus();
+//				}
+//				e.consume();
+//			}
+//		});
       	
       	JTextArea usernameError = new JTextArea();
 		usernameError.setBounds(775, 433, 150, 50);
@@ -113,9 +114,6 @@ public class LoginView
 		    	  {
 					// Logging in to a user account resets GUI to show their file system options
 					UserMenuView userMenuView = new UserMenuView(programView);
-					
-					// Print logged in user's menu view
-					userMenuView.printView();
 		    	  }
 		    	  // Else if login returned account does not exist error message
 		    	  else if (loginError.equals("That account does not exist"))

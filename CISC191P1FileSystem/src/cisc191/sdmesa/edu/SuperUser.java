@@ -62,88 +62,88 @@ public class SuperUser extends User implements Fileable
 		super(newUsername, newPassword, newSerialNumber, DATABASE);
 	}
 	
-	/**
-	 * Purpose: Just prints out the File System Options a user has
-	 */
-	@Override
-	public void printFileSystemOptions() 
-	{
-			
-		System.out.println("\n--------------------------------");
-		System.out.println("--- File System Manager Menu ---");
-		System.out.println("--------------------------------\n");
-		System.out.println("Current user: " + getUsername() + " (super user)\n");
-		System.out.println("\\_(o_o)_/ --> Here are your options. Choose wisely...\n");
-		System.out.println("1) Upload a file to the database");
-		System.out.println("2) Save a database file to your machine");
-		System.out.println("3) Delete a file in the database");
-		System.out.println("4) View your database files");
-		System.out.println("5) View another users database files");
-		System.out.println("6) Log out of current user");
-		System.out.println("\nEnter a menu option: ");
-	}
+//	/**
+//	 * Purpose: Just prints out the File System Options a user has
+//	 */
+//	@Override
+//	public void printFileSystemOptions() 
+//	{
+//			
+//		System.out.println("\n--------------------------------");
+//		System.out.println("--- File System Manager Menu ---");
+//		System.out.println("--------------------------------\n");
+//		System.out.println("Current user: " + getUsername() + " (super user)\n");
+//		System.out.println("\\_(o_o)_/ --> Here are your options. Choose wisely...\n");
+//		System.out.println("1) Upload a file to the database");
+//		System.out.println("2) Save a database file to your machine");
+//		System.out.println("3) Delete a file in the database");
+//		System.out.println("4) View your database files");
+//		System.out.println("5) View another users database files");
+//		System.out.println("6) Log out of current user");
+//		System.out.println("\nEnter a menu option: ");
+//	}
 	
-	/**
-	 * Purpose: To run the File System Option
-	 */
-	@Override
-	public void runFileSystemOption(Scanner userInput) 
-	{
-		//Try to get an int as input from the user...
-		try 
-		{
-			// Compare user int input and run corresponding method
-			switch (userInput.nextInt()) 
-			{
-				// Option 1 uploads a file to the database
-				case 1: userInput.nextLine();
-						uploadFileToDatabase(userInput);
-						break;
-				
-				// Option 2 saves a database file to this user's cpu
-				case 2: userInput.nextLine();
-						saveFileToUserMachine(userInput);
-						break;
-				
-				// Option 3 deletes any file in the database
-				case 3: userInput.nextLine();
-						deleteFile(userInput);
-						break;
-						
-				// Option 4 views this user's files in the database
-				case 4: userInput.nextLine();
-						viewUserFiles();
-						break;
-				
-				// Option 5 views another user's files in the database
-				case 5: userInput.nextLine();
-						viewAnotherUsersFiles(userInput);
-						break;
-						
-				// Option 6 logs this User out, sending user back to main menu
-				case 6: logOut();
-						break;
-				
-				// Default handles int inputs not 1 through 6		
-				default: System.out.println("\\_(o_o)_/ --> Is that an option I gave you?? I'll answer that, NO IT'S NOT!");
-						System.out.println("Returning to File System menu. Try an actual option this time.");
-						break;
-			}
-		} 
-		// Catch InputMismatches, print error message, return to file system menu loop
-		catch (InputMismatchException e)
-		{
-			// Clear userInput, infinite loop without this
-			userInput.nextLine();
-			
-			// Print error message
-			System.out.println("\\_(o_o)_/ --> Looks like you've entered something COMPLETELY WRONG. Why am I not surprised?");
-			System.out.println("Returning to File System menu. Again.");
-			
-			// Exit method
-			return;
-		}
-	}
+//	/**
+//	 * Purpose: To run the File System Option
+//	 */
+//	@Override
+//	public void runFileSystemOption(Scanner userInput) 
+//	{
+//		//Try to get an int as input from the user...
+//		try 
+//		{
+//			// Compare user int input and run corresponding method
+//			switch (userInput.nextInt()) 
+//			{
+//				// Option 1 uploads a file to the database
+//				case 1: userInput.nextLine();
+//						uploadFileToDatabase(userInput);
+//						break;
+//				
+//				// Option 2 saves a database file to this user's cpu
+//				case 2: userInput.nextLine();
+//						saveFileToUserMachine(userInput);
+//						break;
+//				
+//				// Option 3 deletes any file in the database
+//				case 3: userInput.nextLine();
+//						deleteFile(userInput);
+//						break;
+//						
+//				// Option 4 views this user's files in the database
+//				case 4: userInput.nextLine();
+//						viewUserFiles();
+//						break;
+//				
+//				// Option 5 views another user's files in the database
+//				case 5: userInput.nextLine();
+//						viewAnotherUsersFiles(userInput);
+//						break;
+//						
+//				// Option 6 logs this User out, sending user back to main menu
+//				case 6: logOut();
+//						break;
+//				
+//				// Default handles int inputs not 1 through 6		
+//				default: System.out.println("\\_(o_o)_/ --> Is that an option I gave you?? I'll answer that, NO IT'S NOT!");
+//						System.out.println("Returning to File System menu. Try an actual option this time.");
+//						break;
+//			}
+//		} 
+//		// Catch InputMismatches, print error message, return to file system menu loop
+//		catch (InputMismatchException e)
+//		{
+//			// Clear userInput, infinite loop without this
+//			userInput.nextLine();
+//			
+//			// Print error message
+//			System.out.println("\\_(o_o)_/ --> Looks like you've entered something COMPLETELY WRONG. Why am I not surprised?");
+//			System.out.println("Returning to File System menu. Again.");
+//			
+//			// Exit method
+//			return;
+//		}
+//	}
 	
 	/**
 	 * Purpose: To "upload" a given file into the globalStorage[][] array
@@ -557,12 +557,7 @@ public class SuperUser extends User implements Fileable
 	 * 
 	 */
 	public void viewAnotherUsersFiles(Scanner userInput)
-	{
-		// Print header
-		System.out.println("------------------------------------");
-		System.out.println("--- Viewing another user's files ---");
-		System.out.println("------------------------------------");
-		
+	{	
 		// Holds a count of how many basic user accounts are accessed
 		int usersLoopedThrough = 0;
 		

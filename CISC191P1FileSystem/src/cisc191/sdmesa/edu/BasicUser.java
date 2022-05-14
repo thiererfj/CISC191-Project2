@@ -59,79 +59,79 @@ public class BasicUser extends User implements Fileable
 		super(newUsername, newPassword, newSerialNumber, DATABASE);
 	}
 	
-	/**
-	 * Purpose: Just prints out the File System Options a user has
-	 */
-	@Override
-	public void printFileSystemOptions() 
-	{
-		// Options...
-		System.out.println("\n--------------------------------");
-		System.out.println("--- File System Manager Menu ---");
-		System.out.println("--------------------------------\n");
-		System.out.println("Current user: " + getUsername() + "\n");
-		System.out.println("1) Upload a file to the database");
-		System.out.println("2) Save a database file to your machine");
-		System.out.println("3) Delete a file in the database");
-		System.out.println("4) View your database files");
-		System.out.println("5) Log out of current user");
-		System.out.println("\nEnter a menu option: ");
-	}
-	
-	/**
-	 * Run this User's File System option
-	 */
-	@Override
-	public void runFileSystemOption(Scanner userInput) 
-	{
-		try 
-		{
-			// Compare user int input and run corresponding method
-			switch (userInput.nextInt()) 
-			{
-				// Option 1 uploads a file to the database
-				case 1: userInput.nextLine();
-						uploadFileToDatabase(userInput);
-						break;
-					
-				// Option 2 saves a file to this user's cpu
-				case 2: userInput.nextLine();
-						saveFileToUserMachine(userInput);
-						break;
-				
-				// Option 3 deletes one of this user's files in the database
-				case 3: userInput.nextLine();
-						deleteFile(userInput);
-						break;
-						
-				// Option 4 views this user's files in the database
-				case 4: userInput.nextLine();
-						viewUserFiles();
-						break;
-						
-				// Option 5 logs this User out, sending user back to main menu
-				case 5: userInput.nextLine();
-						logOut();
-						break;
-						
-				// Default handles int inputs not 1 through 5 
-				default: System.out.println("\\_(o_o)_/ --> There are 5 options here, buddy. PICK ONE OF THEM.");
-						break;
-			}
-		}
-		//If input isn't an int, then it will display an error message, the while loop will then restart, thus printing out the FileSystemMenu again
-		catch (InputMismatchException e) 
-		{
-			// Infinite loop without this
-			userInput.nextLine();
-			
-			// Tell user their input was bad
-			System.out.println("\\_(o_o)_/ --> InputMismatch!? Sure, I'll handle this exception for you. I'll do everything here.");
-			
-			// Exit method
-			return;
-		}
-	}
+//	/**
+//	 * Purpose: Just prints out the File System Options a user has
+//	 */
+//	@Override
+//	public void printFileSystemOptions() 
+//	{
+//		// Options...
+//		System.out.println("\n--------------------------------");
+//		System.out.println("--- File System Manager Menu ---");
+//		System.out.println("--------------------------------\n");
+//		System.out.println("Current user: " + getUsername() + "\n");
+//		System.out.println("1) Upload a file to the database");
+//		System.out.println("2) Save a database file to your machine");
+//		System.out.println("3) Delete a file in the database");
+//		System.out.println("4) View your database files");
+//		System.out.println("5) Log out of current user");
+//		System.out.println("\nEnter a menu option: ");
+//	}
+//	
+//	/**
+//	 * Run this User's File System option
+//	 */
+//	@Override
+//	public void runFileSystemOption(Scanner userInput) 
+//	{
+//		try 
+//		{
+//			// Compare user int input and run corresponding method
+//			switch (userInput.nextInt()) 
+//			{
+//				// Option 1 uploads a file to the database
+//				case 1: userInput.nextLine();
+//						uploadFileToDatabase(userInput);
+//						break;
+//					
+//				// Option 2 saves a file to this user's cpu
+//				case 2: userInput.nextLine();
+//						saveFileToUserMachine(userInput);
+//						break;
+//				
+//				// Option 3 deletes one of this user's files in the database
+//				case 3: userInput.nextLine();
+//						deleteFile(userInput);
+//						break;
+//						
+//				// Option 4 views this user's files in the database
+//				case 4: userInput.nextLine();
+//						viewUserFiles();
+//						break;
+//						
+//				// Option 5 logs this User out, sending user back to main menu
+//				case 5: userInput.nextLine();
+//						logOut();
+//						break;
+//						
+//				// Default handles int inputs not 1 through 5 
+//				default: System.out.println("\\_(o_o)_/ --> There are 5 options here, buddy. PICK ONE OF THEM.");
+//						break;
+//			}
+//		}
+//		//If input isn't an int, then it will display an error message, the while loop will then restart, thus printing out the FileSystemMenu again
+//		catch (InputMismatchException e) 
+//		{
+//			// Infinite loop without this
+//			userInput.nextLine();
+//			
+//			// Tell user their input was bad
+//			System.out.println("\\_(o_o)_/ --> InputMismatch!? Sure, I'll handle this exception for you. I'll do everything here.");
+//			
+//			// Exit method
+//			return;
+//		}
+//	}
 	
 	/**
 	 * Purpose: To "upload" a given file into the globalStorage[][] array

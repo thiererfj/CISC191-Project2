@@ -27,7 +27,6 @@ public class UploadFileView
 		this.userMenuView = userMenuView;
 		this.programView = programView;
 		this.fileButtons = new JButton[10];
-		
 		printView();
 	}
 	
@@ -53,7 +52,7 @@ public class UploadFileView
 			}
 			else
 			{ 
-				fileList = fileList + (i + 1) + " - " + getDatabase().getGlobalStorage()[programView.getProgramModel().getCurrentUser().getSerialNumber()][i].getFileName();
+				fileList = fileList + (i + 1) + " - " + programView.getProgramModel().getDatabase().getGlobalStorage()[programView.getProgramModel().getCurrentUser().getSerialNumber()][i].getFileName();
 			}
 			
 		}
@@ -274,7 +273,7 @@ public class UploadFileView
 		userFileArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		userFileArea.setBounds(370, 350, 300, 250);
 		userFileArea.setBackground(Color.lightGray);
-		
+		userFileArea.setEditable(false);
 		programView.add(userFileArea);
 		
 		JTextField fileNameEntry = new JTextField();
@@ -294,6 +293,7 @@ public class UploadFileView
 		programView.add(uploadFileButton);
 	}
 	
+	// What is this for?
 	public Database getDatabase()
 	{
 		return null;

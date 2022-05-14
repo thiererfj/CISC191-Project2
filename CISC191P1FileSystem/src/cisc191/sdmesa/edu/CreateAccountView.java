@@ -13,6 +13,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+/**
+ * @author Anthony
+ * @author Frank
+ * 
+ * 
+ * 
+ * 
+ * might not use this, but...
+ * https://kodejava.org/how-do-i-move-focus-from-jtextarea-using-tab-key/
+ *
+ */
 public class CreateAccountView {
 
 	//CreateAccountView has a programView
@@ -135,18 +146,20 @@ public class CreateAccountView {
 		
 		// Add Tab key listener to username JTextArea so you can type username
 		// and then hit tab to switch to password JTextArea
-		userName.addKeyListener(new KeyAdapter()
-		{
-			@Override
-			public void keyPressed(KeyEvent e)
-			{
-				if (e.getKeyCode() == KeyEvent.VK_TAB)
-				{
-					userPassword.requestFocus();
-				}
-				e.consume();
-			}
-		});
+		// maybe troubleshoot this or delete w/e
+//		userName.addKeyListener(new KeyAdapter()
+//		{
+//			@Override
+//			public void keyPressed(KeyEvent e)
+//			{
+//				if (e.getKeyCode() == KeyEvent.VK_TAB)
+//				{
+//					userPassword.requestFocus();
+//					userName.setFocusable(true);
+//				}
+//				e.consume();
+//			}
+//		});
 
 		JTextArea usernameError = new JTextArea("");
         usernameError.setBounds(775, 433, 150, 50);

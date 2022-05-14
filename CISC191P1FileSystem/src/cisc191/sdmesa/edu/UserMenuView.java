@@ -1,12 +1,14 @@
 package cisc191.sdmesa.edu;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class UserMenuView 
 {
@@ -15,6 +17,7 @@ public class UserMenuView
 	public UserMenuView (ProgramView programView)
 	{
 		this.programView = programView;
+		printView();
 	}
 	
 	public void printView() 
@@ -23,6 +26,16 @@ public class UserMenuView
     	
     	// Add title JLabel to window
     	programView.addTitleLabel("User Menu", Color.LIGHT_GRAY, Color.WHITE);
+    	
+    	// Add JTextArea to show username of user logged in
+    	JTextArea displayCurrentUsername = new JTextArea();
+    	displayCurrentUsername.setText("Current User: " + programView.getProgramModel().getCurrentUser().getUsername());
+    	displayCurrentUsername.setFont(new Font("Times New Roman", Font.BOLD, 20));
+    	displayCurrentUsername.setBounds(20, 20, 200, 25);
+    	displayCurrentUsername.setBackground(Color.BLACK);
+    	displayCurrentUsername.setForeground(Color.GRAY);
+    	displayCurrentUsername.setEditable(false);
+    	programView.add(displayCurrentUsername);
         
         JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 20, 20));
         buttonPanel.setOpaque(true);
@@ -37,58 +50,56 @@ public class UserMenuView
         // Add button panel to main window
         programView.add(buttonPanel);
 
-        uploadFileButton.addActionListener(new ActionListener()
-   	    {
-        	public void actionPerformed(ActionEvent e)
-        	{
-        		uploadFileVisuals();
-//        		System.out.println("Clicked");
-        	}
-    	});
+		uploadFileButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				uploadFileVisuals();
+				// System.out.println("Clicked");
+			}
+		});
        
         //GOODDDDDD
 
-        JButton saveFileButton = new JButton("Save File");
-        saveFileButton.setBackground(Color.gray);
-        saveFileButton.setFocusable(false);
-        buttonPanel.add(saveFileButton);
-        
-        saveFileButton.addActionListener(new ActionListener()
-	    {
-		      public void actionPerformed(ActionEvent e)
-		      {
-		    	  saveFileVisuals();
-		      }
+		JButton downloadFileButton = new JButton("Download File");
+		downloadFileButton.setBackground(Color.gray);
+		downloadFileButton.setFocusable(false);
+		buttonPanel.add(downloadFileButton);
+
+		downloadFileButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				downloadFileVisuals();
+			}
 		});
         
         //GOODDDDDD
-        
-        
 
-        JButton deleteFileButton = new JButton("Delete File");
-        deleteFileButton.setBackground(Color.gray);
-        deleteFileButton.setFocusable(false);
-        buttonPanel.add(deleteFileButton);
-        
-        deleteFileButton.addActionListener(new ActionListener()
-	    {
-		      public void actionPerformed(ActionEvent e)
-		      {
-		    	
-		      }
+		JButton deleteFileButton = new JButton("Delete File");
+		deleteFileButton.setBackground(Color.gray);
+		deleteFileButton.setFocusable(false);
+		buttonPanel.add(deleteFileButton);
+
+		deleteFileButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				deleteFileVisuals();
+			}
 		});
 
-        JButton viewFilesButton = new JButton("View Files");
-        viewFilesButton.setBackground(Color.gray);
-        viewFilesButton.setFocusable(false);
-        buttonPanel.add(viewFilesButton);
-        
-        viewFilesButton.addActionListener(new ActionListener()
-	    {
-		      public void actionPerformed(ActionEvent e)
-		      {
-		    	 
-		      }
+		JButton viewFilesButton = new JButton("View Your Files");
+		viewFilesButton.setBackground(Color.gray);
+		viewFilesButton.setFocusable(false);
+		buttonPanel.add(viewFilesButton);
+
+		viewFilesButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				viewCurrentUserFilesVisuals();
+			}
 		});
         
         JButton logOutButton = new JButton("Log Out");
@@ -133,9 +144,19 @@ public class UserMenuView
 		UploadFileView uploadFileView = new UploadFileView(this, programView);
 	}
 	
-	private void saveFileVisuals() 
+	private void downloadFileVisuals() 
 	{
-		SaveFileView saveFileView = new SaveFileView(this, programView);
+		DownloadFileView downloadFileView = new DownloadFileView(this, programView);
+	}
+	
+	private void deleteFileVisuals() 
+	{
+		DeleteFileView deleteFileView = new DeleteFileView(this, programView, 1);
+	}
+	
+	private void viewCurrentUserFilesVisuals() 
+	{
+		ViewFilesView viewFilesView = new ViewFilesView(this, programView, 1);
 	}
 	
 	/**

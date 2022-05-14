@@ -91,65 +91,56 @@ abstract class User
 		return serialNumber;
 	}
 	
-	/**
-	 * Purpose: To set a user as active or inactive depending on the boolean value given in the parameter
-	 * 
-	 */
-	public void setIsActive(boolean newActivity) 
-	{
-		this.isActive = newActivity;
-	}
+//	/**
+//	 * Purpose: To set a user as active or inactive depending on the boolean value given in the parameter
+//	 * 
+//	 */
+//	public void setIsActive(boolean newActivity) 
+//	{
+//		this.isActive = newActivity;
+//	}
+//	
+//	/**
+//	 * Purpose: Getter method isActive
+//	 * 
+//	 * @return isActive
+//	 */
+//	public boolean getIsActive()
+//	{
+//		return isActive;
+//	}
 	
 	/**
-	 * Purpose: Getter method isActive
-	 * 
-	 * @return isActive
+	 * Purpose: Create and return a String representing the filenames of this user's uploaded files
 	 */
-	public boolean getIsActive()
+	public String viewUserFiles() 
 	{
-		return isActive;
-	}
-	
-	/**
-	 * Purpose: To print this user's files to the console
-	 */
-	public void viewUserFiles() 
-	{
-		// Print header
-		System.out.println("--------------------------------");
-		System.out.println("--- Viewing " + getUsername() + "'s files ---"); 
-		System.out.println("--------------------------------");
-				
+		// Create empty String to add filenames to
+		String fileList = "";
+		
 		// Loop through this user's row in FileData[][]
 		for (int i = 0; i < 10; i++)
 		{
 			// No file at index
-			if(getDatabase().getGlobalStorage()[getSerialNumber()][i] == null)
+			if (DATABASE.getGlobalStorage()[getSerialNumber()][i] == null)
 			{
-				// Print file number (index + 1) and empty state status
-				System.out.println((i + 1) + " - Empty");
+				// Add "empty" filename
+				fileList = fileList + (i + 1) + " - Empty\n";
 			}
 			// File exists at index
 			else
 			{
-				// Print file number (index + 1) and file name
-				System.out.println((i + 1) + " - " + getDatabase().getGlobalStorage()[getSerialNumber()][i].getFileName());
+				// Add correct filename
+				fileList = fileList + (i + 1) + " - " + DATABASE.getGlobalStorage()[getSerialNumber()][i].getFileName();
 			}
 		}
-	}
-	
-	/**
-	 * Purpose: Logs the user out of their account, returning back to the mainMenu()
-	 * 
-	 */
-	public void logOut() 
-	{
-		// Set user activity status to false, which breaks ProgramMenu runUserFileSystem() loop
-		setIsActive(false);
+		
+		// Return the completed String
+		return fileList;
 	}
 
-	abstract void printFileSystemOptions();
-	
-	abstract void runFileSystemOption(Scanner userInput);
+//	abstract void printFileSystemOptions();
+//	
+//	abstract void runFileSystemOption(Scanner userInput);
 	
 }
