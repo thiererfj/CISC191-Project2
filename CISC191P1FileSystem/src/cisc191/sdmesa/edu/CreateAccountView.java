@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -107,30 +109,44 @@ public class CreateAccountView {
         // Add button panel to window
         programView.add(buttonPanel);
 
-
-        //Asking for Username
+        // JLabel to ask user for creation username
 		JLabel enterName = new JLabel("Create a Username:");
 		enterName.setBounds(250, 375, 150, 50);
 		enterName.setForeground(Color.white);
 		programView.add(enterName);
 		
-		//Username Text Box
-		JTextArea userName = new JTextArea();
-		userName.setBounds(250, 425, 500, 50);
-		userName.setFont(new Font("Times New Roman", Font.BOLD, 30));
-		programView.add(userName);
-		
-		//Asking for Password
+		// JLabel to ask user for creation password
 		JLabel enterPassword = new JLabel("Create a Password:");
 		enterPassword.setBounds(250, 475, 150, 50);
 		enterPassword.setForeground(Color.white);
 		programView.add(enterPassword);
 		
-		//User password Text Box
+		// Text box where user enters username
+		JTextArea userName = new JTextArea();
+		userName.setBounds(250, 425, 500, 50);
+		userName.setFont(new Font("Times New Roman", Font.BOLD, 30));	
+		programView.add(userName);
+		
+		// Text box where user enters password
 		JTextArea userPassword = new JTextArea();
 		userPassword.setBounds(250, 525, 500, 50);
 		userPassword.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		programView.add(userPassword);
+		
+		// Add Tab key listener to username JTextArea so you can type username
+		// and then hit tab to switch to password JTextArea
+		userName.addKeyListener(new KeyAdapter()
+		{
+			@Override
+			public void keyPressed(KeyEvent e)
+			{
+				if (e.getKeyCode() == KeyEvent.VK_TAB)
+				{
+					userPassword.requestFocus();
+				}
+				e.consume();
+			}
+		});
 
 		JTextArea usernameError = new JTextArea("");
         usernameError.setBounds(775, 433, 150, 50);
