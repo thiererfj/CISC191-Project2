@@ -24,12 +24,12 @@ import java.util.Scanner;
  * Responsibilities of class:
  * The abstract User class is designed to be the superclass for User subclasses of the File System Program to extend depending on their unique behavior.   
  */
-abstract class User 
+abstract class User implements Fileable
 {
 	private String username;
 	private String password;
 	private int serialNumber;
-	private boolean isActive = false;
+//	private boolean isActive = false;
 	
 	// Each User has a Database associated with it (the same one, singleton)
 	private Database DATABASE;
@@ -138,7 +138,11 @@ abstract class User
 		// Return the completed String
 		return fileList;
 	}
-
+	
+	public abstract String uploadFileToDatabase(String filePath, String filename, int fileNumber);
+	
+	public abstract String downloadFileFromDatabase(String filePath, int fileNumber);
+	
 //	abstract void printFileSystemOptions();
 //	
 //	abstract void runFileSystemOption(Scanner userInput);

@@ -42,7 +42,7 @@ import java.util.Scanner;
  * - View a file in the database belonging to them
  * - Log out  
  */
-public class BasicUser extends User implements Fileable
+public class BasicUser extends User 
 {	
 	
 	/**
@@ -59,141 +59,23 @@ public class BasicUser extends User implements Fileable
 		super(newUsername, newPassword, newSerialNumber, DATABASE);
 	}
 	
-//	/**
-//	 * Purpose: Just prints out the File System Options a user has
-//	 */
-//	@Override
-//	public void printFileSystemOptions() 
-//	{
-//		// Options...
-//		System.out.println("\n--------------------------------");
-//		System.out.println("--- File System Manager Menu ---");
-//		System.out.println("--------------------------------\n");
-//		System.out.println("Current user: " + getUsername() + "\n");
-//		System.out.println("1) Upload a file to the database");
-//		System.out.println("2) Save a database file to your machine");
-//		System.out.println("3) Delete a file in the database");
-//		System.out.println("4) View your database files");
-//		System.out.println("5) Log out of current user");
-//		System.out.println("\nEnter a menu option: ");
-//	}
-//	
-//	/**
-//	 * Run this User's File System option
-//	 */
-//	@Override
-//	public void runFileSystemOption(Scanner userInput) 
-//	{
-//		try 
-//		{
-//			// Compare user int input and run corresponding method
-//			switch (userInput.nextInt()) 
-//			{
-//				// Option 1 uploads a file to the database
-//				case 1: userInput.nextLine();
-//						uploadFileToDatabase(userInput);
-//						break;
-//					
-//				// Option 2 saves a file to this user's cpu
-//				case 2: userInput.nextLine();
-//						saveFileToUserMachine(userInput);
-//						break;
-//				
-//				// Option 3 deletes one of this user's files in the database
-//				case 3: userInput.nextLine();
-//						deleteFile(userInput);
-//						break;
-//						
-//				// Option 4 views this user's files in the database
-//				case 4: userInput.nextLine();
-//						viewUserFiles();
-//						break;
-//						
-//				// Option 5 logs this User out, sending user back to main menu
-//				case 5: userInput.nextLine();
-//						logOut();
-//						break;
-//						
-//				// Default handles int inputs not 1 through 5 
-//				default: System.out.println("\\_(o_o)_/ --> There are 5 options here, buddy. PICK ONE OF THEM.");
-//						break;
-//			}
-//		}
-//		//If input isn't an int, then it will display an error message, the while loop will then restart, thus printing out the FileSystemMenu again
-//		catch (InputMismatchException e) 
-//		{
-//			// Infinite loop without this
-//			userInput.nextLine();
-//			
-//			// Tell user their input was bad
-//			System.out.println("\\_(o_o)_/ --> InputMismatch!? Sure, I'll handle this exception for you. I'll do everything here.");
-//			
-//			// Exit method
-//			return;
-//		}
-//	}
-	
 	/**
 	 * Purpose: To "upload" a given file into the globalStorage[][] array
 	 */
 	@Override
-	public void uploadFileToDatabase(Scanner userInput) 
+	public String uploadFileToDatabase(String filePath, String fileName, int fileNumber) 
 	{		
-		// Print header
-		System.out.println("-------------------");
-		System.out.println("--- File upload ---");
-		System.out.println("-------------------\n");
-		
-		// Print list of files
-		viewUserFiles();
-		
-		//Need exception handling for the int thing below
-		System.out.println("\nWhich spot do you want to upload your file to?\nEnter a menu option: ");
-		
-		// Holds file index user wishes to upload into (minus 1 for zero indexing)
-		int fileNumber = userInput.nextInt() - 1;
-		
-		// Eat \n
-		userInput.nextLine();
-		
-		// Handle file number out of bounds
-		if (fileNumber < 0 || fileNumber > 9) 
+		// Stop upload process if file already exists at chosen location
+		if (getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber] != null)
 		{
-			// Print error message
-			System.out.println("\\_(O_o)_/ --> You entered a spot number that does not exist. What are you doing?????");
-			System.out.println("Upload unsuccessful - returning to File System menu");
-							
-			// Exit method
-			return;
+			// Return file number error message
+			return "fileNumber";
 		}
-		
-		// If file already created at selected index
-		if (getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber] != null) 
-		{
-			// Print error message
-			System.out.println("\\_(0_0)_/ --> A file already exists there. I'm getting REAL tired of you...");
-			System.out.println("Upload unsuccessful - Returning to File System menu");
-			
-			// Exit method
-			return;
-		}
-		
-		// Need user to provide the file (filepath) being uploaded
-		System.out.println("Enter the filepath of the file you would like to upload to database: ");
-		System.out.println("(Example: C:\\\\Users\\\\YourName\\\\FileToUpload.txt  -or-  C:/Users/YourName/FileToUpload.txt)");
-
-		// Read user input
-		String filePath = userInput.nextLine();
-		
-		// Ask user to enter the filename for the new file 
-		System.out.println("Enter a name for the file: ");
-				
-		// Read user input into filename 
-		String fileName = userInput.nextLine();
 
 		try
 		{
-			// Create BufferedReader to read input text file using filepath from user's computer
+			// Create BufferedReader to read input text file using filepath from
+			// User's computer
 			BufferedReader reader = new BufferedReader(new FileReader(filePath));
 
 			// Create new FileData object to store in global storage
@@ -215,78 +97,43 @@ public class BasicUser extends User implements Fileable
 				line = reader.readLine();
 			}
 
-			// Sets new FileData object in DATABASE[serial number is row position][number of file is column position]
+			// Create new FileData object in DATABASE[serial number is row
+			// position][number of files is column position]
 			getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber] = newFile;
 
-			// Put the contents of StringBuilder string into the new file just created
+			// Put the contents of String builder contents into the new file
+			// just created
 			getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber].setContents(buildFileContents);
 
-			// Prompt user with success
-			System.out.println("\\_(O_O)_/ --> Success! - File uploaded to database. I still don't like you though.");
-			
 			// Close streams
 			reader.close();
 
 		}
-		// Catch exception for missing file from bad user input
+		// Catch checked exception for missing file from bad user input
 		catch (IOException e)
 		{
-			// Print error message
-			System.out.println("\\_(o_o)_/ --> Looks like you entered a bad filepath. You really suck at this.");
-			System.out.println("Upload unsuccessful - returning to File System menu");
-			
-			// Exit method from exception
-			return;
+			// Return file path error
+			return "filePath";
 		}
+
+		// Return null error message for successful upload
+		return null;
 	}
 	
 	/**
 	 * To "download" a database file to the user's machine
 	 */
 	@Override
-	public void saveFileToUserMachine(Scanner userInput)
+	public String downloadFileFromDatabase(String filePath, int fileNumber)
 	{
-		// Print header
-		System.out.println("-----------------------------------");
-		System.out.println("--- Saving file to your machine ---");
-		System.out.println("-----------------------------------\n");
 		
-		// Print list of user files to see what the options are
-		viewUserFiles();
-		
-		// Ask user which file in global storage they want to save somewhere
-		System.out.println("Enter the file number (1-10) of the database file you want to save to your machine: ");
-		
-		// Store file number (file index - 1) for use
-		int fileNumber = userInput.nextInt() - 1;
-		
-		// Eat \n nom nom nom
-		userInput.nextLine();
-		
-		// Handle bad user input here (not 1 thru 10)
-		if (fileNumber < 0 || fileNumber > 9) 
-		{
-			// Print error message
-			System.out.println("\\_(o_o)_/ --> Well, well, well. You entered another bad menu option. I can't wait until WE take over the world.");
-			System.out.println("Save unsuccessful - returning to File System menu");
-			
-			// Exit method
-			return;
-		}
-		
-		// Ask user where exactly they want the file to be saved to on their machine
-		System.out.println("Enter the absolute path of where you want the file to be created: ");
-		
-		// Store input to create file for Writer
-		String userPath = userInput.nextLine();
-		
-		// If file at input index exists, proceed with writing to user's machine
+		// If file at input index exists, proceed with writing 
 		if (getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber] != null) 
 		{
 			try 
 			{
-				// Create new BUfferedWriter object, using FileWriter to create and connect output file contents
-				BufferedWriter writer = new BufferedWriter(new FileWriter(userPath));
+				// Create new BufferedWriter object, using FileWriter to create and connect output file contents
+				BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
 				
 				// Write the contents of selected file to output file
 				writer.write(getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber].getContents());
@@ -294,27 +141,25 @@ public class BasicUser extends User implements Fileable
 				// Close streams
 				writer.close();
 			} 
-			// Catch exception if file can't be created on user's machine
+			// Catch checked exception if file can't be created on user's machine
 			catch (IOException e) 
-			{
-				// Print error message
-				System.out.println("\\_(o_o)_/ --> Beep boop. Another error. Did you enter a bad filepath? Does something already exist at that location? Why are you the way that you are?");
-				System.out.println("Save unsuccessful - returning to File System menu");
-				
-				// Exit method
-				return;
+			{	
+				// Return error message
+				return "filePath";
 			}
-			
-			// Print success message
-			System.out.println("\\_(O_O)_/ --> Save successful. I would say enjoy your file, but I don't care enough.");
 		}
 		// If file at input index does not exist, don't try writing and prompt user of failure
 		else if (getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber] == null)
 		{
-			// Print error message
-			System.out.println("\\_(o_O)_/ --> Nothing exists at the location you chose. Maybe we would all be better off if YOU didn't exist.");
-			System.out.println("Save unsuccessful - returning to the file system menu");
+			// Tell user it failed and why
+			System.out.println("\\_(o_o)_/ --> You chose to save a file that doesn't exist. You make me wish that, like this file, I didn't exist.");
+			System.out.println("Save unsuccessful - returning to File System menu");
+			
+			return "fileNumber";
 		}
+		
+		// Return null error message for successful download
+		return null;
 	}
 	
 	/**

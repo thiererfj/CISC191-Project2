@@ -5,9 +5,11 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -276,21 +278,59 @@ public class UploadFileView
 		userFileArea.setEditable(false);
 		programView.add(userFileArea);
 		
-		JTextField fileNameEntry = new JTextField();
-		fileNameEntry.setBounds(300, 620, 375, 50);
-		fileNameEntry.setFont(new Font("Times New Roman", Font.BOLD, 30));
-		programView.add(fileNameEntry);
-		
 		JTextField filePathEntry = new JTextField();
-		filePathEntry.setBounds(300, 690, 375, 50);
+		filePathEntry.setBounds(300, 620, 375, 50);
 		filePathEntry.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		programView.add(filePathEntry);
+		
+		JTextField fileNameEntry = new JTextField();
+		fileNameEntry.setBounds(300, 690, 375, 50);
+		fileNameEntry.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		programView.add(fileNameEntry);
 		
 		JButton uploadFileButton = new JButton("Upload File");
 		uploadFileButton.setBackground(Color.gray);
 		uploadFileButton.setFocusable(false);
-		uploadFileButton.setBounds(685, 620, 50, 100);
+		uploadFileButton.setBounds(685, 620, 120, 120);
 		programView.add(uploadFileButton);
+		
+		uploadFileButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				String filePath = filePathEntry.getText();
+				String fileName = fileNameEntry.getText();
+				int fileNumber = 0;
+				
+				for (int i = 0; i < 10; i++) 
+				{
+					if (fileButtons[i].isEnabled())
+					{
+						fileNumber = i;
+					}
+				}
+				
+				String uploadError = programView.getProgramModel().getCurrentUser().uploadFileToDatabase(filePath, fileName, fileNumber);
+				
+				if (Objects.isNull(uploadError))
+				{
+					JOptionPane.showMessageDialog(null, "File successfully uploaded to the database");
+					programView.getContentPane().removeAll();
+					programView.getContentPane().repaint();
+					userMenuView.printView();
+				}
+				else if (uploadError.equals("filePath"))
+				{
+					JOptionPane.showMessageDialog(null, "File upload unsuccessful, check file path");
+					printView();
+				}
+				else if (uploadError.equals("fileNumber"))
+				{
+					JOptionPane.showMessageDialog(null, "File upload unsuccessful, check selected file number");
+					printView();
+				}
+			}
+		});
 	}
 	
 	// What is this for?
@@ -298,9 +338,6 @@ public class UploadFileView
 	{
 		return null;
 	}
-	
-	
-	
 	
 	
 	// Loop through this user's row in FileData[][]

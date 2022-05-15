@@ -45,7 +45,7 @@ import java.util.Scanner;
  * - View any basic user's database files
  * - Log out 
  */
-public class SuperUser extends User implements Fileable 
+public class SuperUser extends User
 {
 	
 	/**
@@ -149,57 +149,14 @@ public class SuperUser extends User implements Fileable
 	 * Purpose: To "upload" a given file into the globalStorage[][] array
 	 */
 	@Override
-	public void uploadFileToDatabase(Scanner userInput) 
+	public String uploadFileToDatabase(String filePath, String fileName, int fileNumber) 
 	{	
-		// Print header
-		System.out.println("-------------------");
-		System.out.println("--- File Upload ---");
-		System.out.println("-------------------\n");
-		
-		// Print user's files
-		viewUserFiles();
-		
-		// An InputMismatchException will be caught by runFileSystemOption() 
-		System.out.println("\nWhich spot would you like to upload your file to?\nEnter a menu option: ");
-		int fileNumber = userInput.nextInt() - 1;
-		
-		// Eat \n
-		userInput.nextLine();
-		
-		// Handle file number out of bounds
-		if (fileNumber < 0 || fileNumber > 9) 
-		{
-			// Print error message
-			System.out.println("\\_(o_o)_/ --> Really? Another bad input? Enter a number ONE THROUGH NINE.");
-			System.out.println("Upload unsuccessful - returning to File System menu");
-			
-			// Exit method
-			return;
-		}
-		
 		// Stop upload process if file already exists at chosen location
 		if (getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber] != null) 
 		{
-			// Print error message
-			System.out.println("\\_(o_o)_/ --> A file already exists in that spot! IDIOT!");
-			System.out.println("Upload unsuccessful - Returning to File System menu");
-			
-			// Exit method
-			return;
+			// Return file number error message
+			return "fileNumber";
 		}
-		
-		// Need user to provide the file being uploaded
-		System.out.println("Enter the filepath of the file you would like to upload to database: ");
-		System.out.println("(Example: C:\\\\Users\\\\YourName\\\\FileToUpload.txt  -or-  C:/Users/YourName/FileToUpload.txt)");
-		
-		// Read user input into filepath
-		String filePath = userInput.nextLine();
-		
-		// Ask user to enter the filename for the new file 
-		System.out.println("Enter a name for the file: ");
-		
-		// Read user input into filename 
-		String fileName = userInput.nextLine();
 		
 		try 
 		{
@@ -231,9 +188,6 @@ public class SuperUser extends User implements Fileable
 			// Put the contents of String builder contents into the new file just created 
 			getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber].setContents(buildFileContents);
 			
-			// Prompt user with success
-			System.out.println("Success! - File uploaded to database");
-			
 			// Close streams
 			reader.close();
 	
@@ -241,54 +195,20 @@ public class SuperUser extends User implements Fileable
 		// Catch checked exception for missing file from bad user input
 		catch (IOException e) 
 		{
-			// Print error message
-			System.out.println("\\_(o_o)_/ --> Cannot find file specified, do you not know the names to your own files?");
-			System.out.println("Upload unsuccessful - returning to File System menu");
-			
-			// Exit method
-			return;
+			// Return file path error
+			return "filePath";
 		}
+		
+		// Return null error message for successful upload
+		return null;
 	}
 	
 	/**
 	 * To "download" a database file to the user's machine
 	 */
 	@Override
-	public void saveFileToUserMachine(Scanner userInput)
+	public String downloadFileFromDatabase(String filePath, int fileNumber)
 	{
-		// Print header
-		System.out.println("-----------------------------------");
-		System.out.println("--- Saving File to Your Machine ---");
-		System.out.println("-----------------------------------\n");
-		
-		// Print list of user files to see what the options are
-		viewUserFiles();
-		
-		// Ask user which file in global storage they want to save somewhere
-		System.out.println("\nEnter the file number (1-10) of the database file you would like to save to your machine: ");
-		
-		// Store file number (file index - 1) for use
-		int fileNumber = userInput.nextInt() - 1;
-		
-		// Eat \n nom nom nom
-		userInput.nextLine();
-		
-		// Handle bad user input here (not 1 thru 10)
-		if (fileNumber < 1 || fileNumber > 9) 
-		{
-			// Print error message
-			System.out.println("\\_(o_o)_/ --> Enter a valid menu option! They're right there on the screen! ");
-			System.out.println("Save unsuccessful - returning to File System menu");
-			
-			// Exit method
-			return;
-		}
-		
-		// Ask user where exactly they want the file to be saved to on their machine
-		System.out.println("Enter the absolute path of where you want the file to be created: ");
-		
-		// Store input to create file for Writer
-		String userPath = userInput.nextLine();
 		
 		// If file at input index exists, proceed with writing 
 		if (getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber] != null) 
@@ -296,7 +216,7 @@ public class SuperUser extends User implements Fileable
 			try 
 			{
 				// Create new BufferedWriter object, using FileWriter to create and connect output file contents
-				BufferedWriter writer = new BufferedWriter(new FileWriter(userPath));
+				BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
 				
 				// Write the contents of selected file to output file
 				writer.write(getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber].getContents());
@@ -306,17 +226,10 @@ public class SuperUser extends User implements Fileable
 			} 
 			// Catch checked exception if file can't be created on user's machine
 			catch (IOException e) 
-			{
-				// Tell user it failed and hopefully why
-				System.out.println("\\_(o_o)_/ --> The file could not be created. Did you enter the correct filepath? Probaly not, knowing you.");
-				System.out.println("Save unsuccessful - returning to File System menu");
-				
-				// Exit method
-				return;
+			{	
+				// Return error message
+				return "filePath";
 			}
-			
-			// Tell user it was successful
-			System.out.println("Save successful! Enjoy your file :)");
 		}
 		// If file at input index does not exist, don't try writing and prompt user of failure
 		else if (getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber] == null)
@@ -324,7 +237,12 @@ public class SuperUser extends User implements Fileable
 			// Tell user it failed and why
 			System.out.println("\\_(o_o)_/ --> You chose to save a file that doesn't exist. You make me wish that, like this file, I didn't exist.");
 			System.out.println("Save unsuccessful - returning to File System menu");
+			
+			return "fileNumber";
 		}
+		
+		// Return null error message for successful download
+		return null;
 	}
 	
 	/**

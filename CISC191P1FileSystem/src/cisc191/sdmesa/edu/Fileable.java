@@ -32,14 +32,14 @@ public interface Fileable
 	 * 
 	 * @param userInput
 	 */
-	void uploadFileToDatabase(Scanner userInput);
+	String uploadFileToDatabase(String filePath, String fileName, int fileNumber);
 	
 	/**
 	 * Allow user to save a file from the program database to their machine
 	 * 
 	 * @param userInput
 	 */
-	void saveFileToUserMachine(Scanner userInput);
+	String downloadFileFromDatabase(String filePath, int fileNumber);
 	
 	/**
 	 * Allow user to delete file from database
