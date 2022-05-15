@@ -131,7 +131,7 @@ abstract class User implements Fileable
 			else
 			{
 				// Add correct filename
-				fileList = fileList + (i + 1) + " - " + DATABASE.getGlobalStorage()[getSerialNumber()][i].getFileName();
+				fileList = fileList + (i + 1) + " - " + DATABASE.getGlobalStorage()[getSerialNumber()][i].getFileName() + "\n";
 			}
 		}
 		

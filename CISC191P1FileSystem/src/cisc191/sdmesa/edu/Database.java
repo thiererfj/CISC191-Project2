@@ -167,12 +167,6 @@ public class Database
 		return superUsername;
 	}
 	
-	
-	
-	
-	
-	
-	
 	public String[] getBasicUsernames() 
 	{
 		String[] basicUsernames = new String[9];
@@ -191,7 +185,7 @@ public class Database
 
 		return basicUsernames;
 	}
-
+	
 	public boolean superUserExists() 
 	{
 		if (users[0] != null)

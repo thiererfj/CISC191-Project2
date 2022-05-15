@@ -20,7 +20,7 @@ public class UploadFileView
 {
 	private UserMenuView userMenuView;
 	private ProgramView programView;
-	private String fileList = "";
+	private String fileList;
 	private JPanel fileButtonPanel;
 	private JButton[] fileButtons;
 	
@@ -46,19 +46,6 @@ public class UploadFileView
 	
 	public void viewFiles()
 	{
-		for (int i = 0; i < 10; i++)
-		{
-			if (programView.getProgramModel().getDatabase().getGlobalStorage()[programView.getProgramModel().getCurrentUser().getSerialNumber()][i] == null)
-			{
-				fileList = fileList + (i + 1) + " - Empty\n";
-			}
-			else
-			{ 
-				fileList = fileList + (i + 1) + " - " + programView.getProgramModel().getDatabase().getGlobalStorage()[programView.getProgramModel().getCurrentUser().getSerialNumber()][i].getFileName();
-			}
-			
-		}
-		
 		// Loop to make file buttons
 		for (int i = 0; i < 10; i++) 
 		{
@@ -271,6 +258,10 @@ public class UploadFileView
 		programView.add(fileButtonPanel);
 		programView.setVisible(true);
 		
+		// Call User view files method to get formatted String representation of files in database
+		fileList = programView.getProgramModel().getCurrentUser().viewUserFiles();
+		
+		// Create text area to display user's files
 		JTextArea userFileArea = new JTextArea(fileList);
 		userFileArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		userFileArea.setBounds(370, 350, 300, 250);
@@ -294,6 +285,7 @@ public class UploadFileView
 		uploadFileButton.setBounds(685, 620, 120, 120);
 		programView.add(uploadFileButton);
 		
+		// User clicking upload button executes these tasks
 		uploadFileButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -304,12 +296,16 @@ public class UploadFileView
 				
 				for (int i = 0; i < 10; i++) 
 				{
-					if (fileButtons[i].isEnabled())
+					if (!fileButtons[i].isEnabled())
 					{
 						fileNumber = i;
 					}
 				}
 				
+				// Testing number entry - delete later
+				System.out.println(fileNumber);
+				
+				// Calls SuperUser upload file method, receives error String message (null if no error)
 				String uploadError = programView.getProgramModel().getCurrentUser().uploadFileToDatabase(filePath, fileName, fileNumber);
 				
 				if (Objects.isNull(uploadError))
