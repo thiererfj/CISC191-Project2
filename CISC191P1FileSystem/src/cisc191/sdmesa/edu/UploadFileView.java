@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -245,7 +246,7 @@ public class UploadFileView
 		});
 		
 		fileButtonPanel = new JPanel();
-		fileButtonPanel.setBounds(300, 350, 50, 250); //last bound was 500
+		fileButtonPanel.setBounds(315, 345, 50, 250); //last bound was 500
 		fileButtonPanel.setLayout(new GridLayout(10, 1));
 		fileButtonPanel.setOpaque(true);
 		
@@ -255,6 +256,7 @@ public class UploadFileView
 			fileButtonPanel.add(fileButtons[i]);
 		}
 		
+		// Add and make visible the file button panel
 		programView.add(fileButtonPanel);
 		programView.setVisible(true);
 		
@@ -264,25 +266,40 @@ public class UploadFileView
 		// Create text area to display user's files
 		JTextArea userFileArea = new JTextArea(fileList);
 		userFileArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		userFileArea.setBounds(370, 350, 300, 250);
+		userFileArea.setBounds(385, 345, 300, 250);
 		userFileArea.setBackground(Color.lightGray);
 		userFileArea.setEditable(false);
 		programView.add(userFileArea);
 		
+		// Label asking user to enter the origin file path, to grab file form their computer
+		JLabel filePathLabel = new JLabel("Enter the origin file path of the file being uploaded: ");
+		filePathLabel.setBounds(315, 605, 300, 40);
+		filePathLabel.setForeground(Color.white);
+		programView.add(filePathLabel);
+		
+		// Text filed for user to enter the origin file path
 		JTextField filePathEntry = new JTextField();
-		filePathEntry.setBounds(300, 620, 375, 50);
+		filePathEntry.setBounds(315, 650, 375, 50);
 		filePathEntry.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		programView.add(filePathEntry);
 		
+		// Label asking for user to enter the desired database file name
+		JLabel fileNameLabel = new JLabel("Enter the desired file name: ");
+		fileNameLabel.setBounds(315, 705, 300, 40);
+		fileNameLabel.setForeground(Color.white);
+		programView.add(fileNameLabel);
+		
+		// Text field for user to enter the desired database file name
 		JTextField fileNameEntry = new JTextField();
-		fileNameEntry.setBounds(300, 690, 375, 50);
+		fileNameEntry.setBounds(315, 750, 375, 50);
 		fileNameEntry.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		programView.add(fileNameEntry);
 		
+		// Button to initiate the uploading
 		JButton uploadFileButton = new JButton("Upload File");
 		uploadFileButton.setBackground(Color.gray);
 		uploadFileButton.setFocusable(false);
-		uploadFileButton.setBounds(685, 620, 120, 120);
+		uploadFileButton.setBounds(330, 825, 345, 65);
 		programView.add(uploadFileButton);
 		
 		// User clicking upload button executes these tasks
@@ -294,6 +311,7 @@ public class UploadFileView
 				String fileName = fileNameEntry.getText();
 				int fileNumber = 0;
 				
+				// Loop through file buttons to see which is disabled (the selected file number)
 				for (int i = 0; i < 10; i++) 
 				{
 					if (!fileButtons[i].isEnabled())
@@ -308,18 +326,23 @@ public class UploadFileView
 				// Calls SuperUser upload file method, receives error String message (null if no error)
 				String uploadError = programView.getProgramModel().getCurrentUser().uploadFileToDatabase(filePath, fileName, fileNumber);
 				
+				// Checking error messages, first if null there was no error
 				if (Objects.isNull(uploadError))
 				{
 					JOptionPane.showMessageDialog(null, "File successfully uploaded to the database");
 					programView.getContentPane().removeAll();
 					programView.getContentPane().repaint();
+					
+					// Roll back to the user's file system menu view
 					userMenuView.printView();
 				}
+				// If there was a file path error
 				else if (uploadError.equals("filePath"))
 				{
 					JOptionPane.showMessageDialog(null, "File upload unsuccessful, check file path");
 					printView();
 				}
+				// If there was a file number error 
 				else if (uploadError.equals("fileNumber"))
 				{
 					JOptionPane.showMessageDialog(null, "File upload unsuccessful, check selected file number");

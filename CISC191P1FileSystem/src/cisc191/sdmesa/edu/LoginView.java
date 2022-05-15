@@ -42,25 +42,25 @@ public class LoginView
         //Set Username / Set Password TextBoxes
         //Basic and SuperUser JButtons      (Which will disable if Super User is already created)
         
-        // JLabel asking user for login username
+        // Label asking user for login username
       	JLabel enterName = new JLabel("Enter Username:");
       	enterName.setBounds(250, 375, 150, 50);
       	enterName.setForeground(Color.white);
      	programView.add(enterName);
      	
-     	// JLabel asking user for login password
+     	// Text area for user to enter login username
+     	JTextArea userName = new JTextArea();
+      	userName.setBounds(250, 425, 500, 50);
+      	userName.setFont(new Font("Times New Roman", Font.BOLD, 30));
+      	programView.add(userName);
+     	
+     	// Label asking user for login password
       	JLabel enterPassword = new JLabel("Enter Password:");
       	enterPassword.setBounds(250, 475, 150, 50);
       	enterPassword.setForeground(Color.white);
       	programView.add(enterPassword);
-     		
-     	// JTextArea for user to enter login username
-     	JTextArea userName = new JTextArea();
-      	userName.setBounds(250, 425, 500, 50);
-      	userName.setFont(new Font("Times New Roman", Font.BOLD, 30));
-      	programView.add(userName);	
       		
-      	// JTextArea for user to enter login password
+      	// Text area for user to enter login password
       	JTextArea userPassword = new JTextArea();
       	userPassword.setBounds(250, 525, 500, 50);
       	userPassword.setFont(new Font("Times New Roman", Font.BOLD, 30));
@@ -68,7 +68,7 @@ public class LoginView
       	
 		// Add Tab key listener to username JTextArea so you can type username
 		// and then hit tab to switch to password JTextArea
-      	// not working quite right
+      	// not working quite right - could be helpful if bugs worked out
 //		userName.addKeyListener(new KeyAdapter()
 //		{
 //			@Override
