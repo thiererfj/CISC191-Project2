@@ -2,11 +2,13 @@ package cisc191.sdmesa.edu;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -112,9 +114,10 @@ public class UserMenuView
 		{
 			JButton viewFilesButton = new JButton();
 			viewFilesButton.setLayout(new BoxLayout(viewFilesButton, BoxLayout.Y_AXIS));
-			JLabel firstLine = new JLabel("View Your");
+			viewFilesButton.add(Box.createRigidArea(new Dimension(0, 30)));
+			JLabel firstLine = new JLabel("    View Your");
 			firstLine.setHorizontalAlignment(SwingConstants.CENTER);
-			JLabel secondLine = new JLabel("Files");
+			JLabel secondLine = new JLabel("         Files");
 			secondLine.setHorizontalAlignment(SwingConstants.CENTER);
 			viewFilesButton.add(firstLine);
 			viewFilesButton.add(secondLine);
@@ -131,11 +134,12 @@ public class UserMenuView
 			});
 			
 			JButton viewAnotherUsersFilesButton = new JButton();
-			viewAnotherUsersFilesButton.setLayout(new BorderLayout());
-			firstLine = new JLabel("View Another");
-			secondLine = new JLabel("User's Files");
-			viewAnotherUsersFilesButton.add(BorderLayout.NORTH, firstLine);
-			viewAnotherUsersFilesButton.add(BorderLayout.SOUTH, secondLine);
+			viewAnotherUsersFilesButton.setLayout(new BoxLayout(viewAnotherUsersFilesButton, BoxLayout.Y_AXIS));
+			viewAnotherUsersFilesButton.add(Box.createRigidArea(new Dimension(0, 30)));
+			firstLine = new JLabel(" View Another");
+			secondLine = new JLabel("   User's Files");
+			viewAnotherUsersFilesButton.add(firstLine);
+			viewAnotherUsersFilesButton.add(secondLine);
 			viewAnotherUsersFilesButton.setBackground(Color.gray);
 			viewAnotherUsersFilesButton.setFocusable(false);
 			buttonPanel.add(viewAnotherUsersFilesButton);

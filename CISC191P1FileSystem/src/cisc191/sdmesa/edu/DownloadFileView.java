@@ -19,14 +19,14 @@ public class DownloadFileView
 	private UserMenuView userMenuView;
 	private ProgramView programView;
 	private String fileList;
-	private JPanel fileButtonPanel;
-	private JButton[] fileButtons;
+	private JPanel fileSelectButtonPanel;
+	private JButton[] fileSelectButtons;
 	
 	public DownloadFileView (UserMenuView userMenuView, ProgramView programView) 
 	{
 		this.userMenuView = userMenuView;
 		this.programView = programView;
-		this.fileButtons = new JButton[10];
+		this.fileSelectButtons = new JButton[10];
 		printView();
 	}
 	
@@ -49,213 +49,25 @@ public class DownloadFileView
 		// Loop to make file buttons
 		for (int i = 0; i < 10; i++)
 		{
-			fileButtons[i] = new JButton(Integer.toString(i + 1));
-			fileButtons[i].setBackground(Color.gray);
-			fileButtons[i].setFocusable(false);
+			fileSelectButtons[i] = new JButton(Integer.toString(i + 1));
+			fileSelectButtons[i].setBackground(Color.gray);
+			fileSelectButtons[i].setFocusable(false);
+			
+			fileSelectButtons[i].addActionListener(new FileSelectButtonListener(programView, fileSelectButtons, fileSelectButtons[i]));
 		}
 		
-		fileButtons[0].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileButtons[0].setEnabled(false);
-				fileButtons[1].setEnabled(true);
-				fileButtons[2].setEnabled(true);
-				fileButtons[3].setEnabled(true);
-				fileButtons[4].setEnabled(true);
-				fileButtons[5].setEnabled(true);
-				fileButtons[6].setEnabled(true);
-				fileButtons[7].setEnabled(true);
-				fileButtons[8].setEnabled(true);
-				fileButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileButtons[1].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileButtons[0].setEnabled(true);
-				fileButtons[1].setEnabled(false);
-				fileButtons[2].setEnabled(true);
-				fileButtons[3].setEnabled(true);
-				fileButtons[4].setEnabled(true);
-				fileButtons[5].setEnabled(true);
-				fileButtons[6].setEnabled(true);
-				fileButtons[7].setEnabled(true);
-				fileButtons[8].setEnabled(true);
-				fileButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileButtons[2].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileButtons[0].setEnabled(true);
-				fileButtons[1].setEnabled(true);
-				fileButtons[2].setEnabled(false);
-				fileButtons[3].setEnabled(true);
-				fileButtons[4].setEnabled(true);
-				fileButtons[5].setEnabled(true);
-				fileButtons[6].setEnabled(true);
-				fileButtons[7].setEnabled(true);
-				fileButtons[8].setEnabled(true);
-				fileButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileButtons[3].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileButtons[0].setEnabled(true);
-				fileButtons[1].setEnabled(true);
-				fileButtons[2].setEnabled(true);
-				fileButtons[3].setEnabled(false);
-				fileButtons[4].setEnabled(true);
-				fileButtons[5].setEnabled(true);
-				fileButtons[6].setEnabled(true);
-				fileButtons[7].setEnabled(true);
-				fileButtons[8].setEnabled(true);
-				fileButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileButtons[4].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileButtons[0].setEnabled(true);
-				fileButtons[1].setEnabled(true);
-				fileButtons[2].setEnabled(true);
-				fileButtons[3].setEnabled(true);
-				fileButtons[4].setEnabled(false);
-				fileButtons[5].setEnabled(true);
-				fileButtons[6].setEnabled(true);
-				fileButtons[7].setEnabled(true);
-				fileButtons[8].setEnabled(true);
-				fileButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileButtons[5].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileButtons[0].setEnabled(true);
-				fileButtons[1].setEnabled(true);
-				fileButtons[2].setEnabled(true);
-				fileButtons[3].setEnabled(true);
-				fileButtons[4].setEnabled(true);
-				fileButtons[5].setEnabled(false);
-				fileButtons[6].setEnabled(true);
-				fileButtons[7].setEnabled(true);
-				fileButtons[8].setEnabled(true);
-				fileButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileButtons[6].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileButtons[0].setEnabled(true);
-				fileButtons[1].setEnabled(true);
-				fileButtons[2].setEnabled(true);
-				fileButtons[3].setEnabled(true);
-				fileButtons[4].setEnabled(true);
-				fileButtons[5].setEnabled(true);
-				fileButtons[6].setEnabled(false);
-				fileButtons[7].setEnabled(true);
-				fileButtons[8].setEnabled(true);
-				fileButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileButtons[7].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileButtons[0].setEnabled(true);
-				fileButtons[1].setEnabled(true);
-				fileButtons[2].setEnabled(true);
-				fileButtons[3].setEnabled(true);
-				fileButtons[4].setEnabled(true);
-				fileButtons[5].setEnabled(true);
-				fileButtons[6].setEnabled(true);
-				fileButtons[7].setEnabled(false);
-				fileButtons[8].setEnabled(true);
-				fileButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileButtons[8].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileButtons[0].setEnabled(true);
-				fileButtons[1].setEnabled(true);
-				fileButtons[2].setEnabled(true);
-				fileButtons[3].setEnabled(true);
-				fileButtons[4].setEnabled(true);
-				fileButtons[5].setEnabled(true);
-				fileButtons[6].setEnabled(true);
-				fileButtons[7].setEnabled(true);
-				fileButtons[8].setEnabled(false);
-				fileButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileButtons[9].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileButtons[0].setEnabled(true);
-				fileButtons[1].setEnabled(true);
-				fileButtons[2].setEnabled(true);
-				fileButtons[3].setEnabled(true);
-				fileButtons[4].setEnabled(true);
-				fileButtons[5].setEnabled(true);
-				fileButtons[6].setEnabled(true);
-				fileButtons[7].setEnabled(true);
-				fileButtons[8].setEnabled(true);
-				fileButtons[9].setEnabled(false);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileButtonPanel = new JPanel();
-		fileButtonPanel.setBounds(315, 345, 50, 250); //last bound was 500
-		fileButtonPanel.setLayout(new GridLayout(10, 1));
-		fileButtonPanel.setOpaque(true);
+		fileSelectButtonPanel = new JPanel();
+		fileSelectButtonPanel.setBounds(315, 345, 50, 250); //last bound was 500
+		fileSelectButtonPanel.setLayout(new GridLayout(10, 1));
+		fileSelectButtonPanel.setOpaque(true);
 		
 		// Loop to add file buttons to file button panel
 		for (int i = 0; i < 10; i++) 
 		{
-			fileButtonPanel.add(fileButtons[i]);
+			fileSelectButtonPanel.add(fileSelectButtons[i]);
 		}
 		
-		programView.add(fileButtonPanel);
+		programView.add(fileSelectButtonPanel);
 		programView.setVisible(true);
 		
 		JTextArea userFileArea = new JTextArea(fileList);
@@ -290,7 +102,7 @@ public class DownloadFileView
 				
 				for (int i = 0; i < 10; i++) 
 				{
-					if (!fileButtons[i].isEnabled())
+					if (!fileSelectButtons[i].isEnabled())
 					{
 						fileNumber = i;
 					}

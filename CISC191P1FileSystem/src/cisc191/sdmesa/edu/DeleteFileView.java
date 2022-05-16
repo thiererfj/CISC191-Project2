@@ -17,18 +17,16 @@ public class DeleteFileView
 	private UserMenuView userMenuView;
 	private ProgramView programView;
 	private String fileList;
-	private JPanel fileDeleteButtonPanel;
-	private JButton[] fileDeleteButtons;
+	private JPanel fileSelectButtonPanel;
+	private JButton[] fileSelectButtons;
 	private int deletionUserSerialNumber;
-	
-	// 1 to delete their own file, 2 to delete another user's file
-	private int deleteType;
+	private int deleteType = 0;
 	
 	public DeleteFileView (UserMenuView userMenuView, ProgramView programView, int deleteType) 
 	{
 		this.userMenuView = userMenuView;
 		this.programView = programView;
-		this.fileDeleteButtons = new JButton[10];
+		this.fileSelectButtons = new JButton[10];
 		this.deleteType = deleteType;
 		printView();
 	}
@@ -52,220 +50,32 @@ public class DeleteFileView
 		}
 		else if (deleteType == 2) 
 		{
-			fileList = "Figure out how to delete another user's files";
+			fileList = "display users for super user to select?";
 		}
 		
 		// Loop to make file buttons
 		for (int i = 0; i < 10; i++)
 		{
-			fileDeleteButtons[i] = new JButton(Integer.toString(i + 1));
-			fileDeleteButtons[i].setBackground(Color.gray);
-			fileDeleteButtons[i].setFocusable(false);
+			fileSelectButtons[i] = new JButton(Integer.toString(i + 1));
+			fileSelectButtons[i].setBackground(Color.gray);
+			fileSelectButtons[i].setFocusable(false);
+			
+			fileSelectButtons[i].addActionListener(new FileSelectButtonListener(programView, fileSelectButtons, fileSelectButtons[i]));
 		}
 		
-		fileDeleteButtons[0].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileDeleteButtons[0].setEnabled(false);
-				fileDeleteButtons[1].setEnabled(true);
-				fileDeleteButtons[2].setEnabled(true);
-				fileDeleteButtons[3].setEnabled(true);
-				fileDeleteButtons[4].setEnabled(true);
-				fileDeleteButtons[5].setEnabled(true);
-				fileDeleteButtons[6].setEnabled(true);
-				fileDeleteButtons[7].setEnabled(true);
-				fileDeleteButtons[8].setEnabled(true);
-				fileDeleteButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileDeleteButtons[1].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileDeleteButtons[0].setEnabled(true);
-				fileDeleteButtons[1].setEnabled(false);
-				fileDeleteButtons[2].setEnabled(true);
-				fileDeleteButtons[3].setEnabled(true);
-				fileDeleteButtons[4].setEnabled(true);
-				fileDeleteButtons[5].setEnabled(true);
-				fileDeleteButtons[6].setEnabled(true);
-				fileDeleteButtons[7].setEnabled(true);
-				fileDeleteButtons[8].setEnabled(true);
-				fileDeleteButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileDeleteButtons[2].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileDeleteButtons[0].setEnabled(true);
-				fileDeleteButtons[1].setEnabled(true);
-				fileDeleteButtons[2].setEnabled(false);
-				fileDeleteButtons[3].setEnabled(true);
-				fileDeleteButtons[4].setEnabled(true);
-				fileDeleteButtons[5].setEnabled(true);
-				fileDeleteButtons[6].setEnabled(true);
-				fileDeleteButtons[7].setEnabled(true);
-				fileDeleteButtons[8].setEnabled(true);
-				fileDeleteButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileDeleteButtons[3].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileDeleteButtons[0].setEnabled(true);
-				fileDeleteButtons[1].setEnabled(true);
-				fileDeleteButtons[2].setEnabled(true);
-				fileDeleteButtons[3].setEnabled(false);
-				fileDeleteButtons[4].setEnabled(true);
-				fileDeleteButtons[5].setEnabled(true);
-				fileDeleteButtons[6].setEnabled(true);
-				fileDeleteButtons[7].setEnabled(true);
-				fileDeleteButtons[8].setEnabled(true);
-				fileDeleteButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileDeleteButtons[4].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileDeleteButtons[0].setEnabled(true);
-				fileDeleteButtons[1].setEnabled(true);
-				fileDeleteButtons[2].setEnabled(true);
-				fileDeleteButtons[3].setEnabled(true);
-				fileDeleteButtons[4].setEnabled(false);
-				fileDeleteButtons[5].setEnabled(true);
-				fileDeleteButtons[6].setEnabled(true);
-				fileDeleteButtons[7].setEnabled(true);
-				fileDeleteButtons[8].setEnabled(true);
-				fileDeleteButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileDeleteButtons[5].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileDeleteButtons[0].setEnabled(true);
-				fileDeleteButtons[1].setEnabled(true);
-				fileDeleteButtons[2].setEnabled(true);
-				fileDeleteButtons[3].setEnabled(true);
-				fileDeleteButtons[4].setEnabled(true);
-				fileDeleteButtons[5].setEnabled(false);
-				fileDeleteButtons[6].setEnabled(true);
-				fileDeleteButtons[7].setEnabled(true);
-				fileDeleteButtons[8].setEnabled(true);
-				fileDeleteButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileDeleteButtons[6].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileDeleteButtons[0].setEnabled(true);
-				fileDeleteButtons[1].setEnabled(true);
-				fileDeleteButtons[2].setEnabled(true);
-				fileDeleteButtons[3].setEnabled(true);
-				fileDeleteButtons[4].setEnabled(true);
-				fileDeleteButtons[5].setEnabled(true);
-				fileDeleteButtons[6].setEnabled(false);
-				fileDeleteButtons[7].setEnabled(true);
-				fileDeleteButtons[8].setEnabled(true);
-				fileDeleteButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileDeleteButtons[7].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileDeleteButtons[0].setEnabled(true);
-				fileDeleteButtons[1].setEnabled(true);
-				fileDeleteButtons[2].setEnabled(true);
-				fileDeleteButtons[3].setEnabled(true);
-				fileDeleteButtons[4].setEnabled(true);
-				fileDeleteButtons[5].setEnabled(true);
-				fileDeleteButtons[6].setEnabled(true);
-				fileDeleteButtons[7].setEnabled(false);
-				fileDeleteButtons[8].setEnabled(true);
-				fileDeleteButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileDeleteButtons[8].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileDeleteButtons[0].setEnabled(true);
-				fileDeleteButtons[1].setEnabled(true);
-				fileDeleteButtons[2].setEnabled(true);
-				fileDeleteButtons[3].setEnabled(true);
-				fileDeleteButtons[4].setEnabled(true);
-				fileDeleteButtons[5].setEnabled(true);
-				fileDeleteButtons[6].setEnabled(true);
-				fileDeleteButtons[7].setEnabled(true);
-				fileDeleteButtons[8].setEnabled(false);
-				fileDeleteButtons[9].setEnabled(true);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
-		fileDeleteButtons[9].addActionListener(new ActionListener() 
-		{
-			public void actionPerformed(ActionEvent e) 
-			{
-				fileDeleteButtons[0].setEnabled(true);
-				fileDeleteButtons[1].setEnabled(true);
-				fileDeleteButtons[2].setEnabled(true);
-				fileDeleteButtons[3].setEnabled(true);
-				fileDeleteButtons[4].setEnabled(true);
-				fileDeleteButtons[5].setEnabled(true);
-				fileDeleteButtons[6].setEnabled(true);
-				fileDeleteButtons[7].setEnabled(true);
-				fileDeleteButtons[8].setEnabled(true);
-				fileDeleteButtons[9].setEnabled(false);
-				
-				programView.getContentPane().repaint();
-			}
-		});
-		
 		// Create JPanel for fileDeleteButtons
-		fileDeleteButtonPanel = new JPanel();
-		fileDeleteButtonPanel.setBounds(315, 345, 50, 250); //last bound was 500
-		fileDeleteButtonPanel.setLayout(new GridLayout(10, 1));
-		fileDeleteButtonPanel.setOpaque(true);
+		fileSelectButtonPanel = new JPanel();
+		fileSelectButtonPanel.setBounds(315, 345, 50, 250); //last bound was 500
+		fileSelectButtonPanel.setLayout(new GridLayout(10, 1));
+		fileSelectButtonPanel.setOpaque(true);
 		
 		// Loop to add file buttons to file button panel
 		for (int i = 0; i < 10; i++)
 		{
-			fileDeleteButtonPanel.add(fileDeleteButtons[i]);
+			fileSelectButtonPanel.add(fileSelectButtons[i]);
 		}
 		
-		programView.add(fileDeleteButtonPanel);
+		programView.add(fileSelectButtonPanel);
 		programView.setVisible(true);
 		
 		// Create text area to display relevant user's files
@@ -292,7 +102,7 @@ public class DeleteFileView
 				// Loop through file delete buttons to see which is disabled (the selected file number)
 				for (int i = 0; i < 10; i++) 
 				{
-					if (!fileDeleteButtons[i].isEnabled())
+					if (!fileSelectButtons[i].isEnabled())
 					{
 						fileNumber = i;
 					}

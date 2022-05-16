@@ -47,4 +47,6 @@ public interface Fileable
 	 * @param userInput
 	 */
 	String deleteFile(int userIndex, int fileNumber);
+	
+//	String viewFiles(int userIndex);
 }
