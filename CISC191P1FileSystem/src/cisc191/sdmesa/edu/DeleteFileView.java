@@ -16,7 +16,7 @@ public class DeleteFileView
 {
 	private UserMenuView userMenuView;
 	private ProgramView programView;
-	private String fileList = "";
+	private String fileList;
 	private JPanel fileDeleteButtonPanel;
 	private JButton[] fileDeleteButtons;
 	private int deletionUserSerialNumber;

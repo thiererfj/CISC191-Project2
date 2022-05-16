@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -17,7 +18,7 @@ public class DownloadFileView
 {
 	private UserMenuView userMenuView;
 	private ProgramView programView;
-	private String fileList = "";
+	private String fileList;
 	private JPanel fileButtonPanel;
 	private JButton[] fileButtons;
 	
@@ -43,17 +44,7 @@ public class DownloadFileView
 	
 	private void viewDownloadFiles()
 	{
-		for (int i = 0; i < 10; i++)
-		{
-			if (programView.getProgramModel().getDatabase().getGlobalStorage()[programView.getProgramModel().getCurrentUser().getSerialNumber()][i] == null)
-			{
-				fileList = fileList + (i + 1) + " - Empty\n";
-			}
-			else
-			{ 
-				fileList = fileList + (i + 1) + " - " + programView.getProgramModel().getDatabase().getGlobalStorage()[programView.getProgramModel().getCurrentUser().getSerialNumber()][i].getFileName();
-			}
-		}
+		fileList = programView.getProgramModel().getCurrentUser().viewUserFiles();
 		
 		// Loop to make file buttons
 		for (int i = 0; i < 10; i++)
@@ -254,7 +245,7 @@ public class DownloadFileView
 		});
 		
 		fileButtonPanel = new JPanel();
-		fileButtonPanel.setBounds(300, 350, 50, 250); //last bound was 500
+		fileButtonPanel.setBounds(315, 345, 50, 250); //last bound was 500
 		fileButtonPanel.setLayout(new GridLayout(10, 1));
 		fileButtonPanel.setOpaque(true);
 		
@@ -269,23 +260,28 @@ public class DownloadFileView
 		
 		JTextArea userFileArea = new JTextArea(fileList);
 		userFileArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		userFileArea.setBounds(370, 350, 300, 250);
+		userFileArea.setBounds(385, 345, 300, 250);
 		userFileArea.setBackground(Color.lightGray);
 		userFileArea.setEditable(false);
 		programView.add(userFileArea);
 		
+		JLabel filePathLabel = new JLabel("Enter the desired file path for the file being downloaded: ");
+		filePathLabel.setBounds(315, 610, 400, 40);
+		filePathLabel.setForeground(Color.white);
+		programView.add(filePathLabel);
+		
 		JTextField filePathEntry = new JTextField();
-		filePathEntry.setBounds(300, 690, 375, 50);
+		filePathEntry.setBounds(315, 650, 375, 50);
 		filePathEntry.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		programView.add(filePathEntry);
 		
-		JButton uploadFileButton = new JButton("Download File");
-		uploadFileButton.setBackground(Color.gray);
-		uploadFileButton.setFocusable(false);
-		uploadFileButton.setBounds(685, 620, 120, 120);
-		programView.add(uploadFileButton);
+		JButton downloadFileButton = new JButton("Download File");
+		downloadFileButton.setBackground(Color.gray);
+		downloadFileButton.setFocusable(false);
+		downloadFileButton.setBounds(330, 720, 345, 65);
+		programView.add(downloadFileButton);
 		
-		uploadFileButton.addActionListener(new ActionListener()
+		downloadFileButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
@@ -294,7 +290,7 @@ public class DownloadFileView
 				
 				for (int i = 0; i < 10; i++) 
 				{
-					if (fileButtons[i].isEnabled())
+					if (!fileButtons[i].isEnabled())
 					{
 						fileNumber = i;
 					}
