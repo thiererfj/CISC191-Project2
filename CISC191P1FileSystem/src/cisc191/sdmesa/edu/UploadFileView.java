@@ -320,10 +320,7 @@ public class UploadFileView
 					}
 				}
 				
-				// Testing number entry - delete later
-				System.out.println(fileNumber);
-				
-				// Calls SuperUser upload file method, receives error String message (null if no error)
+				// Calls User subclass upload file method, receives error String message (null if no error)
 				String uploadError = programView.getProgramModel().getCurrentUser().uploadFileToDatabase(filePath, fileName, fileNumber);
 				
 				// Checking error messages, first if null there was no error
@@ -340,12 +337,16 @@ public class UploadFileView
 				else if (uploadError.equals("filePath"))
 				{
 					JOptionPane.showMessageDialog(null, "File upload unsuccessful, check file path");
+					
+					// Reprint this upload view to reset from error
 					printView();
 				}
 				// If there was a file number error 
 				else if (uploadError.equals("fileNumber"))
 				{
 					JOptionPane.showMessageDialog(null, "File upload unsuccessful, check selected file number");
+					
+					// Reprint this upload view to reset from error
 					printView();
 				}
 			}

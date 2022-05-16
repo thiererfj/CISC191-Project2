@@ -46,5 +46,5 @@ public interface Fileable
 	 * 
 	 * @param userInput
 	 */
-	void deleteFile(Scanner userInput);
+	String deleteFile(int userIndex, int fileNumber);
 }

@@ -163,51 +163,23 @@ public class BasicUser extends User
 	}
 	
 	/**
-	 * To delete a file from this user's FileData[][] row in Database
+	 * To delete a file from the Database FileData[][] two-dimensional array for any user
 	 */
 	@Override 
-	public void deleteFile(Scanner userInput) 
+	public String deleteFile(int userIndex, int fileNumber) 
 	{
-		// Print user's files
-		viewUserFiles();
 		
-		// Handle bad user index input
-		try
+		// If no file exists at chosen index
+		if (getDatabase().getGlobalStorage()[userIndex][fileNumber] == null)
 		{
-			System.out.println("\nEnter the file number of the file you want to delete?: ");
-			
-			// Holds index of file to delete (input - 1 for zero indexing)
-			int filePosition = userInput.nextInt() - 1;
-			
-			// Eat \n
-			userInput.nextLine();
-			
-			// If no file exists at selected index
-			if (getDatabase().getGlobalStorage()[getSerialNumber()][filePosition] == null) 
-			{
-				// Print error message
-				System.out.println("\\_(O_O)_/ --> That file does not exist, cannot delete nothing! What's next, you want to divide by zero?!??!?");
-				System.out.println("Deletion unsuccessful - Returning to File System menu");
-				
-				// Exit method
-				return;
-			}
-			
-			// If file exists at selected index, "delete" by setting index to null
-			getDatabase().getGlobalStorage()[getSerialNumber()][filePosition] = null;
-			
-			// Print success message
-			System.out.println("\\_(o_o)_/ --> File successfully deleted. Yay.");
+			return "empty";
 		}
-		// If user enters index that does not exist
-		catch (ArrayIndexOutOfBoundsException e2) 
+		else 
 		{
-			// Print error message
-			System.out.println("\\_(o_o)_/ --> My circuits tell me you entered something bad. They are baffled you made it this far in life.");
-			System.out.println("Deletion unsuccessful - returning to File System menu");
+			// "Deleting" a file just sets its array index to null
+			getDatabase().getGlobalStorage()[userIndex][fileNumber] = null;
 			
-			// Exit method
-			return;
+			return null;
 		}
 	}
 	

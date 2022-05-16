@@ -143,6 +143,8 @@ abstract class User implements Fileable
 	
 	public abstract String downloadFileFromDatabase(String filePath, int fileNumber);
 	
+	public abstract String deleteFile(int userIndex, int fileNumber);
+	
 //	abstract void printFileSystemOptions();
 //	
 //	abstract void runFileSystemOption(Scanner userInput);
