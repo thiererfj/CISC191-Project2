@@ -59,7 +59,7 @@ public class DownloadFileView
 			fileSelectButtons[i].setBackground(Color.gray);
 			fileSelectButtons[i].setFocusable(false);
 			
-			fileSelectButtons[i].addActionListener(new FileSelectButtonListener(programView, fileSelectButtons, fileSelectButtons[i]));
+			fileSelectButtons[i].addActionListener(new SelectButtonListener(programView, fileSelectButtons, fileSelectButtons[i]));
 		}
 		
 		fileSelectButtonPanel = new JPanel();

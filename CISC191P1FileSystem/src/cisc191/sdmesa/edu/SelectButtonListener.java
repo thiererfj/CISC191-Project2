@@ -5,13 +5,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class FileSelectButtonListener implements ActionListener
+public class SelectButtonListener implements ActionListener
 {
 	private ProgramView programView;
 	private JButton[] fileSelectButtons;
 	private JButton selectedButton;
 	
-	public FileSelectButtonListener(ProgramView programView, JButton[] fileSelectButtons, JButton selectedButton)
+	public SelectButtonListener(ProgramView programView, JButton[] fileSelectButtons, JButton selectedButton)
 	{
 		this.programView = programView;
 		this.fileSelectButtons = fileSelectButtons;

@@ -19,27 +19,15 @@ import javax.swing.SwingConstants;
 public class UserMenuView 
 {
 	private ProgramView programView;
+	private JPanel buttonPanel;
 	private boolean currentUserIsSuper;
 	
 	public UserMenuView (ProgramView programView, boolean currentUserIsSuper)
 	{
 		this.programView = programView;
 		this.currentUserIsSuper = currentUserIsSuper;
-//		setUserType();
 		printView();
 	}
-	
-//	private void setUserType() 
-//	{
-//		if (programView.getProgramModel().getCurrentUser() instanceof SuperUser) 
-//		{
-//			currentUserIsSuper = true;
-//		}
-//		else 
-//		{
-//			currentUserIsSuper = false;
-//		}
-//	}
 	
 	public void printView() 
 	{
@@ -58,10 +46,21 @@ public class UserMenuView
     	displayCurrentUsername.setEditable(false);
     	programView.add(displayCurrentUsername);
         
-        JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 20, 20));
-        buttonPanel.setOpaque(true);
-        buttonPanel.setBackground(Color.black);
-        buttonPanel.setBounds(200, 600, 800, 100);
+    	// Set button panel layout depending on user type
+    	if (currentUserIsSuper) 
+    	{
+    		buttonPanel = new JPanel(new GridLayout(1, 6, 20, 20));
+            buttonPanel.setOpaque(true);
+            buttonPanel.setBackground(Color.black);
+            buttonPanel.setBounds(100, 600, 1000, 100);
+    	}
+    	else 
+    	{
+    		buttonPanel = new JPanel(new GridLayout(1, 4, 20, 20));
+            buttonPanel.setOpaque(true);
+            buttonPanel.setBackground(Color.black);
+            buttonPanel.setBounds(200, 600, 800, 100);
+    	}
         
         JButton uploadFileButton = new JButton("Upload File");
         uploadFileButton.setBackground(Color.gray);
@@ -94,31 +93,54 @@ public class UserMenuView
 				downloadFileVisuals();
 			}
 		});
-        
-        //GOODDDDDD
-
-		JButton deleteFileButton = new JButton("Delete File");
-		deleteFileButton.setBackground(Color.gray);
-		deleteFileButton.setFocusable(false);
-		buttonPanel.add(deleteFileButton);
-
-		deleteFileButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				deleteFileVisuals();
-			}
-		});
 		
-		// Add extra button if current user is super
+		// Add extra buttons if current user is super
 		if (currentUserIsSuper)
 		{
+			JButton deleteFileButton = new JButton();
+			deleteFileButton.setLayout(new BoxLayout(deleteFileButton, BoxLayout.Y_AXIS));
+			deleteFileButton.add(Box.createRigidArea(new Dimension(0, 30)));
+			JLabel firstLine = new JLabel("    Delete Your");
+			JLabel secondLine = new JLabel("       Own File");
+			deleteFileButton.add(firstLine);
+			deleteFileButton.add(secondLine);
+			deleteFileButton.setBackground(Color.gray);
+			deleteFileButton.setFocusable(false);
+			buttonPanel.add(deleteFileButton);
+
+			deleteFileButton.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					deleteFileVisuals();
+				}
+			});
+			
+			JButton deleteAnotherUsersFileButton = new JButton();
+			deleteAnotherUsersFileButton.setLayout(new BoxLayout(deleteAnotherUsersFileButton, BoxLayout.Y_AXIS));
+			deleteAnotherUsersFileButton.add(Box.createRigidArea(new Dimension(0, 30)));
+			firstLine = new JLabel("  Delete Another");
+			secondLine = new JLabel("      User's File");
+			deleteAnotherUsersFileButton.add(firstLine);
+			deleteAnotherUsersFileButton.add(secondLine);
+			deleteAnotherUsersFileButton.setBackground(Color.gray);
+			deleteAnotherUsersFileButton.setFocusable(false);
+			buttonPanel.add(deleteAnotherUsersFileButton);
+
+			deleteAnotherUsersFileButton.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					deleteAnotherUsersFileVisuals();
+				}
+			});
+			
 			JButton viewFilesButton = new JButton();
 			viewFilesButton.setLayout(new BoxLayout(viewFilesButton, BoxLayout.Y_AXIS));
 			viewFilesButton.add(Box.createRigidArea(new Dimension(0, 30)));
-			JLabel firstLine = new JLabel("   View Your");
+			firstLine = new JLabel("     View Your");
 			firstLine.setHorizontalAlignment(SwingConstants.CENTER);
-			JLabel secondLine = new JLabel("        Files");
+			secondLine = new JLabel("     Own Files");
 			secondLine.setHorizontalAlignment(SwingConstants.CENTER);
 			viewFilesButton.add(firstLine);
 			viewFilesButton.add(secondLine);
@@ -137,8 +159,8 @@ public class UserMenuView
 			JButton viewAnotherUsersFilesButton = new JButton();
 			viewAnotherUsersFilesButton.setLayout(new BoxLayout(viewAnotherUsersFilesButton, BoxLayout.Y_AXIS));
 			viewAnotherUsersFilesButton.add(Box.createRigidArea(new Dimension(0, 30)));
-			firstLine = new JLabel(" View Another");
-			secondLine = new JLabel("  User's Files");
+			firstLine = new JLabel("  View Another");
+			secondLine = new JLabel("   User's Files");
 			viewAnotherUsersFilesButton.add(firstLine);
 			viewAnotherUsersFilesButton.add(secondLine);
 			viewAnotherUsersFilesButton.setBackground(Color.gray);
@@ -156,6 +178,19 @@ public class UserMenuView
 		// Otherwise don't add extra button
 		else 
 		{
+			JButton deleteFileButton = new JButton("Delete File");
+			deleteFileButton.setBackground(Color.gray);
+			deleteFileButton.setFocusable(false);
+			buttonPanel.add(deleteFileButton);
+
+			deleteFileButton.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					deleteFileVisuals();
+				}
+			});
+			
 			JButton viewFilesButton = new JButton("View Your Files");
 			viewFilesButton.setBackground(Color.gray);
 			viewFilesButton.setFocusable(false);
@@ -219,16 +254,25 @@ public class UserMenuView
 	
 	private void deleteFileVisuals() 
 	{
+		// Pass 1 for basic user view type
 		DeleteFileView deleteFileView = new DeleteFileView(this, programView, 1);
+	}
+	
+	private void deleteAnotherUsersFileVisuals() 
+	{
+		// Pass 2 for super user view type
+		DeleteFileView deleteFileView = new DeleteFileView(this, programView, 2);
 	}
 	
 	private void viewCurrentUserFilesVisuals() 
 	{
+		// Pass 1 for basic user view type
 		ViewFilesView viewFilesView = new ViewFilesView(this, programView, 1);
 	}
 	
 	private void viewSelectedUsersFilesVisuals() 
 	{
+		// Pass 2 for super user view type
 		ViewFilesView viewFilesView = new ViewFilesView(this, programView, 2);
 	}
 	

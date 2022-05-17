@@ -206,4 +206,30 @@ public class Database
 		return false;
 	}
 	
+	public String viewUserAccounts() 
+	{
+		// Create empty String to add account usernames to
+		String accountList = "";
+
+		// Loop through this user's row in FileData[][]
+		for (int i = 0; i < 10; i++)
+		{
+			// No file at index
+			if (users[i] == null)
+			{
+				// Add "empty" filename
+				accountList = accountList + (i + 1) + " - Empty\n";
+			}
+			// File exists at index
+			else
+			{
+				// Add correct filename
+				accountList = accountList + (i + 1) + " - " + users[i].getUsername() + "\n";
+			}
+		}
+
+		// Return the completed String
+		return accountList;
+	}
+	
 }
