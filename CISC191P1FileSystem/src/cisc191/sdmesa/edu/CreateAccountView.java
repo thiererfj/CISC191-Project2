@@ -70,7 +70,7 @@ public class CreateAccountView {
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 20, 20));
         buttonPanel.setOpaque(true);
         buttonPanel.setBackground(Color.black);
-        buttonPanel.setBounds(300, 325, 400, 50);
+        buttonPanel.setBounds(400, 310, 400, 50);
         
         // If no super user
         if(!programView.getProgramModel().getDatabase().superUserExists())
@@ -92,7 +92,6 @@ public class CreateAccountView {
             
         	
         }
-        
         
         //Click if you want to make basic user account
         basicUserButton = new JButton("Basic User");
@@ -122,25 +121,25 @@ public class CreateAccountView {
 
         // JLabel to ask user for creation username
 		JLabel enterName = new JLabel("Create a Username:");
-		enterName.setBounds(250, 375, 150, 50);
+		enterName.setBounds(350, 375, 150, 50);
 		enterName.setForeground(Color.white);
 		programView.add(enterName);
 		
 		// JLabel to ask user for creation password
 		JLabel enterPassword = new JLabel("Create a Password:");
-		enterPassword.setBounds(250, 475, 150, 50);
+		enterPassword.setBounds(350, 475, 150, 50);
 		enterPassword.setForeground(Color.white);
 		programView.add(enterPassword);
 		
 		// Text box where user enters username
 		JTextArea userName = new JTextArea();
-		userName.setBounds(250, 425, 500, 50);
+		userName.setBounds(350, 425, 500, 50);
 		userName.setFont(new Font("Times New Roman", Font.BOLD, 30));	
 		programView.add(userName);
 		
 		// Text box where user enters password
 		JTextArea userPassword = new JTextArea();
-		userPassword.setBounds(250, 525, 500, 50);
+		userPassword.setBounds(350, 525, 500, 50);
 		userPassword.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		programView.add(userPassword);
 		
@@ -162,19 +161,19 @@ public class CreateAccountView {
 //		});
 
 		JTextArea usernameError = new JTextArea("");
-        usernameError.setBounds(775, 433, 150, 50);
+        usernameError.setBounds(860, 433, 150, 50);
         usernameError.setBackground(Color.black);
         usernameError.setForeground(Color.red);
         programView.add(usernameError);
         
         JTextArea passwordError = new JTextArea();
-        passwordError.setBounds(775, 533, 150, 50);
+        passwordError.setBounds(860, 533, 150, 50);
         passwordError.setBackground(Color.black);
         passwordError.setForeground(Color.red);
         programView.add(passwordError);
 		
         accountInstanceButton = new JButton("Create Account");
-        accountInstanceButton.setBounds(400, 600, 200, 50);
+        accountInstanceButton.setBounds(500, 600, 200, 50);
         accountInstanceButton.setEnabled(false);
         accountInstanceButton.setBackground(Color.gray);
         accountInstanceButton.setFocusable(false);

@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -53,6 +54,12 @@ public class DeleteFileView
 			fileList = "display users for super user to select?";
 		}
 		
+		// Label telling user to click a file button to set file index
+		JLabel fileButtonLabel = new JLabel("Select which position to delete the file from: ");
+		fileButtonLabel.setBounds(415, 255, 300, 40);
+		fileButtonLabel.setForeground(Color.white);
+		programView.add(fileButtonLabel);
+		
 		// Loop to make file buttons
 		for (int i = 0; i < 10; i++)
 		{
@@ -65,7 +72,7 @@ public class DeleteFileView
 		
 		// Create JPanel for fileDeleteButtons
 		fileSelectButtonPanel = new JPanel();
-		fileSelectButtonPanel.setBounds(315, 345, 50, 250); //last bound was 500
+		fileSelectButtonPanel.setBounds(415, 300, 50, 250); //last bound was 500
 		fileSelectButtonPanel.setLayout(new GridLayout(10, 1));
 		fileSelectButtonPanel.setOpaque(true);
 		
@@ -81,7 +88,7 @@ public class DeleteFileView
 		// Create text area to display relevant user's files
 		JTextArea userFileArea = new JTextArea(fileList);
 		userFileArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		userFileArea.setBounds(385, 345, 300, 250);
+		userFileArea.setBounds(485, 300, 300, 250);
 		userFileArea.setBackground(Color.lightGray);
 		userFileArea.setEditable(false);
 		programView.add(userFileArea);
@@ -90,7 +97,7 @@ public class DeleteFileView
 		JButton deleteFileButton = new JButton("Delete File");
 		deleteFileButton.setBackground(Color.gray);
 		deleteFileButton.setFocusable(false);
-		deleteFileButton.setBounds(330, 650, 345, 65);
+		deleteFileButton.setBounds(425, 600, 345, 65);
 		programView.add(deleteFileButton);
 		
 		deleteFileButton.addActionListener(new ActionListener()

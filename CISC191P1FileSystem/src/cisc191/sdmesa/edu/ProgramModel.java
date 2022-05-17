@@ -141,7 +141,7 @@ public class ProgramModel
 				{
 					if (i == 0) 
 					{
-						users = users + "\n" + getDatabase().getUsers()[i].getUsername() + " - (Super User)";
+						users = users + "\n" + getDatabase().getUsers()[i].getUsername();
 					}
 					else 
 					{

@@ -30,7 +30,7 @@ public class ProgramView extends JFrame
 	public ProgramView(ProgramModel programModel)
 	{
 		this.programModel = programModel;
-		setSize(1000, 1000);
+		setSize(1200, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setLocationRelativeTo(null);
@@ -62,7 +62,7 @@ public class ProgramView extends JFrame
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 20, 20));
 		buttonPanel.setOpaque(true);
 		buttonPanel.setBackground(Color.black);
-		buttonPanel.setBounds(100, 600, 800, 100);
+		buttonPanel.setBounds(150, 600, 900, 100);
 
 		// Maybe we can rework this? What if there are 9 basic users but no super user
 		if (programModel.getDatabase().getUsers()[9] == null)
@@ -206,7 +206,7 @@ public class ProgramView extends JFrame
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
 		titleLabel.setOpaque(true);
 		titleLabel.setBackground(backgroundColor);
-		titleLabel.setBounds(250, 100, 500, 200);
+		titleLabel.setBounds(400, 50, 400, 150);
 		titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		titleLabel.setForeground(foregroundColor);
 		add(titleLabel);

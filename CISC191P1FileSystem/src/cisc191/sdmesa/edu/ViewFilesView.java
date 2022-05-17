@@ -45,7 +45,7 @@ public class ViewFilesView
 		
 		JTextArea userFileArea = new JTextArea(fileList);
 		userFileArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		userFileArea.setBounds(370, 350, 300, 250);
+		userFileArea.setBounds(450, 300, 300, 250);
 		userFileArea.setBackground(Color.lightGray);
 		userFileArea.setEditable(false);
 		programView.add(userFileArea);

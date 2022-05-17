@@ -29,11 +29,11 @@ public class ViewUserAccountsView
         programView.addTitleLabel("Accounts", Color.LIGHT_GRAY, Color.WHITE);
         
         JTextArea userList = new JTextArea(programView.getProgramModel().viewUserAccounts());
-        userList.setBounds(250,325, 500, 375);
+        userList.setBounds(350, 300, 500, 375);
         userList.setFont(new Font("Times New Roman", Font.BOLD, 30));
         
-        userList.setBackground(Color.black);
-        userList.setForeground(Color.white);
+        userList.setBackground(Color.gray);
+        userList.setForeground(Color.black);
         programView.add(userList);
 
         programView.getContentPane().repaint();

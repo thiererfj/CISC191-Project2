@@ -47,6 +47,12 @@ public class UploadFileView
 	
 	public void viewFiles()
 	{
+		// Label telling user to click a file button to set file index
+		JLabel fileButtonLabel = new JLabel("Select which position to upload the file to: ");
+		fileButtonLabel.setBounds(100, 255, 300, 40);
+		fileButtonLabel.setForeground(Color.white);
+		programView.add(fileButtonLabel);
+		
 		// Loop to make file buttons
 		for (int i = 0; i < 10; i++) 
 		{
@@ -58,7 +64,7 @@ public class UploadFileView
 		}
 		
 		fileSelectButtonPanel = new JPanel();
-		fileSelectButtonPanel.setBounds(315, 345, 50, 250); //last bound was 500
+		fileSelectButtonPanel.setBounds(100, 300, 50, 250); //last bound was 500
 		fileSelectButtonPanel.setLayout(new GridLayout(10, 1));
 		fileSelectButtonPanel.setOpaque(true);
 		
@@ -78,32 +84,32 @@ public class UploadFileView
 		// Create text area to display user's files
 		JTextArea userFileArea = new JTextArea(fileList);
 		userFileArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		userFileArea.setBounds(385, 345, 300, 250);
+		userFileArea.setBounds(170, 300, 300, 250);
 		userFileArea.setBackground(Color.lightGray);
 		userFileArea.setEditable(false);
 		programView.add(userFileArea);
 		
 		// Label asking user to enter the origin file path, to grab file form their computer
 		JLabel filePathLabel = new JLabel("Enter the origin file path of the file being uploaded: ");
-		filePathLabel.setBounds(315, 605, 300, 40);
+		filePathLabel.setBounds(600, 305, 300, 40);
 		filePathLabel.setForeground(Color.white);
 		programView.add(filePathLabel);
 		
 		// Text filed for user to enter the origin file path
 		JTextField filePathEntry = new JTextField();
-		filePathEntry.setBounds(315, 650, 375, 50);
+		filePathEntry.setBounds(600, 350, 375, 50);
 		filePathEntry.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		programView.add(filePathEntry);
 		
 		// Label asking for user to enter the desired database file name
 		JLabel fileNameLabel = new JLabel("Enter the desired file name: ");
-		fileNameLabel.setBounds(315, 705, 300, 40);
+		fileNameLabel.setBounds(600, 415, 300, 40);
 		fileNameLabel.setForeground(Color.white);
 		programView.add(fileNameLabel);
 		
 		// Text field for user to enter the desired database file name
 		JTextField fileNameEntry = new JTextField();
-		fileNameEntry.setBounds(315, 750, 375, 50);
+		fileNameEntry.setBounds(600, 460, 375, 50);
 		fileNameEntry.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		programView.add(fileNameEntry);
 		
@@ -111,7 +117,7 @@ public class UploadFileView
 		JButton uploadFileButton = new JButton("Upload File");
 		uploadFileButton.setBackground(Color.gray);
 		uploadFileButton.setFocusable(false);
-		uploadFileButton.setBounds(330, 825, 345, 65);
+		uploadFileButton.setBounds(420, 600, 345, 65);
 		programView.add(uploadFileButton);
 		
 		// User clicking upload button executes these tasks

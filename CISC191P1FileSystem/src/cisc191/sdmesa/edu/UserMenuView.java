@@ -61,7 +61,7 @@ public class UserMenuView
         JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 20, 20));
         buttonPanel.setOpaque(true);
         buttonPanel.setBackground(Color.black);
-        buttonPanel.setBounds(100, 600, 800, 100);
+        buttonPanel.setBounds(200, 600, 800, 100);
         
         JButton uploadFileButton = new JButton("Upload File");
         uploadFileButton.setBackground(Color.gray);
@@ -187,20 +187,20 @@ public class UserMenuView
 		
 		
 		//BasicUser Options
-		System.out.println("1) Upload a file to the database");
-		System.out.println("2) Save a database file to your machine");
-		System.out.println("3) Delete a file in the database");
-		System.out.println("4) View your database files");
-		System.out.println("5) Log out of current user");
+//		System.out.println("1) Upload a file to the database");
+//		System.out.println("2) Save a database file to your machine");
+//		System.out.println("3) Delete a file in the database");
+//		System.out.println("4) View your database files");
+//		System.out.println("5) Log out of current user");
 		
 		
 		//SuperUser Options
-		System.out.println("1) Upload a file to the database");
-		System.out.println("2) Save a database file to your machine");
-		System.out.println("3) Delete a file in the database");
-		System.out.println("4) View your database files");
-		System.out.println("5) View another users database files");
-		System.out.println("6) Log out of current user");
+//		System.out.println("1) Upload a file to the database");
+//		System.out.println("2) Save a database file to your machine");
+//		System.out.println("3) Delete a file in the database");
+//		System.out.println("4) View your database files");
+//		System.out.println("5) View another users database files");
+//		System.out.println("6) Log out of current user");
 		
 		
 		programView.repaint();

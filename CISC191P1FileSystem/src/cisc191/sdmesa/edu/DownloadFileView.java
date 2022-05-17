@@ -44,6 +44,12 @@ public class DownloadFileView
 	
 	private void viewDownloadFiles()
 	{
+		// Label telling user to click a file button to set file index
+		JLabel fileButtonLabel = new JLabel("Select which position to download the file from: ");
+		fileButtonLabel.setBounds(100, 255, 300, 40);
+		fileButtonLabel.setForeground(Color.white);
+		programView.add(fileButtonLabel);
+		
 		fileList = programView.getProgramModel().getCurrentUser().viewUserFiles();
 		
 		// Loop to make file buttons
@@ -57,7 +63,7 @@ public class DownloadFileView
 		}
 		
 		fileSelectButtonPanel = new JPanel();
-		fileSelectButtonPanel.setBounds(315, 345, 50, 250); //last bound was 500
+		fileSelectButtonPanel.setBounds(100, 300, 50, 250); //last bound was 500
 		fileSelectButtonPanel.setLayout(new GridLayout(10, 1));
 		fileSelectButtonPanel.setOpaque(true);
 		
@@ -72,25 +78,25 @@ public class DownloadFileView
 		
 		JTextArea userFileArea = new JTextArea(fileList);
 		userFileArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		userFileArea.setBounds(385, 345, 300, 250);
+		userFileArea.setBounds(170, 300, 300, 250);
 		userFileArea.setBackground(Color.lightGray);
 		userFileArea.setEditable(false);
 		programView.add(userFileArea);
 		
 		JLabel filePathLabel = new JLabel("Enter the desired file path for the file being downloaded: ");
-		filePathLabel.setBounds(315, 610, 400, 40);
+		filePathLabel.setBounds(600, 350, 400, 40);
 		filePathLabel.setForeground(Color.white);
 		programView.add(filePathLabel);
 		
 		JTextField filePathEntry = new JTextField();
-		filePathEntry.setBounds(315, 650, 375, 50);
+		filePathEntry.setBounds(600, 395, 375, 50);
 		filePathEntry.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		programView.add(filePathEntry);
 		
 		JButton downloadFileButton = new JButton("Download File");
 		downloadFileButton.setBackground(Color.gray);
 		downloadFileButton.setFocusable(false);
-		downloadFileButton.setBounds(330, 720, 345, 65);
+		downloadFileButton.setBounds(420, 600, 345, 65);
 		programView.add(downloadFileButton);
 		
 		downloadFileButton.addActionListener(new ActionListener()
