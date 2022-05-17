@@ -21,24 +21,25 @@ public class UserMenuView
 	private ProgramView programView;
 	private boolean currentUserIsSuper;
 	
-	public UserMenuView (ProgramView programView)
+	public UserMenuView (ProgramView programView, boolean currentUserIsSuper)
 	{
 		this.programView = programView;
-		setUserType();
+		this.currentUserIsSuper = currentUserIsSuper;
+//		setUserType();
 		printView();
 	}
 	
-	private void setUserType() 
-	{
-		if (programView.getProgramModel().getCurrentUser() instanceof SuperUser) 
-		{
-			currentUserIsSuper = true;
-		}
-		else 
-		{
-			currentUserIsSuper = false;
-		}
-	}
+//	private void setUserType() 
+//	{
+//		if (programView.getProgramModel().getCurrentUser() instanceof SuperUser) 
+//		{
+//			currentUserIsSuper = true;
+//		}
+//		else 
+//		{
+//			currentUserIsSuper = false;
+//		}
+//	}
 	
 	public void printView() 
 	{
@@ -115,9 +116,9 @@ public class UserMenuView
 			JButton viewFilesButton = new JButton();
 			viewFilesButton.setLayout(new BoxLayout(viewFilesButton, BoxLayout.Y_AXIS));
 			viewFilesButton.add(Box.createRigidArea(new Dimension(0, 30)));
-			JLabel firstLine = new JLabel("    View Your");
+			JLabel firstLine = new JLabel("   View Your");
 			firstLine.setHorizontalAlignment(SwingConstants.CENTER);
-			JLabel secondLine = new JLabel("         Files");
+			JLabel secondLine = new JLabel("        Files");
 			secondLine.setHorizontalAlignment(SwingConstants.CENTER);
 			viewFilesButton.add(firstLine);
 			viewFilesButton.add(secondLine);
@@ -137,7 +138,7 @@ public class UserMenuView
 			viewAnotherUsersFilesButton.setLayout(new BoxLayout(viewAnotherUsersFilesButton, BoxLayout.Y_AXIS));
 			viewAnotherUsersFilesButton.add(Box.createRigidArea(new Dimension(0, 30)));
 			firstLine = new JLabel(" View Another");
-			secondLine = new JLabel("   User's Files");
+			secondLine = new JLabel("  User's Files");
 			viewAnotherUsersFilesButton.add(firstLine);
 			viewAnotherUsersFilesButton.add(secondLine);
 			viewAnotherUsersFilesButton.setBackground(Color.gray);

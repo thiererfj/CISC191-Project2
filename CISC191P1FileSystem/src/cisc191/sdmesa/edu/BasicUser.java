@@ -60,127 +60,13 @@ public class BasicUser extends User
 	}
 	
 	/**
-	 * Purpose: To "upload" a given file into the globalStorage[][] array
+	 * Runs the BasicUser version of UserMenuView
 	 */
 	@Override
-	public String uploadFileToDatabase(String filePath, String fileName, int fileNumber) 
-	{		
-		// Stop upload process if file already exists at chosen location
-		if (getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber] != null)
-		{
-			// Return file number error message
-			return "fileNumber";
-		}
-
-		try
-		{
-			// Create BufferedReader to read input text file using filepath from
-			// User's computer
-			BufferedReader reader = new BufferedReader(new FileReader(filePath));
-
-			// Create new FileData object to store in global storage
-			FileData newFile = new FileData(fileName);
-
-			// Create StringBuilder to build text file content String
-			StringBuilder buildFileContents = new StringBuilder();
-
-			// Read the first line in text file
-			String line = reader.readLine();
-
-			// Loop until end of text file, null line indicates end
-			while (line != null)
-			{
-				// Add line from BufferedReader to StringBuilder
-				buildFileContents.append(line + "\n");
-
-				// Read the next line
-				line = reader.readLine();
-			}
-
-			// Create new FileData object in DATABASE[serial number is row
-			// position][number of files is column position]
-			getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber] = newFile;
-
-			// Put the contents of String builder contents into the new file
-			// just created
-			getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber].setContents(buildFileContents);
-
-			// Close streams
-			reader.close();
-
-		}
-		// Catch checked exception for missing file from bad user input
-		catch (IOException e)
-		{
-			// Return file path error
-			return "filePath";
-		}
-
-		// Return null error message for successful upload
-		return null;
-	}
-	
-	/**
-	 * To "download" a database file to the user's machine
-	 */
-	@Override
-	public String downloadFileFromDatabase(String filePath, int fileNumber)
+	public void runUserMenuView() 
 	{
-		
-		// If file at input index exists, proceed with writing 
-		if (getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber] != null) 
-		{
-			try 
-			{
-				// Create new BufferedWriter object, using FileWriter to create and connect output file contents
-				BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-				
-				// Write the contents of selected file to output file
-				writer.write(getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber].getContents());
-				
-				// Close streams
-				writer.close();
-			} 
-			// Catch checked exception if file can't be created on user's machine
-			catch (IOException e) 
-			{	
-				// Return error message
-				return "filePath";
-			}
-		}
-		// If file at input index does not exist, don't try writing and prompt user of failure
-		else if (getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber] == null)
-		{
-			// Tell user it failed and why
-			System.out.println("\\_(o_o)_/ --> You chose to save a file that doesn't exist. You make me wish that, like this file, I didn't exist.");
-			System.out.println("Save unsuccessful - returning to File System menu");
-			
-			return "fileNumber";
-		}
-		
-		// Return null error message for successful download
-		return null;
-	}
-	
-	/**
-	 * To delete a file from the Database FileData[][] two-dimensional array for any user
-	 */
-	@Override 
-	public String deleteFile(int userIndex, int fileNumber) 
-	{
-		
-		// If no file exists at chosen index
-		if (getDatabase().getGlobalStorage()[userIndex][fileNumber] == null)
-		{
-			return "empty";
-		}
-		else 
-		{
-			// "Deleting" a file just sets its array index to null
-			getDatabase().getGlobalStorage()[userIndex][fileNumber] = null;
-			
-			return null;
-		}
+		// Create UserMenuView object to run logged in user view, pass true parameter for SuperUser
+		UserMenuView userMenuView = new UserMenuView(getProgramView(), false);
 	}
 	
 }

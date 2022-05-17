@@ -112,8 +112,8 @@ public class LoginView
 		    	  // Check if login did not return error message (loginError is null)
 		    	  if (Objects.isNull(loginError))
 		    	  {
-					// Logging in to a user account resets GUI to show their file system options
-					UserMenuView userMenuView = new UserMenuView(programView);
+					// Successful login (no error returned) calls polymorphic user menu view run method
+					programView.getProgramModel().getCurrentUser().runUserMenuView();
 		    	  }
 		    	  // Else if login returned account does not exist error message
 		    	  else if (loginError.equals("That account does not exist"))

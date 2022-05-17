@@ -39,6 +39,8 @@ public class ProgramModel
 	
 	// Program menu has a UserFactory to create users
 	private UserFactory factory = new UserFactory();
+	
+	private ProgramView programView;
 
 	public Database getDatabase() 
 	{
@@ -66,9 +68,9 @@ public class ProgramModel
 		dataLoader.loadSavedData();
 		
 		// Create JFrame object to display window
-		ProgramView mainWindow = new ProgramView(this);
+		programView = new ProgramView(this);
 		
-		mainWindow.printMainMenu();
+		programView.printMainMenu();
 	}
 	
 	/**
@@ -110,6 +112,7 @@ public class ProgramModel
 			// Assign current user to new verified login
 			currentUser = loginAttempt;
 			
+			currentUser.setProgramView(programView);
 			// Set user activity so File System program can end on log out
 //			currentUser.setIsActive(true);
 			
