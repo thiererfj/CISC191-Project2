@@ -20,7 +20,11 @@ public class ProgramView extends JFrame
 {
 	private final String VERSION = "1.5";
 	private ProgramModel programModel;
-	private User currentUser;
+//	private User currentUser;
+	private Color viewBackgroundColor = Color.decode("#A67B8A");
+	private Color viewTitleBoxColor = Color.decode("#79BED9");
+	private Color viewButtonColor = Color.decode("#324759");
+	private Color viewTextColor = Color.decode("#EBF2F2");
 
 	/**
 	 * Purpose: Constructor for ProgramView that sets information for the JFrame
@@ -54,21 +58,22 @@ public class ProgramView extends JFrame
 	public void printMainMenu()
 	{
 		// Set black background here so sub frame doesn't change it when going back to main menu
-		getContentPane().setBackground(Color.black);
+		getContentPane().setBackground(viewBackgroundColor);
 
 		// Add title JLabel to window
-		addTitleLabel("Angry File System", Color.LIGHT_GRAY, Color.WHITE);
+		addTitleLabel("Angry File System", viewTitleBoxColor, Color.decode("#1F0802"));
 
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 20, 20));
 		buttonPanel.setOpaque(true);
-		buttonPanel.setBackground(Color.black);
+		buttonPanel.setBackground(viewBackgroundColor);
 		buttonPanel.setBounds(150, 600, 900, 100);
 
 		// Maybe we can rework this? What if there are 9 basic users but no super user
 		if (programModel.getDatabase().getUsers()[9] == null)
 		{
 			JButton createAccountButton = new JButton("Create Account");
-			createAccountButton.setBackground(Color.gray);
+			createAccountButton.setBackground(viewButtonColor);
+			createAccountButton.setForeground(viewTextColor);
 			createAccountButton.setFocusable(false);
 			buttonPanel.add(createAccountButton);
 
@@ -85,7 +90,8 @@ public class ProgramView extends JFrame
 		}
 
 		JButton loginButton = new JButton("Log In");
-		loginButton.setBackground(Color.gray);
+		loginButton.setBackground(viewButtonColor);
+		loginButton.setForeground(viewTextColor);
 		loginButton.setFocusable(false);
 		buttonPanel.add(loginButton);
 
@@ -98,7 +104,8 @@ public class ProgramView extends JFrame
 		});
 
 		JButton viewUserAccountsButton = new JButton("View Accounts");
-		viewUserAccountsButton.setBackground(Color.gray);
+		viewUserAccountsButton.setBackground(viewButtonColor);
+		viewUserAccountsButton.setForeground(viewTextColor);
 		viewUserAccountsButton.setFocusable(false);
 		buttonPanel.add(viewUserAccountsButton);
 
@@ -111,7 +118,8 @@ public class ProgramView extends JFrame
 		});
 
 		JButton quitProgramButton = new JButton("Quit Program (Save Data)");
-		quitProgramButton.setBackground(Color.gray);
+		quitProgramButton.setBackground(viewButtonColor);
+		quitProgramButton.setForeground(viewTextColor);
 		quitProgramButton.setFocusable(false);
 		buttonPanel.add(quitProgramButton);
 
@@ -175,7 +183,7 @@ public class ProgramView extends JFrame
 	public void addBackButton()
 	{
 		JButton backButton = new JButton("Back");
-		backButton.setBackground(Color.lightGray);
+		backButton.setBackground(viewButtonColor);
 		backButton.setFocusable(false);
 		backButton.setBounds(20, 20, 70, 40);
 

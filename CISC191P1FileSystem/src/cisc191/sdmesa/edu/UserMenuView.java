@@ -119,8 +119,8 @@ public class UserMenuView
 			JButton deleteAnotherUsersFileButton = new JButton();
 			deleteAnotherUsersFileButton.setLayout(new BoxLayout(deleteAnotherUsersFileButton, BoxLayout.Y_AXIS));
 			deleteAnotherUsersFileButton.add(Box.createRigidArea(new Dimension(0, 30)));
-			firstLine = new JLabel("  Delete Another");
-			secondLine = new JLabel("      User's File");
+			firstLine = new JLabel(" Delete Another");
+			secondLine = new JLabel("     User's File");
 			deleteAnotherUsersFileButton.add(firstLine);
 			deleteAnotherUsersFileButton.add(secondLine);
 			deleteAnotherUsersFileButton.setBackground(Color.gray);
@@ -159,8 +159,8 @@ public class UserMenuView
 			JButton viewAnotherUsersFilesButton = new JButton();
 			viewAnotherUsersFilesButton.setLayout(new BoxLayout(viewAnotherUsersFilesButton, BoxLayout.Y_AXIS));
 			viewAnotherUsersFilesButton.add(Box.createRigidArea(new Dimension(0, 30)));
-			firstLine = new JLabel("  View Another");
-			secondLine = new JLabel("   User's Files");
+			firstLine = new JLabel(" View Another");
+			secondLine = new JLabel("  User's Files");
 			viewAnotherUsersFilesButton.add(firstLine);
 			viewAnotherUsersFilesButton.add(secondLine);
 			viewAnotherUsersFilesButton.setBackground(Color.gray);
