@@ -61,7 +61,7 @@ public class ProgramView extends JFrame
 		getContentPane().setBackground(viewBackgroundColor);
 
 		// Add title JLabel to window
-		addTitleLabel("Angry File System", viewTitleBoxColor, Color.decode("#1F0802"));
+		addTitleLabel("Angry File System", viewTitleBoxColor, viewTextColor);
 
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 20, 20));
 		buttonPanel.setOpaque(true);
@@ -184,6 +184,7 @@ public class ProgramView extends JFrame
 	{
 		JButton backButton = new JButton("Back");
 		backButton.setBackground(viewButtonColor);
+		backButton.setForeground(viewTextColor);
 		backButton.setFocusable(false);
 		backButton.setBounds(20, 20, 70, 40);
 

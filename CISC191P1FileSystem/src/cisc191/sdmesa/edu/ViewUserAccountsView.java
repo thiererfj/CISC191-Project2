@@ -13,6 +13,10 @@ import javax.swing.JTextArea;
 public class ViewUserAccountsView
 {
     private ProgramView programView;
+    private Color viewBackgroundColor = Color.decode("#A67B8A");
+	private Color viewTitleBoxColor = Color.decode("#79BED9");
+	private Color viewButtonColor = Color.decode("#324759");
+	private Color viewTextColor = Color.decode("#EBF2F2");
 
     public ViewUserAccountsView(ProgramView programView) 
     {
@@ -24,16 +28,16 @@ public class ViewUserAccountsView
     private void printView() 
     {
         programView.getContentPane().removeAll();
-        programView.getContentPane().setBackground(Color.black);
+        programView.getContentPane().setBackground(viewBackgroundColor);
         programView.addBackButton();
-        programView.addTitleLabel("Accounts", Color.LIGHT_GRAY, Color.WHITE);
+        programView.addTitleLabel("Accounts", viewTitleBoxColor, viewTextColor);
         
         JTextArea userList = new JTextArea(programView.getProgramModel().viewUserAccounts());
         userList.setBounds(350, 300, 500, 375);
         userList.setFont(new Font("Times New Roman", Font.BOLD, 30));
         
-        userList.setBackground(Color.gray);
-        userList.setForeground(Color.black);
+        userList.setBackground(viewBackgroundColor);
+        userList.setForeground(viewTextColor);
         programView.add(userList);
 
         programView.getContentPane().repaint();

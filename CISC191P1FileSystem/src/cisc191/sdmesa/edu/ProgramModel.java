@@ -129,26 +129,46 @@ public class ProgramModel
 	{
 		String users = "";
 		
+		// I changed this method so that we can use it in every view accounts case. Otherwise
+		// we needed a separate method to view user accounts in ViewUserAccountsView
 		if (DATABASE.getUsers()[0] == null) 
 		{
 			users = "\nNo accounts have been created yet";
 		}
 		else 
 		{
-			for (int i = 0; i < getDatabase().getUsers().length; i++)
+			// Loop through this user's row in FileData[][]
+			for (int i = 0; i < 10; i++)
 			{
-				if(getDatabase().getUsers()[i] != null)
+				// No file at index
+				if (DATABASE.getUsers()[i] == null)
 				{
-					if (i == 0) 
-					{
-						users = users + "\n" + getDatabase().getUsers()[i].getUsername();
-					}
-					else 
-					{
-						users = users + "\n	" + getDatabase().getUsers()[i].getUsername();
-					}
+					// Add "empty" filename
+					users = users + (i + 1) + " - Empty\n";
+				}
+				// File exists at index
+				else
+				{
+					// Add correct filename
+					users = users + (i + 1) + " - " + DATABASE.getUsers()[i].getUsername() + "\n";
 				}
 			}
+			
+			// What the code was, but this won't work for the SuperUser delete and view functions
+//			for (int i = 0; i < getDatabase().getUsers().length; i++)
+//			{
+//				if (getDatabase().getUsers()[i] != null)
+//				{
+//					if (i == 0) 
+//					{
+//						users = users + "\n" + getDatabase().getUsers()[i].getUsername();
+//					}
+//					else 
+//					{
+//						users = users + "\n" + getDatabase().getUsers()[i].getUsername();
+//					}
+//				}
+//			}
 		}
 		
 		return users;
@@ -161,9 +181,6 @@ public class ProgramModel
 	 */
 	public void saveDataBeforeExit() throws IOException 
 	{
-		//Says bye bye
-		System.out.println("\\_(o_o)_/ --> I thought you would never leave! By the way, I saved your data for next time. You're not welcome...");
-		
 		// Create DataSaver object to save session data to program utility files
 		DataSaver dataSaver = new DataSaver(DATABASE);
 		dataSaver.saveSessionDataToFiles();

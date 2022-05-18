@@ -21,6 +21,10 @@ public class DeleteFileView
 	private JPanel selectButtonPanel;
 	private JButton[] selectButtons;
 	private int deletionUserSerialNumber;
+	private Color viewBackgroundColor = Color.decode("#A67B8A");
+	private Color viewTitleBoxColor = Color.decode("#79BED9");
+	private Color viewButtonColor = Color.decode("#324759");
+	private Color viewTextColor = Color.decode("#EBF2F2");
 	
 	private int viewType;
 	
@@ -36,7 +40,7 @@ public class DeleteFileView
 	private void printView() 
 	{
 		programView.getContentPane().removeAll();
-		programView.addTitleLabel("Delete File", Color.lightGray, Color.white);
+		programView.addTitleLabel("Delete File", viewTitleBoxColor, viewTextColor);
 		userMenuView.addBackButton();
 		programView.setVisible(true);
 		initialViewCheck();
@@ -61,12 +65,12 @@ public class DeleteFileView
 		else if (viewType == 2)
 		{
 			// Create String representing User accounts in database by username
-			String userAccountList = programView.getProgramModel().getDatabase().viewUserAccounts();
+			String userAccountList = programView.getProgramModel().viewUserAccounts();
 			
 			// Label telling user to click a user account button to set user account to delete file from 
 			JLabel userButtonLabel = new JLabel("Select which user account to delete file from: ");
 			userButtonLabel.setBounds(415, 255, 300, 40);
-			userButtonLabel.setForeground(Color.white);
+			userButtonLabel.setForeground(viewTextColor);
 			programView.add(userButtonLabel);
 			
 			// Create JPanel for userSelectButtons
@@ -79,7 +83,7 @@ public class DeleteFileView
 			for (int i = 0; i < 10; i++)
 			{
 				selectButtons[i] = new JButton(Integer.toString(i + 1));
-				selectButtons[i].setBackground(Color.gray);
+				selectButtons[i].setBackground(viewButtonColor);
 				selectButtons[i].setFocusable(false);
 				
 				selectButtons[i].addActionListener(new SelectButtonListener(programView, selectButtons, selectButtons[i]));
@@ -93,13 +97,13 @@ public class DeleteFileView
 			JTextArea userAccountListArea = new JTextArea(userAccountList);
 			userAccountListArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
 			userAccountListArea.setBounds(485, 300, 300, 250);
-			userAccountListArea.setBackground(Color.lightGray);
+			userAccountListArea.setBackground(viewButtonColor);
 			userAccountListArea.setEditable(false);
 			programView.add(userAccountListArea);
 			
 			// Button to initiate the uploading
 			JButton selectUserExecuteButton = new JButton("Select User");
-			selectUserExecuteButton.setBackground(Color.gray);
+			selectUserExecuteButton.setBackground(viewTextColor);
 			selectUserExecuteButton.setFocusable(false);
 			selectUserExecuteButton.setBounds(425, 600, 345, 65);
 			programView.add(selectUserExecuteButton);
@@ -142,7 +146,7 @@ public class DeleteFileView
 	private void viewAndDeleteFiles() 
 	{
 		programView.getContentPane().removeAll();
-		programView.addTitleLabel("Delete File", Color.lightGray, Color.white);
+		programView.addTitleLabel("Delete File", viewTitleBoxColor, viewTextColor);
 		userMenuView.addBackButton();
 		programView.setVisible(true);
 		programView.getContentPane().repaint();
@@ -150,7 +154,7 @@ public class DeleteFileView
 		// Label telling user to click a file button to set file index
 		JLabel fileButtonLabel = new JLabel("Select which position to delete the file from: ");
 		fileButtonLabel.setBounds(415, 255, 300, 40);
-		fileButtonLabel.setForeground(Color.white);
+		fileButtonLabel.setForeground(viewTextColor);
 		programView.add(fileButtonLabel);
 		
 		// Create JPanel for fileDeleteButtons
@@ -163,9 +167,9 @@ public class DeleteFileView
 		for (int i = 0; i < 10; i++)
 		{
 			selectButtons[i] = new JButton(Integer.toString(i + 1));
-			selectButtons[i].setBackground(Color.gray);
+			selectButtons[i].setBackground(viewButtonColor);
+			selectButtons[i].setForeground(viewTextColor);
 			selectButtons[i].setFocusable(false);
-			
 			selectButtons[i].addActionListener(new SelectButtonListener(programView, selectButtons, selectButtons[i]));
 			selectButtonPanel.add(selectButtons[i]);
 		}
@@ -177,13 +181,15 @@ public class DeleteFileView
 		JTextArea userFileArea = new JTextArea(fileList);
 		userFileArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		userFileArea.setBounds(485, 300, 300, 250);
-		userFileArea.setBackground(Color.lightGray);
+		userFileArea.setBackground(viewButtonColor);
+		userFileArea.setForeground(viewTextColor);
 		userFileArea.setEditable(false);
 		programView.add(userFileArea);
 		
 		// Button to initiate the uploading
 		JButton deleteFileExecuteButton = new JButton("Delete File");
-		deleteFileExecuteButton.setBackground(Color.gray);
+		deleteFileExecuteButton.setBackground(viewButtonColor);
+		deleteFileExecuteButton.setForeground(viewTextColor);
 		deleteFileExecuteButton.setFocusable(false);
 		deleteFileExecuteButton.setBounds(425, 600, 345, 65);
 		programView.add(deleteFileExecuteButton);

@@ -14,9 +14,13 @@ import javax.swing.JTextArea;
 
 public class LoginView 
 {
-	
 	// LoginView has a ProgramView
 	private ProgramView programView;
+	
+	private Color viewBackgroundColor = Color.decode("#A67B8A");
+	private Color viewTitleBoxColor = Color.decode("#79BED9");
+	private Color viewButtonColor = Color.decode("#324759");
+	private Color viewTextColor = Color.decode("#EBF2F2");
 
 	// Constructor
 	public LoginView (ProgramView programView)
@@ -30,14 +34,14 @@ public class LoginView
 	{
 		programView.getContentPane().removeAll();
 
-        programView.getContentPane().setBackground(Color.black);
+        programView.getContentPane().setBackground(viewBackgroundColor);
         //GUI Visual Code for creating an account goes here
         
         // Add back to main menu button functionality
         programView.addBackButton();
         
         // Add title JLabel to window
-        programView.addTitleLabel("Log In", Color.LIGHT_GRAY, Color.WHITE);
+        programView.addTitleLabel("Log In", viewTitleBoxColor, viewTextColor);
 
         //Set Username / Set Password TextBoxes
         //Basic and SuperUser JButtons      (Which will disable if Super User is already created)
@@ -45,7 +49,7 @@ public class LoginView
         // Label asking user for login username
       	JLabel enterName = new JLabel("Enter Username:");
       	enterName.setBounds(350, 375, 150, 50);
-      	enterName.setForeground(Color.white);
+      	enterName.setForeground(viewTextColor);
      	programView.add(enterName);
      	
      	// Text area for user to enter login username
@@ -57,7 +61,7 @@ public class LoginView
      	// Label asking user for login password
       	JLabel enterPassword = new JLabel("Enter Password:");
       	enterPassword.setBounds(350, 475, 150, 50);
-      	enterPassword.setForeground(Color.white);
+      	enterPassword.setForeground(viewTextColor);
       	programView.add(enterPassword);
       		
       	// Text area for user to enter login password
@@ -84,19 +88,20 @@ public class LoginView
       	
       	JTextArea usernameError = new JTextArea();
 		usernameError.setBounds(860, 433, 150, 50);
-		usernameError.setBackground(Color.black);
-		usernameError.setForeground(Color.red);
+		usernameError.setBackground(viewBackgroundColor);
+		usernameError.setForeground(viewTextColor);
 		programView.add(usernameError);
       	
 		JTextArea passwordError = new JTextArea();
 		passwordError.setBounds(860, 533, 150, 50);
-		passwordError.setBackground(Color.black);	
-		passwordError.setForeground(Color.red);
+		passwordError.setBackground(viewBackgroundColor);	
+		passwordError.setForeground(viewTextColor);
 		programView.add(passwordError);
       	
       	JButton loginButton = new JButton("Login");
       	loginButton.setBounds(500, 600, 200, 50);
-      	loginButton.setBackground(Color.gray);
+      	loginButton.setBackground(viewButtonColor);
+      	loginButton.setForeground(viewTextColor);
       	loginButton.setFocusable(false);
       	loginButton.addActionListener(new ActionListener()
 	    {

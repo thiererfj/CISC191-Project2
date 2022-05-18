@@ -21,6 +21,10 @@ public class UserMenuView
 	private ProgramView programView;
 	private JPanel buttonPanel;
 	private boolean currentUserIsSuper;
+	private Color viewBackgroundColor = Color.decode("#A67B8A");
+	private Color viewTitleBoxColor = Color.decode("#79BED9");
+	private Color viewButtonColor = Color.decode("#324759");
+	private Color viewTextColor = Color.decode("#EBF2F2");
 	
 	public UserMenuView (ProgramView programView, boolean currentUserIsSuper)
 	{
@@ -34,15 +38,15 @@ public class UserMenuView
 		programView.getContentPane().removeAll();
     	
     	// Add title JLabel to window
-    	programView.addTitleLabel("User Menu", Color.LIGHT_GRAY, Color.WHITE);
+    	programView.addTitleLabel("User Menu", viewTitleBoxColor, viewTextColor);
     	
     	// Add JTextArea to show username of user logged in
     	JTextArea displayCurrentUsername = new JTextArea();
     	displayCurrentUsername.setText("Current User: " + programView.getProgramModel().getCurrentUser().getUsername());
     	displayCurrentUsername.setFont(new Font("Times New Roman", Font.BOLD, 20));
     	displayCurrentUsername.setBounds(20, 20, 200, 25);
-    	displayCurrentUsername.setBackground(Color.BLACK);
-    	displayCurrentUsername.setForeground(Color.GRAY);
+    	displayCurrentUsername.setBackground(viewBackgroundColor);
+    	displayCurrentUsername.setForeground(viewTextColor);
     	displayCurrentUsername.setEditable(false);
     	programView.add(displayCurrentUsername);
         
@@ -51,19 +55,20 @@ public class UserMenuView
     	{
     		buttonPanel = new JPanel(new GridLayout(1, 6, 20, 20));
             buttonPanel.setOpaque(true);
-            buttonPanel.setBackground(Color.black);
+            buttonPanel.setBackground(viewBackgroundColor);
             buttonPanel.setBounds(100, 600, 1000, 100);
     	}
     	else 
     	{
     		buttonPanel = new JPanel(new GridLayout(1, 4, 20, 20));
             buttonPanel.setOpaque(true);
-            buttonPanel.setBackground(Color.black);
+            buttonPanel.setBackground(viewBackgroundColor);
             buttonPanel.setBounds(200, 600, 800, 100);
     	}
         
         JButton uploadFileButton = new JButton("Upload File");
-        uploadFileButton.setBackground(Color.gray);
+        uploadFileButton.setBackground(viewButtonColor);
+        uploadFileButton.setForeground(viewTextColor);
         uploadFileButton.setFocusable(false);
         buttonPanel.add(uploadFileButton);
             
@@ -75,14 +80,14 @@ public class UserMenuView
 			public void actionPerformed(ActionEvent e)
 			{
 				uploadFileVisuals();
-				// System.out.println("Clicked");
 			}
 		});
        
         //GOODDDDDD
 
 		JButton downloadFileButton = new JButton("Download File");
-		downloadFileButton.setBackground(Color.gray);
+		downloadFileButton.setBackground(viewButtonColor);
+		downloadFileButton.setForeground(viewTextColor);
 		downloadFileButton.setFocusable(false);
 		buttonPanel.add(downloadFileButton);
 
@@ -101,10 +106,12 @@ public class UserMenuView
 			deleteFileButton.setLayout(new BoxLayout(deleteFileButton, BoxLayout.Y_AXIS));
 			deleteFileButton.add(Box.createRigidArea(new Dimension(0, 30)));
 			JLabel firstLine = new JLabel("    Delete Your");
+			firstLine.setForeground(viewTextColor);
 			JLabel secondLine = new JLabel("       Own File");
+			secondLine.setForeground(viewTextColor);
 			deleteFileButton.add(firstLine);
 			deleteFileButton.add(secondLine);
-			deleteFileButton.setBackground(Color.gray);
+			deleteFileButton.setBackground(viewButtonColor);
 			deleteFileButton.setFocusable(false);
 			buttonPanel.add(deleteFileButton);
 
@@ -120,10 +127,12 @@ public class UserMenuView
 			deleteAnotherUsersFileButton.setLayout(new BoxLayout(deleteAnotherUsersFileButton, BoxLayout.Y_AXIS));
 			deleteAnotherUsersFileButton.add(Box.createRigidArea(new Dimension(0, 30)));
 			firstLine = new JLabel(" Delete Another");
+			firstLine.setForeground(viewTextColor);
 			secondLine = new JLabel("     User's File");
+			secondLine.setForeground(viewTextColor);
 			deleteAnotherUsersFileButton.add(firstLine);
 			deleteAnotherUsersFileButton.add(secondLine);
-			deleteAnotherUsersFileButton.setBackground(Color.gray);
+			deleteAnotherUsersFileButton.setBackground(viewButtonColor);
 			deleteAnotherUsersFileButton.setFocusable(false);
 			buttonPanel.add(deleteAnotherUsersFileButton);
 
@@ -139,12 +148,12 @@ public class UserMenuView
 			viewFilesButton.setLayout(new BoxLayout(viewFilesButton, BoxLayout.Y_AXIS));
 			viewFilesButton.add(Box.createRigidArea(new Dimension(0, 30)));
 			firstLine = new JLabel("     View Your");
-			firstLine.setHorizontalAlignment(SwingConstants.CENTER);
+			firstLine.setForeground(viewTextColor);
 			secondLine = new JLabel("     Own Files");
-			secondLine.setHorizontalAlignment(SwingConstants.CENTER);
+			secondLine.setForeground(viewTextColor);
 			viewFilesButton.add(firstLine);
 			viewFilesButton.add(secondLine);
-			viewFilesButton.setBackground(Color.gray);
+			viewFilesButton.setBackground(viewButtonColor);
 			viewFilesButton.setFocusable(false);
 			buttonPanel.add(viewFilesButton);
 			
@@ -159,11 +168,13 @@ public class UserMenuView
 			JButton viewAnotherUsersFilesButton = new JButton();
 			viewAnotherUsersFilesButton.setLayout(new BoxLayout(viewAnotherUsersFilesButton, BoxLayout.Y_AXIS));
 			viewAnotherUsersFilesButton.add(Box.createRigidArea(new Dimension(0, 30)));
-			firstLine = new JLabel(" View Another");
-			secondLine = new JLabel("  User's Files");
+			firstLine = new JLabel("  View Another");
+			firstLine.setForeground(viewTextColor);
+			secondLine = new JLabel("   User's Files");
+			secondLine.setForeground(viewTextColor);
 			viewAnotherUsersFilesButton.add(firstLine);
 			viewAnotherUsersFilesButton.add(secondLine);
-			viewAnotherUsersFilesButton.setBackground(Color.gray);
+			viewAnotherUsersFilesButton.setBackground(viewButtonColor);
 			viewAnotherUsersFilesButton.setFocusable(false);
 			buttonPanel.add(viewAnotherUsersFilesButton);
 			
@@ -179,7 +190,8 @@ public class UserMenuView
 		else 
 		{
 			JButton deleteFileButton = new JButton("Delete File");
-			deleteFileButton.setBackground(Color.gray);
+			deleteFileButton.setBackground(viewBackgroundColor);
+			deleteFileButton.setForeground(viewTextColor);
 			deleteFileButton.setFocusable(false);
 			buttonPanel.add(deleteFileButton);
 
@@ -192,7 +204,8 @@ public class UserMenuView
 			});
 			
 			JButton viewFilesButton = new JButton("View Your Files");
-			viewFilesButton.setBackground(Color.gray);
+			viewFilesButton.setBackground(viewBackgroundColor);
+			viewFilesButton.setForeground(viewTextColor);
 			viewFilesButton.setFocusable(false);
 			buttonPanel.add(viewFilesButton);
 			
@@ -206,7 +219,8 @@ public class UserMenuView
 		}
         
         JButton logOutButton = new JButton("Log Out");
-        logOutButton.setBackground(Color.gray);
+        logOutButton.setBackground(viewButtonColor);
+        logOutButton.setForeground(viewTextColor);
         logOutButton.setFocusable(false);
         buttonPanel.add(logOutButton);
         
@@ -282,7 +296,8 @@ public class UserMenuView
 	public void addBackButton()
 	{
 		JButton backButton = new JButton("Back");
-		backButton.setBackground(Color.lightGray);
+		backButton.setBackground(viewButtonColor);
+		backButton.setForeground(viewTextColor);
 		backButton.setFocusable(false);
 		backButton.setBounds(20, 20, 70, 40);
 

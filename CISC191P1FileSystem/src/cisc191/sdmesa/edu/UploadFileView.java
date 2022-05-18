@@ -24,6 +24,10 @@ public class UploadFileView
 	private String fileList;
 	private JPanel fileSelectButtonPanel;
 	private JButton[] fileSelectButtons;
+	private Color viewBackgroundColor = Color.decode("#A67B8A");
+	private Color viewTitleBoxColor = Color.decode("#79BED9");
+	private Color viewButtonColor = Color.decode("#324759");
+	private Color viewTextColor = Color.decode("#EBF2F2");
 	
 	public UploadFileView (UserMenuView userMenuView, ProgramView programView)
 	{
@@ -36,7 +40,7 @@ public class UploadFileView
 	public void printView() 
 	{
 		programView.getContentPane().removeAll();
-		programView.addTitleLabel("Upload File", Color.lightGray, Color.white);
+		programView.addTitleLabel("Upload File", viewTitleBoxColor, viewTextColor);
 		userMenuView.addBackButton();
 		programView.setVisible(true);
 		programView.getContentPane().repaint();
@@ -57,7 +61,8 @@ public class UploadFileView
 		for (int i = 0; i < 10; i++) 
 		{
 			fileSelectButtons[i] = new JButton(Integer.toString(i + 1));
-			fileSelectButtons[i].setBackground(Color.gray);
+			fileSelectButtons[i].setBackground(viewButtonColor);
+			fileSelectButtons[i].setForeground(viewTextColor);
 			fileSelectButtons[i].setFocusable(false);
 			
 			fileSelectButtons[i].addActionListener(new SelectButtonListener(programView, fileSelectButtons, fileSelectButtons[i]));
@@ -85,14 +90,15 @@ public class UploadFileView
 		JTextArea userFileArea = new JTextArea(fileList);
 		userFileArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		userFileArea.setBounds(170, 300, 300, 250);
-		userFileArea.setBackground(Color.lightGray);
+		userFileArea.setBackground(viewButtonColor);
+		userFileArea.setForeground(viewTextColor);
 		userFileArea.setEditable(false);
 		programView.add(userFileArea);
 		
 		// Label asking user to enter the origin file path, to grab file form their computer
 		JLabel filePathLabel = new JLabel("Enter the origin file path of the file being uploaded: ");
 		filePathLabel.setBounds(600, 305, 300, 40);
-		filePathLabel.setForeground(Color.white);
+		filePathLabel.setForeground(viewTextColor);
 		programView.add(filePathLabel);
 		
 		// Text filed for user to enter the origin file path
@@ -104,7 +110,7 @@ public class UploadFileView
 		// Label asking for user to enter the desired database file name
 		JLabel fileNameLabel = new JLabel("Enter the desired file name: ");
 		fileNameLabel.setBounds(600, 415, 300, 40);
-		fileNameLabel.setForeground(Color.white);
+		fileNameLabel.setForeground(viewTextColor);
 		programView.add(fileNameLabel);
 		
 		// Text field for user to enter the desired database file name
@@ -115,7 +121,8 @@ public class UploadFileView
 		
 		// Button to initiate the uploading
 		JButton uploadFileButton = new JButton("Upload File");
-		uploadFileButton.setBackground(Color.gray);
+		uploadFileButton.setBackground(viewButtonColor);
+		uploadFileButton.setForeground(viewTextColor);
 		uploadFileButton.setFocusable(false);
 		uploadFileButton.setBounds(420, 600, 345, 65);
 		programView.add(uploadFileButton);

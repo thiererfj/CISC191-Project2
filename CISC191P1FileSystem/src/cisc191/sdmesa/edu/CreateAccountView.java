@@ -37,6 +37,11 @@ public class CreateAccountView {
     
     //CreateAccountView has an accountInstanceButton
     private JButton accountInstanceButton;
+    
+    private Color viewBackgroundColor = Color.decode("#A67B8A");
+	private Color viewTitleBoxColor = Color.decode("#79BED9");
+	private Color viewButtonColor = Color.decode("#324759");
+	private Color viewTextColor = Color.decode("#EBF2F2");
 	
 	/**
 	 * Purpose: Constructor for CreateAccountView
@@ -58,25 +63,26 @@ public class CreateAccountView {
     {
         programView.getContentPane().removeAll();
 
-        programView.getContentPane().setBackground(Color.black);
+        programView.getContentPane().setBackground(viewBackgroundColor);
         //GUI Visual Code for creating an account goes here
         
         // Add back to main menu button functionality
         programView.addBackButton();
         
         // Add title JLabel to window
-        programView.addTitleLabel("Create Account", Color.LIGHT_GRAY, Color.WHITE);
+        programView.addTitleLabel("Create Account", viewTitleBoxColor, viewTextColor);
         
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 20, 20));
         buttonPanel.setOpaque(true);
-        buttonPanel.setBackground(Color.black);
+        buttonPanel.setBackground(viewBackgroundColor);
         buttonPanel.setBounds(400, 310, 400, 50);
         
         // If no super user
         if(!programView.getProgramModel().getDatabase().superUserExists())
         {
         	superUserButton = new JButton("Super User");
-            superUserButton.setBackground(Color.gray);
+            superUserButton.setBackground(viewButtonColor);
+            superUserButton.setForeground(viewTextColor);
             superUserButton.setFocusable(false);
             buttonPanel.add(superUserButton);
             superUserButton.addActionListener(new ActionListener()
@@ -95,9 +101,10 @@ public class CreateAccountView {
         
         //Click if you want to make basic user account
         basicUserButton = new JButton("Basic User");
-        basicUserButton.setBackground(Color.gray);
+        basicUserButton.setBackground(viewButtonColor);
+        basicUserButton.setForeground(viewTextColor);
         basicUserButton.setFocusable(false);
-
+        buttonPanel.add(basicUserButton);
         basicUserButton.addActionListener(new ActionListener()
 	    {
 		      public void actionPerformed(ActionEvent e)
@@ -114,7 +121,7 @@ public class CreateAccountView {
 		      }
 		});
 
-        buttonPanel.add(basicUserButton);
+        
         
         // Add button panel to window
         programView.add(buttonPanel);
@@ -122,13 +129,13 @@ public class CreateAccountView {
         // JLabel to ask user for creation username
 		JLabel enterName = new JLabel("Create a Username:");
 		enterName.setBounds(350, 375, 150, 50);
-		enterName.setForeground(Color.white);
+		enterName.setForeground(viewTextColor);
 		programView.add(enterName);
 		
 		// JLabel to ask user for creation password
 		JLabel enterPassword = new JLabel("Create a Password:");
 		enterPassword.setBounds(350, 475, 150, 50);
-		enterPassword.setForeground(Color.white);
+		enterPassword.setForeground(viewTextColor);
 		programView.add(enterPassword);
 		
 		// Text box where user enters username
@@ -162,21 +169,23 @@ public class CreateAccountView {
 
 		JTextArea usernameError = new JTextArea("");
         usernameError.setBounds(860, 433, 150, 50);
-        usernameError.setBackground(Color.black);
-        usernameError.setForeground(Color.red);
+        usernameError.setBackground(viewBackgroundColor);
+        usernameError.setForeground(viewTextColor);
         programView.add(usernameError);
         
         JTextArea passwordError = new JTextArea();
         passwordError.setBounds(860, 533, 150, 50);
-        passwordError.setBackground(Color.black);
-        passwordError.setForeground(Color.red);
+        passwordError.setBackground(viewBackgroundColor);
+        passwordError.setForeground(viewTextColor);
         programView.add(passwordError);
 		
         accountInstanceButton = new JButton("Create Account");
         accountInstanceButton.setBounds(500, 600, 200, 50);
         accountInstanceButton.setEnabled(false);
-        accountInstanceButton.setBackground(Color.gray);
+        accountInstanceButton.setBackground(viewButtonColor);
+        accountInstanceButton.setForeground(viewTextColor);
         accountInstanceButton.setFocusable(false);
+        programView.add(accountInstanceButton);
         accountInstanceButton.addActionListener(new ActionListener()
 	    {
 		      public void actionPerformed(ActionEvent e)
@@ -198,7 +207,6 @@ public class CreateAccountView {
 		    	  
 		    	  
 		    	  //FOR LATER  --> If username and password input is allowed  --> Add user to database
-		    	  // What is this for?
 		    	  if(programView.getProgramModel().getDatabase().findUsername(username) == null)
 		    	  {
 		    		  
@@ -222,7 +230,7 @@ public class CreateAccountView {
 		    			  passwordError.setText("Please enter a password");
 		    			  if(username.equals(""))
 			    		  {
-			    			  usernameError.setText("Please enter a Username");
+			    			  usernameError.setText("Please enter a username");
 			    		  }
 		    			  else
 		    			  {
@@ -258,17 +266,21 @@ public class CreateAccountView {
 		    	  }
 		    	  else
 		    	  {
-		    		 JTextArea userNameAlreadyTaken = new JTextArea("That Username has \nalready been taken");
-		    		 userNameAlreadyTaken.setBounds(775, 433, 150, 50);
-		    		 userNameAlreadyTaken.setBackground(Color.black);
-		    		 userNameAlreadyTaken.setForeground(Color.red);
-		    		 programView.add(userNameAlreadyTaken);
-		    		 programView.getContentPane().repaint();
+		    		 usernameError.setText("That username has \nalready been taken");
+		    		 
+		    		 // This code makes another error message behind usernameError, causing this one
+		    		 // to not show. It's like it's being covered up or something. I tried the above
+		    		 // and it worked how I think this was intended
+//		    		 JTextArea userNameAlreadyTaken = new JTextArea("That Username has \nalready been taken");
+//		    		 userNameAlreadyTaken.setBounds(860, 433, 150, 50);
+//		    		 userNameAlreadyTaken.setBackground(viewBackgroundColor);
+//		    		 userNameAlreadyTaken.setForeground(viewTextColor);
+//		    		 programView.add(userNameAlreadyTaken);
+//		    		 programView.getContentPane().repaint();
 		    	  }
 		    	
 		      }
 		});
-        programView.add(accountInstanceButton);
         
         
         //String username = userNameArea.getText(); 

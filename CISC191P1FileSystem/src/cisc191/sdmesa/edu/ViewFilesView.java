@@ -50,7 +50,7 @@ public class ViewFilesView
 		else if (viewType == 2) 
 		{
 			// Create String representing User accounts in database by username
-			String userAccountList = programView.getProgramModel().getDatabase().viewUserAccounts();
+			String userAccountList = programView.getProgramModel().viewUserAccounts();
 
 			// Label telling user to click a user account button to set user
 			// account to delete file from

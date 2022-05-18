@@ -19,6 +19,7 @@ public class QuitView
 {
     private ProgramView programView;
     private int userCloseOption;
+    private Color viewBackgroundColor = Color.decode("#A67B8A");
 
     public QuitView(ProgramView programView) throws IOException 
     {
@@ -30,7 +31,7 @@ public class QuitView
     private void printView() throws IOException 
     {
         programView.getContentPane().removeAll();
-        programView.getContentPane().setBackground(Color.black);
+        programView.getContentPane().setBackground(viewBackgroundColor);
         programView.getContentPane().repaint();
         
         // Prompt user for program close confirmation
