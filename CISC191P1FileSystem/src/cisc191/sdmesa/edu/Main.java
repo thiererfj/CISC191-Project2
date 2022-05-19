@@ -6,20 +6,12 @@ import java.io.IOException;
  * Lead Author(s):
  * @author Anthony Mayoral
  * @author Francis Thierer
- * <<add additional lead authors here, with a full first and last name>>
- * 
- * Other contributors:
- * <<add additional contributors (mentors, tutors, friends) here, with contact information>>
  * 
  * References:
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
- * 
- * <<add more references here>>
  *  
- *  
- *  
- * Version/date: 2.4 04/05/2022
+ * Version/date: 1.8 05/19/2022
  * 
  * Responsibilities of class:
  * Main is designed to be the entry point of the File System Program. The user will be welcomed to the program,
@@ -27,6 +19,8 @@ import java.io.IOException;
  */
 public class Main 
 {
+	int deleteThis;
+	
 	/**
 	 * Entry point for program
 	 * 

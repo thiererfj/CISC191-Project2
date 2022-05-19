@@ -17,13 +17,42 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+/**
+ * Lead Author(s):
+ * @author Anthony Mayoral
+ * @author Francis Thierer
+ * 
+ * References:
+ * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
+ * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
+ *  
+ * Version/date: 1.8 05/19/2022
+ * 
+ * Responsibilities of class:
+ * DownloadFileView is designed to reprint the window with GUI components allowing a user to "download" FileData object's (files) contents
+ * to a file on their computer. This view gathers required inputs from the user, and communicates with the current User of ProgramModel
+ * to execute the task. 
+ */
 public class DownloadFileView
 {
+	int deleteThis;
+	
+	// DownloadFileView has a UserMenuView
 	private UserMenuView userMenuView;
+	
+	// DownloadFileView has a ProgramView
 	private ProgramView programView;
+	
+	// String to hold list of user files
 	private String fileList;
+	
+	// JPanel for file selection buttons
 	private JPanel fileSelectButtonPanel;
+	
+	// JButton[] array for selection buttons
 	private JButton[] fileSelectButtons;
+	
+	// Color objects to set the color scheme
 	private Color viewBackgroundColor;
 	private Color viewTitleBoxColor;
 	private Color viewButtonColor;

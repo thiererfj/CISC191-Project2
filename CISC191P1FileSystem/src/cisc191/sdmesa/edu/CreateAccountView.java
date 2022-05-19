@@ -17,18 +17,24 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 /**
- * @author Anthony
- * @author Frank
+ * Lead Author(s):
+ * @author Anthony Mayoral
+ * @author Francis Thierer
  * 
+ * References:
+ * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
+ * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
+ *  
+ * Version/date: 1.8 05/19/2022
  * 
- * 
- * 
- * might not use this, but...
- * https://kodejava.org/how-do-i-move-focus-from-jtextarea-using-tab-key/
- *
+ * Responsibilities of class:
+ * CreateAccountView is designed to reprint the window with GUI components allowing a user to create User objects (accounts).
+ * This view gathers the required inputs from the user, and communicates with ProgramModel to execute the task.      
  */
-public class CreateAccountView {
-
+public class CreateAccountView 
+{
+	int deleteThis;
+	
 	//CreateAccountView has a programView
 	private ProgramView programView;
 	
@@ -41,6 +47,7 @@ public class CreateAccountView {
     //CreateAccountView has an accountInstanceButton
     private JButton accountInstanceButton;
     
+    // Color objects to set the color scheme
     private Color viewBackgroundColor;
 	private Color viewTitleBoxColor;
 	private Color viewButtonColor;
@@ -155,8 +162,6 @@ public class CreateAccountView {
 		    	 
 		      }
 		});
-
-        
         
         // Add button panel to window
         programView.add(buttonPanel);
@@ -184,23 +189,6 @@ public class CreateAccountView {
 		userPassword.setBounds(350, 525, 500, 50);
 		userPassword.setFont(new Font("Times New Roman", Font.BOLD, 30));
 		programView.add(userPassword);
-		
-		// Add Tab key listener to username JTextArea so you can type username
-		// and then hit tab to switch to password JTextArea
-		// maybe troubleshoot this or delete w/e
-//		userName.addKeyListener(new KeyAdapter()
-//		{
-//			@Override
-//			public void keyPressed(KeyEvent e)
-//			{
-//				if (e.getKeyCode() == KeyEvent.VK_TAB)
-//				{
-//					userPassword.requestFocus();
-//					userName.setFocusable(true);
-//				}
-//				e.consume();
-//			}
-//		});
 
 		JTextArea usernameError = new JTextArea("");
         usernameError.setBounds(860, 433, 150, 50);
@@ -237,7 +225,6 @@ public class CreateAccountView {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-		    	  
 		    	  
 		    	  //Somehow we want a user object to be made.
 		    	  String userType = "";

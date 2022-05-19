@@ -16,21 +16,60 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+/**
+ * Lead Author(s):
+ * @author Anthony Mayoral
+ * @author Francis Thierer
+ * 
+ * References:
+ * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
+ * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
+ *  
+ * Version/date: 1.8 05/19/2022
+ * 
+ * Responsibilities of class:
+ * DeleteFileView is designed to reprint the window with GUI components allowing a user to delete FileData objects (files) from
+ * User objects (accounts). This view gathers the required inputs from the user, and communicates with the current User of ProgramModel
+ * to execute the task.     
+ */
 public class DeleteFileView
 {
+	int deleteThis;
+	
+	// DeleteFileView has a UserMenuView
 	private UserMenuView userMenuView;
+	
+	// DeleteFileView has a ProgramView
 	private ProgramView programView;
+	
+	// String to hold list of user files
 	private String fileList;
+	
+	// JPanel for file selection buttons
 	private JPanel selectButtonPanel;
+	
+	// JButton array for the selection buttons
 	private JButton[] selectButtons;
+	
+	// Index of User in database to delete from 
 	private int deletionUserSerialNumber;
+	
+	// Color objects to set the color scheme
 	private Color viewBackgroundColor;
 	private Color viewTitleBoxColor;
 	private Color viewButtonColor;
 	private Color viewTextColor;
 	
+	// Changes display depending on User type
 	private int viewType;
 	
+	/**
+	 * Construct DeleteFileView object 
+	 * 
+	 * @param userMenuView
+	 * @param programView
+	 * @param viewType
+	 */
 	public DeleteFileView (UserMenuView userMenuView, ProgramView programView, int viewType) 
 	{
 		this.userMenuView = userMenuView;
@@ -41,9 +80,14 @@ public class DeleteFileView
 		this.viewTitleBoxColor = programView.getViewTitleBoxColor();
 		this.viewButtonColor = programView.getViewButtonColor();
 		this.viewTextColor = programView.getViewTextColor();
+		
+		// Begin showing reprinted view
 		printView();
 	}
 	
+	/**
+	 * Reprints window, beings initial check for which view to display
+	 */
 	private void printView() 
 	{
 		programView.getContentPane().removeAll();
@@ -54,6 +98,9 @@ public class DeleteFileView
 		programView.getContentPane().repaint();
 	}
 	
+	/**
+	 * Changes view depending on User type, 1 for Basic, 2 for Super
+	 */
 	private void initialViewCheck() 
 	{
 		// If current user is Basic, they don't get to choose which account to delete from
@@ -167,6 +214,9 @@ public class DeleteFileView
 		}
 	}
 	
+	/**
+	 * Display selected User's files to get deletion input
+	 */
 	private void viewAndDeleteFiles() 
 	{
 		programView.getContentPane().removeAll();

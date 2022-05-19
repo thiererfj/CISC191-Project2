@@ -22,11 +22,34 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
+/**
+ * Lead Author(s):
+ * @author Anthony Mayoral
+ * @author Francis Thierer
+ * 
+ * References:
+ * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
+ * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
+ *  
+ * Version/date: 1.8 05/19/2022
+ * 
+ * Responsibilities of class:
+ * ProgramView is designed to initialize the main window that will display all the different views with unique GUI components
+ * throughout the program. It also displays the initial "main menu" view that allows a user to create User accounts, log in to them,
+ * view them, and then quit the program while saving the data entered during that session. Exiting the program at any time by
+ * clicking the upper right "X" will NOT save anything. This class also sets the color scheme used everywhere.      
+ */
 public class ProgramView extends JFrame 
 {
-	private final String VERSION = "1.5";
+	int deleteThis;
+	
+	// String to display program version in window title bar
+	private final String VERSION = "1.8";
+	
+	// ProgramView has a ProgramModel to execute the program functions
 	private ProgramModel programModel;
-//	private User currentUser;
+	
+	// Color objects to set the color scheme
 	private Color viewBackgroundColor = Color.decode("#023859");
 	private Color viewTitleBoxColor = Color.decode("#034B8A");
 	private Color viewButtonColor = Color.decode("#B59C8D");
@@ -52,29 +75,36 @@ public class ProgramView extends JFrame
 		// Create Account/Log in to User Account / View User Accounts / Quit
 		// Program
 	}
-
+	
+	/**
+	 * @return ProgramModel instance
+	 */
 	public ProgramModel getProgramModel()
 	{
 		return programModel;
 	}
 
 	/**
-	 * Purpose: Changes view to the PrintMainMenu Menu
+	 * Purpose: Changes view to the PrintMainMenu view
+	 * 
+	 * @throws IOException for audio exceptions or data saving exceptions (shouldn't happen)
 	 */
 	public void printMainMenu() throws IOException
 	{
 		// Set black background here so sub frame doesn't change it when going back to main menu
 		getContentPane().setBackground(viewBackgroundColor);
 
-		// Add title JLabel to window
+		// Add title box label to window
 		addTitleLabel("Angry File System", viewTitleBoxColor, viewTextColor);
-
+		
+		// Add button panel for user option buttons
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 20, 20));
 		buttonPanel.setOpaque(true);
 		buttonPanel.setBackground(viewBackgroundColor);
 		buttonPanel.setBounds(150, 600, 900, 100);
 
 		// Maybe we can rework this? What if there are 9 basic users but no super user
+		// yea if you make 9 basic users, it just goes blank... 
 		if (programModel.getDatabase().getUsers()[9] == null)
 		{
 			JButton createAccountButton = new JButton("Create Account");

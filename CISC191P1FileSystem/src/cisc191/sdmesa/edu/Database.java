@@ -12,30 +12,22 @@ import java.util.Objects;
  * Lead Author(s):
  * @author Anthony Mayoral
  * @author Francis Thierer
- * <<add additional lead authors here, with a full first and last name>>
- * 
- * Other contributors:
- * <<add additional contributors (mentors, tutors, friends) here, with contact information>>
  * 
  * References:
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
- * 
- * <<add more references here>>
- * Design pattern - singleton pattern. (n.d.). 
- * Retrieved March 10, 2022, from https://www.tutorialspoint.com/design_pattern/singleton_pattern.htm 
  *  
- *  
- *  
- * Version/date: 2.4 04/05/2022
+ * Version/date: 1.8 05/19/2022
  * 
  * Responsibilities of class:
- * Database is designed to be a singleton class which acts as the database for storing all user's files in the File System program. 
- * Database has a Files[][] to hold the Files of each User account, and a User[] to hold User accounts. 
- * Its methods allow the File System to add users, view users, find usernames, retrieve its Files[][], and retrieve its User[].
+ * Database is designed to be a singleton class which acts as the "database" for storing all User instances (user accounts),
+ * and all their FileData objects (files) in the program. Its methods allow other objects to add users and view users/ files
+ * and their characteristics.     
  */
 public class Database 
 {
+	int deleteThis;
+	
 	// Database has n number of Files per each User
 	// Files[0][n] will always represent the SuperUser
 	// Files[1 - 9][n] will represent the BasicUsers, with each BasicUser's serial number corresponding to their row index 
@@ -143,7 +135,6 @@ public class Database
 	}
 	
 	/**
-	 * 
 	 * @return database Users
 	 */
 	public User[] getUsers() 
@@ -151,6 +142,9 @@ public class Database
 		return users;
 	}
 
+	/**
+	 * @return username of SuperUser
+	 */
 	public String[] getSuperUsername() 
 	{
 		String[] superUsername = new String[1];
@@ -167,6 +161,9 @@ public class Database
 		return superUsername;
 	}
 	
+	/**
+	 * @return usernames of BasicUsers
+	 */
 	public String[] getBasicUsernames() 
 	{
 		String[] basicUsernames = new String[9];
@@ -186,6 +183,9 @@ public class Database
 		return basicUsernames;
 	}
 	
+	/**
+	 * @return true if SuperUser object has been created, otherwise false
+	 */
 	public boolean superUserExists() 
 	{
 		if (users[0] != null)
@@ -195,7 +195,10 @@ public class Database
 
 		return false;
 	}
-
+	
+	/**
+	 * @return true if at least 1 BasicUser object has been created, otherwise false
+	 */
 	public boolean basicUsersExist() 
 	{
 		if (users[1] != null) 
@@ -206,6 +209,9 @@ public class Database
 		return false;
 	}
 	
+	/**
+	 * @return formatted String representation of Users usernames
+	 */
 	public String viewUserAccounts() 
 	{
 		// Create empty String to add account usernames to

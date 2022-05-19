@@ -10,27 +10,21 @@ import java.io.IOException;
  * Lead Author(s):
  * @author Anthony Mayoral
  * @author Francis Thierer
- * <<add additional lead authors here, with a full first and last name>>
- * 
- * Other contributors:
- * <<add additional contributors (mentors, tutors, friends) here, with contact information>>
  * 
  * References:
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
- * 
- * <<add more references here>>
  *  
- *  
- *  
- * Version/date: 2.4 04/05/2022
+ * Version/date: 1.8 05/19/2022
  * 
  * Responsibilities of class:
- * DataLoader is designed to enable data persistence by loading FileData objects and User accounts from program utility files. It will run just after startup of the FileSystem program,
- * and load any saved previous session data: created user accounts and created user FileData objects.    
+ * DataLoader is designed to enable data persistence in the program by loading FileData objects (files) and User objects (accounts)
+ * from program utility files. It will run upon program startup when ProgramModel is created.       
  */
 public class DataLoader
 {
+	int deleteThis;
+	
 	// DataLoader has the shared single Database instance
 	private final Database DATABASE;
 	

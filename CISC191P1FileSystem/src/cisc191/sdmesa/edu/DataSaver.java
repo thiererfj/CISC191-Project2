@@ -11,29 +11,21 @@ import java.nio.file.Paths;
  * Lead Author(s):
  * @author Anthony Mayoral
  * @author Francis Thierer
- * <<add additional lead authors here, with a full first and last name>>
- * 
- * Other contributors:
- * <<add additional contributors (mentors, tutors, friends) here, with contact information>>
  * 
  * References:
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
- * 
- * <<add more references here>>
- * Files (java platform SE 8 ). (2022, January 5). 
- * Retrieved April 2, 2022, from https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html#deleteIfExists-java.nio.file.Path- 
  *  
- *  
- *  
- * Version/date: 2.4 04/05/2022
+ * Version/date: 1.8 05/19/2022
  * 
  * Responsibilities of class:
- * DataSaver is designed to enable data persistence by saving locally created FileData objects and User accounts to program utility files. It will run just before shutdown of the FileSystem program,
- * and save all session data: created user accounts and created user FileData objects.    
+ * DataSaver is designed to enable data persistence in the program by saving created FileData objects (files) and User objects (accounts)
+ * to program utility files. It will run just before program shutdown, when a user selects "Yes" upon QuitView display.   
  */
 public class DataSaver
 {
+	int deleteThis;
+	
 	// DataSaver has the shared single Database instance
 	private final Database DATABASE;
 	
