@@ -6,8 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.Objects;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -105,10 +108,24 @@ public class LoginView
       	loginButton.setFocusable(false);
       	loginButton.addActionListener(new ActionListener()
 	    {
-		      // If user clicks log in button
+		
+      		// If user clicks log in button
 			  public void actionPerformed(ActionEvent e)
 		      {
-		    	  // Store login parameters
+				  try {
+						programView.clickSound();
+					} catch (LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (UnsupportedAudioFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				  
+				  // Store login parameters
 		    	  String username = userName.getText();
 		    	  String password = userPassword.getText();
 		    	  

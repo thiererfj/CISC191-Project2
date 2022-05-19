@@ -7,7 +7,10 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -79,6 +82,19 @@ public class UserMenuView
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				try {
+					programView.clickSound();
+				} catch (LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedAudioFileException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				uploadFileVisuals();
 			}
 		});
@@ -95,6 +111,19 @@ public class UserMenuView
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				try {
+					programView.clickSound();
+				} catch (LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedAudioFileException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				downloadFileVisuals();
 			}
 		});
@@ -102,57 +131,94 @@ public class UserMenuView
 		// Add extra buttons if current user is super
 		if (currentUserIsSuper)
 		{
-			JButton deleteFileButton = new JButton();
-			deleteFileButton.setLayout(new BoxLayout(deleteFileButton, BoxLayout.Y_AXIS));
-			deleteFileButton.add(Box.createRigidArea(new Dimension(0, 30)));
-			JLabel firstLine = new JLabel("    Delete Your");
-			firstLine.setForeground(viewTextColor);
-			JLabel secondLine = new JLabel("       Own File");
-			secondLine.setForeground(viewTextColor);
-			deleteFileButton.add(firstLine);
-			deleteFileButton.add(secondLine);
-			deleteFileButton.setBackground(viewButtonColor);
-			deleteFileButton.setFocusable(false);
-			buttonPanel.add(deleteFileButton);
+			
+			// I don't think this is necessary
+			
+//			JButton deleteFileButton = new JButton();
+//			deleteFileButton.setLayout(new BoxLayout(deleteFileButton, BoxLayout.Y_AXIS));
+//			deleteFileButton.add(Box.createRigidArea(new Dimension(0, 30)));
+//			JLabel firstLine = new JLabel("    Delete Your");
+//			firstLine.setForeground(viewTextColor);
+//			JLabel secondLine = new JLabel("       Own File");
+//			secondLine.setForeground(viewTextColor);
+//			deleteFileButton.add(firstLine);
+//			deleteFileButton.add(secondLine);
+//			deleteFileButton.setBackground(viewButtonColor);
+//			deleteFileButton.setFocusable(false);
+//			buttonPanel.add(deleteFileButton);
+//
+//			deleteFileButton.addActionListener(new ActionListener()
+//			{
+//				public void actionPerformed(ActionEvent e)
+//				{
+//					deleteFileVisuals();
+//				}
+//			});
+			
+			JButton deleteUserFilesButton = new JButton("Delete Files");
+			//deleteUserFilesButton.setLayout(new BoxLayout(deleteUserFilesButton, BoxLayout.Y_AXIS));
+			//deleteUserFilesButton.add(Box.createRigidArea(new Dimension(0, 30)));
+			deleteUserFilesButton.setForeground(viewTextColor);
+//			firstLine = new JLabel(" Delete Another");
+//			firstLine.setForeground(viewTextColor);
+//			secondLine = new JLabel("     User's File");
+//			secondLine.setForeground(viewTextColor);
+//			deleteUsersFileButton.add(firstLine);
+//			deleteUsersFileButton.add(secondLine);
+			deleteUserFilesButton.setBackground(viewButtonColor);
+			deleteUserFilesButton.setFocusable(false);
+			buttonPanel.add(deleteUserFilesButton);
 
-			deleteFileButton.addActionListener(new ActionListener()
+			deleteUserFilesButton.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					deleteFileVisuals();
+					try {
+						programView.clickSound();
+					} catch (LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (UnsupportedAudioFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					deleteFromAnyUsersFilesVisuals();
 				}
 			});
 			
-			JButton deleteAnotherUsersFileButton = new JButton();
-			deleteAnotherUsersFileButton.setLayout(new BoxLayout(deleteAnotherUsersFileButton, BoxLayout.Y_AXIS));
-			deleteAnotherUsersFileButton.add(Box.createRigidArea(new Dimension(0, 30)));
-			firstLine = new JLabel(" Delete Another");
-			firstLine.setForeground(viewTextColor);
-			secondLine = new JLabel("     User's File");
-			secondLine.setForeground(viewTextColor);
-			deleteAnotherUsersFileButton.add(firstLine);
-			deleteAnotherUsersFileButton.add(secondLine);
-			deleteAnotherUsersFileButton.setBackground(viewButtonColor);
-			deleteAnotherUsersFileButton.setFocusable(false);
-			buttonPanel.add(deleteAnotherUsersFileButton);
-
-			deleteAnotherUsersFileButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					deleteAnotherUsersFileVisuals();
-				}
-			});
 			
-			JButton viewFilesButton = new JButton();
-			viewFilesButton.setLayout(new BoxLayout(viewFilesButton, BoxLayout.Y_AXIS));
-			viewFilesButton.add(Box.createRigidArea(new Dimension(0, 30)));
-			firstLine = new JLabel("     View Your");
-			firstLine.setForeground(viewTextColor);
-			secondLine = new JLabel("     Own Files");
-			secondLine.setForeground(viewTextColor);
-			viewFilesButton.add(firstLine);
-			viewFilesButton.add(secondLine);
+			
+			
+			// Is this really necessary?
+			
+//			JButton viewFilesButton = new JButton();
+//			viewFilesButton.setLayout(new BoxLayout(viewFilesButton, BoxLayout.Y_AXIS));
+//			viewFilesButton.add(Box.createRigidArea(new Dimension(0, 30)));
+//			firstLine = new JLabel("     View Your");
+//			firstLine.setForeground(viewTextColor);
+//			secondLine = new JLabel("     Own Files");
+//			secondLine.setForeground(viewTextColor);
+//			viewFilesButton.add(firstLine);
+//			viewFilesButton.add(secondLine);
+//			viewFilesButton.setBackground(viewButtonColor);
+//			viewFilesButton.setFocusable(false);
+//			buttonPanel.add(viewFilesButton);
+//			
+//			viewFilesButton.addActionListener(new ActionListener()
+//			{
+//				public void actionPerformed(ActionEvent e)
+//				{
+//					viewCurrentUserFilesVisuals();
+//				}
+//			});
+			
+			JButton viewFilesButton = new JButton("View Files");
+			;
+			viewFilesButton.setForeground(viewTextColor);
 			viewFilesButton.setBackground(viewButtonColor);
 			viewFilesButton.setFocusable(false);
 			buttonPanel.add(viewFilesButton);
@@ -161,27 +227,19 @@ public class UserMenuView
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					viewCurrentUserFilesVisuals();
-				}
-			});
-			
-			JButton viewAnotherUsersFilesButton = new JButton();
-			viewAnotherUsersFilesButton.setLayout(new BoxLayout(viewAnotherUsersFilesButton, BoxLayout.Y_AXIS));
-			viewAnotherUsersFilesButton.add(Box.createRigidArea(new Dimension(0, 30)));
-			firstLine = new JLabel("  View Another");
-			firstLine.setForeground(viewTextColor);
-			secondLine = new JLabel("   User's Files");
-			secondLine.setForeground(viewTextColor);
-			viewAnotherUsersFilesButton.add(firstLine);
-			viewAnotherUsersFilesButton.add(secondLine);
-			viewAnotherUsersFilesButton.setBackground(viewButtonColor);
-			viewAnotherUsersFilesButton.setFocusable(false);
-			buttonPanel.add(viewAnotherUsersFilesButton);
-			
-			viewAnotherUsersFilesButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
+					try {
+						programView.clickSound();
+					} catch (LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (UnsupportedAudioFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					viewSelectedUsersFilesVisuals();
 				}
 			});
@@ -199,11 +257,24 @@ public class UserMenuView
 			{
 				public void actionPerformed(ActionEvent e)
 				{
+					try {
+						programView.clickSound();
+					} catch (LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (UnsupportedAudioFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					deleteFileVisuals();
 				}
 			});
 			
-			JButton viewFilesButton = new JButton("View Your Files");
+			JButton viewFilesButton = new JButton("View Files");
 			viewFilesButton.setBackground(viewBackgroundColor);
 			viewFilesButton.setForeground(viewTextColor);
 			viewFilesButton.setFocusable(false);
@@ -213,6 +284,19 @@ public class UserMenuView
 			{
 				public void actionPerformed(ActionEvent e)
 				{
+					try {
+						programView.clickSound();
+					} catch (LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (UnsupportedAudioFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					viewCurrentUserFilesVisuals();
 				}
 			});
@@ -228,9 +312,29 @@ public class UserMenuView
 	    {
 		      public void actionPerformed(ActionEvent e)
 		      {
+		    	  try {
+						programView.clickSound();
+					} catch (LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (UnsupportedAudioFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		    	  
 		    	programView.getContentPane().removeAll();
 		    	programView.repaint();
-		    	programView.printMainMenu();
+		    	
+		    	
+		    	try {
+					programView.printMainMenu();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		      }
 		});
 		
@@ -272,11 +376,12 @@ public class UserMenuView
 		DeleteFileView deleteFileView = new DeleteFileView(this, programView, 1);
 	}
 	
-	private void deleteAnotherUsersFileVisuals() 
+	private void deleteFromAnyUsersFilesVisuals() 
 	{
 		// Pass 2 for super user view type
 		DeleteFileView deleteFileView = new DeleteFileView(this, programView, 2);
 	}
+	
 	
 	private void viewCurrentUserFilesVisuals() 
 	{
@@ -308,6 +413,20 @@ public class UserMenuView
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				
+				try {
+					programView.clickSound();
+				} catch (LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedAudioFileException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				programView.getContentPane().removeAll();
 				programView.getContentPane().repaint();
 				printView();

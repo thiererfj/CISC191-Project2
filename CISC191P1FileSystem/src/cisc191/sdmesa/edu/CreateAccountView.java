@@ -7,7 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -92,6 +95,19 @@ public class CreateAccountView {
     		    	  superUserButton.setEnabled(false);
     		    	  basicUserButton.setEnabled(true);
     		    	  accountInstanceButton.setEnabled(true);
+    		    	  
+    		    	  try {
+  						programView.clickSound();
+  					} catch (LineUnavailableException e1) {
+  						// TODO Auto-generated catch block
+  						e1.printStackTrace();
+  					} catch (UnsupportedAudioFileException e1) {
+  						// TODO Auto-generated catch block
+  						e1.printStackTrace();
+  					} catch (IOException e1) {
+  						// TODO Auto-generated catch block
+  						e1.printStackTrace();
+  					}
     		    	 
     		      }
     		});
@@ -109,6 +125,21 @@ public class CreateAccountView {
 	    {
 		      public void actionPerformed(ActionEvent e)
 		      {
+		    	 
+		    	  try 
+		    	  {
+						programView.clickSound();
+		    	  } catch (LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+		    	  } catch (UnsupportedAudioFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+		    	  } catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+		    	  } 
+		    	  
 		    	 basicUserButton.setEnabled(false);
 		    	 accountInstanceButton.setEnabled(true);
 		    	 
@@ -190,6 +221,20 @@ public class CreateAccountView {
 	    {
 		      public void actionPerformed(ActionEvent e)
 		      {
+		    	  try {
+						programView.clickSound();
+					} catch (LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (UnsupportedAudioFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+		    	  
+		    	  
 		    	  //Somehow we want a user object to be made.
 		    	  String userType = "";
 		    	  String username = userName.getText();
@@ -260,7 +305,12 @@ public class CreateAccountView {
 				    	  programView.getContentPane().removeAll();
 				    	  programView.getContentPane().repaint();
 				    	  //System.out.println(DATABASE.getUsers()[0].getUsername());
-				    	  programView.printMainMenu(); 
+				    	  try {
+							programView.printMainMenu();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} 
 		    		  }
 		    		  
 		    	  }

@@ -5,8 +5,14 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,7 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
 
-public class ProgramView extends JFrame
+public class ProgramView extends JFrame 
 {
 	private final String VERSION = "1.5";
 	private ProgramModel programModel;
@@ -55,7 +61,7 @@ public class ProgramView extends JFrame
 	/**
 	 * Purpose: Changes view to the PrintMainMenu Menu
 	 */
-	public void printMainMenu()
+	public void printMainMenu() throws IOException
 	{
 		// Set black background here so sub frame doesn't change it when going back to main menu
 		getContentPane().setBackground(viewBackgroundColor);
@@ -85,6 +91,21 @@ public class ProgramView extends JFrame
 				public void actionPerformed(ActionEvent e)
 				{
 					createAccountVisuals();
+					
+					try {
+						clickSound();
+					} catch (LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (UnsupportedAudioFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					
 				}
 			});
 		}
@@ -100,6 +121,19 @@ public class ProgramView extends JFrame
 			public void actionPerformed(ActionEvent e)
 			{
 				loginVisuals();
+				
+				try {
+					clickSound();
+				} catch (LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedAudioFileException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -114,6 +148,19 @@ public class ProgramView extends JFrame
 			public void actionPerformed(ActionEvent e)
 			{
 				viewUserAccountsVisuals();
+				
+				try {
+					clickSound();
+				} catch (LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedAudioFileException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -127,6 +174,19 @@ public class ProgramView extends JFrame
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				try {
+					clickSound();
+				} catch (LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedAudioFileException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 				try
 				{
 					closeProgramVisuals();
@@ -197,7 +257,27 @@ public class ProgramView extends JFrame
 			{
 				getContentPane().removeAll();
 				getContentPane().repaint();
-				printMainMenu();
+				
+				try {
+					clickSound();
+				} catch (LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedAudioFileException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+				try {
+					printMainMenu();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 	}
@@ -219,6 +299,25 @@ public class ProgramView extends JFrame
 		titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		titleLabel.setForeground(foregroundColor);
 		add(titleLabel);
+	}
+	
+	public Color getViewTextColor()
+	{
+		return viewTextColor;
+	}
+	
+	public Color getViewButtonColor()
+	{
+		return viewButtonColor;
+	}
+	
+	public void clickSound() throws LineUnavailableException, UnsupportedAudioFileException, IOException
+	{
+		File barkSound = new File("ClickSound.wav");
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(barkSound);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioStream);
+        clip.start();
 	}
 
 }
