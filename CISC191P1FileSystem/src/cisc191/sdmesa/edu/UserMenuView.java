@@ -252,7 +252,7 @@ public class UserMenuView
 		else 
 		{
 			JButton deleteFileButton = new JButton("Delete File");
-			deleteFileButton.setBackground(viewBackgroundColor);
+			deleteFileButton.setBackground(viewButtonColor);
 			deleteFileButton.setForeground(viewTextColor);
 			deleteFileButton.setFocusable(false);
 			buttonPanel.add(deleteFileButton);
@@ -279,7 +279,7 @@ public class UserMenuView
 			});
 			
 			JButton viewFilesButton = new JButton("View Files");
-			viewFilesButton.setBackground(viewBackgroundColor);
+			viewFilesButton.setBackground(viewButtonColor);
 			viewFilesButton.setForeground(viewTextColor);
 			viewFilesButton.setFocusable(false);
 			buttonPanel.add(viewFilesButton);

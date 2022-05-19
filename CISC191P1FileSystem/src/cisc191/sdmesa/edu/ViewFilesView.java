@@ -167,7 +167,7 @@ public class ViewFilesView
 	private void viewFiles() 
 	{
 		programView.getContentPane().removeAll();
-		programView.addTitleLabel("View Files", Color.lightGray, Color.white);
+		programView.addTitleLabel("View Files", viewTitleBoxColor, viewTextColor);
 		userMenuView.addBackButton();
 		programView.setVisible(true);
 		programView.getContentPane().repaint();
@@ -175,136 +175,137 @@ public class ViewFilesView
 		JTextArea userFileArea = new JTextArea(fileList);
 		userFileArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
 		userFileArea.setBounds(485, 300, 300, 250);   //First bound was 450
-		userFileArea.setBackground(Color.lightGray);
+		userFileArea.setBackground(viewButtonColor);
+		userFileArea.setForeground(viewTextColor);
 		userFileArea.setEditable(false);
 		programView.add(userFileArea);
 		
 		
 		
 		// Create JPanel for userSelectButtons
-					JPanel selectButtonPanel = new JPanel();
-					selectButtonPanel.setBounds(415, 300, 50, 250); // last bound was
-																	// 500
-					selectButtonPanel.setLayout(new GridLayout(10, 1));
-					selectButtonPanel.setOpaque(true);
-					
-					JButton[] selectButtons = new JButton[10];
+		JPanel selectButtonPanel = new JPanel();
+		selectButtonPanel.setBounds(415, 300, 50, 250); // last bound was 500
+		selectButtonPanel.setLayout(new GridLayout(10, 1));
+		selectButtonPanel.setOpaque(true);
 
-					// Loop to make file buttons and add to panel
-					for (int i = 0; i < 10; i++)
+		JButton[] selectButtons = new JButton[10];
+
+		// Loop to make file buttons and add to panel
+		for (int i = 0; i < 10; i++)
+		{
+			selectButtons[i] = new JButton(Integer.toString(i + 1));
+			selectButtons[i].setBackground(viewButtonColor);
+			selectButtons[i].setForeground(viewTextColor);
+			selectButtons[i].setFocusable(false);
+
+			selectButtons[i].addActionListener(new SelectButtonListener(programView, selectButtons, selectButtons[i]));
+			selectButtonPanel.add(selectButtons[i]);
+		}
+
+		programView.add(selectButtonPanel);
+		programView.setVisible(true);
+
+		JLabel userButtonLabel = new JLabel("Select which file you want to view: ");
+		userButtonLabel.setBounds(415, 255, 300, 40);
+		userButtonLabel.setForeground(viewTextColor);
+		programView.add(userButtonLabel);
+
+		JButton selectFileExecuteButton = new JButton("Select File");
+		selectFileExecuteButton.setBackground(viewButtonColor);
+		selectFileExecuteButton.setForeground(viewTextColor);
+		selectFileExecuteButton.setFocusable(false);
+		selectFileExecuteButton.setBounds(425, 600, 345, 65);
+		programView.add(selectFileExecuteButton);
+
+		selectFileExecuteButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				try
+				{
+					programView.clickSound();
+				}
+				catch (LineUnavailableException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				catch (UnsupportedAudioFileException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				catch (IOException e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				// Loop through file delete buttons to see which is disabled
+				// (the selected user)
+				for (int i = 0; i < 10; i++)
+				{
+					// If button is disabled (user clicked)
+					if (!(selectButtons[i].isEnabled()))
 					{
-						selectButtons[i] = new JButton(Integer.toString(i + 1));
-						selectButtons[i].setBackground(Color.gray);
-						selectButtons[i].setFocusable(false);
-
-						selectButtons[i].addActionListener(new SelectButtonListener(programView, selectButtons, selectButtons[i]));
-						selectButtonPanel.add(selectButtons[i]);
-					}
-
-					programView.add(selectButtonPanel);
-					programView.setVisible(true);
-					
-					
-					
-					JLabel userButtonLabel = new JLabel("Select which file you want to view: ");
-					userButtonLabel.setBounds(415, 255, 300, 40);
-					userButtonLabel.setForeground(Color.white);
-					programView.add(userButtonLabel);
-					
-					
-					
-					JButton selectFileExecuteButton = new JButton("Select File");
-					selectFileExecuteButton.setBackground(Color.gray);
-					selectFileExecuteButton.setFocusable(false);
-					selectFileExecuteButton.setBounds(425, 600, 345, 65);
-					programView.add(selectFileExecuteButton);
-					
-					
-					
-					selectFileExecuteButton.addActionListener(new ActionListener()
-					{
-						public void actionPerformed(ActionEvent e)
+						// Try to view and delete selected users files
+						try
 						{
-							try {
-								programView.clickSound();
-							} catch (LineUnavailableException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							} catch (UnsupportedAudioFileException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							
-							// Loop through file delete buttons to see which is disabled
-							// (the selected user)
-							for (int i = 0; i < 10; i++)
-							{
-								// If button is disabled (user clicked)
-								if (!(selectButtons[i].isEnabled()))
-								{
-									// Try to view and delete selected users files
-									try
-									{
-										
-										programView.getContentPane().removeAll();
-										
-										//Creates a variable for currentUserSerialNumber so that the code is more easily readable in later code
-										int currentUserSerialNumber = programView.getProgramModel().getCurrentUser().getSerialNumber();
-										
-										//String for fileContents so that the code is more easily readable in later code
-										String fileContents = programView.getProgramModel().getDatabase().getGlobalStorage()[currentUserSerialNumber][i].getContents();
-										
-										JTextArea fileContentsArea = new JTextArea(fileContents);
-										fileContentsArea.setEditable(false);
-										
-										JScrollPane fileContentsScrollPane = new JScrollPane(fileContentsArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-										
-										fileContentsScrollPane.setBounds(100, 100, 1000, 600);
-										
-										programView.add(fileContentsScrollPane);
-										
-										addBackButton();
-										
-										programView.setVisible(true);
-										
-										programView.getContentPane().repaint();
-									
-										
-										
-//										fileList = programView.getProgramModel().getDatabase().getUsers()[i].viewUserFiles();
-//										viewFiles();
-										
-										
-										//This is where you want to do the JScroll thing maybe!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-										
-										
-										
-									}
-									// Handle npe if user selected null User account
-									catch (NullPointerException e2)
-									{
-										// Print error message to screen
-										JOptionPane.showMessageDialog(null, "there is no file in that spot");
 
-										// Reprint this deletion view to reset from error
-										viewFiles(); //Maybe I need to change this back to printView();!!!!!!!!!!!!!!!
-										//printView();
-									}
-								}
-							}
+							programView.getContentPane().removeAll();
+
+							// Creates a variable for currentUserSerialNumber so that the code is more easily readable in later code
+							int currentUserSerialNumber = programView.getProgramModel().getCurrentUser().getSerialNumber();
+
+							// String for fileContents so that the code is more
+							// easily readable in later code
+							String fileContents = programView.getProgramModel().getDatabase().getGlobalStorage()[currentUserSerialNumber][i].getContents();
+
+							JTextArea fileContentsArea = new JTextArea(fileContents);
+							fileContentsArea.setEditable(false);
+
+							JScrollPane fileContentsScrollPane = new JScrollPane(fileContentsArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+							fileContentsScrollPane.setBounds(100, 100, 1000, 600);
+
+							programView.add(fileContentsScrollPane);
+
+							addBackButton();
+
+							programView.setVisible(true);
+
+							programView.getContentPane().repaint();
+
+							// fileList =
+							// programView.getProgramModel().getDatabase().getUsers()[i].viewUserFiles();
+							// viewFiles();
+
+							// This is where you want to do the JScroll thing
+							// maybe!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 						}
-					});
-					//Make sure to add the action listener to this
+						// Handle npe if user selected null User account
+						catch (NullPointerException e2)
+						{
+							// Print error message to screen
+							JOptionPane.showMessageDialog(null, "There is no file in that spot");
+
+							// Reprint this deletion view to reset from error
+							viewFiles(); // Maybe I need to change this back to printView();!!!!!!!!!!!!!!!
+							// printView();
+						}
+					}
+				}
+			}
+		});
+		// Make sure to add the action listener to this
 	}
 	
 	public void addBackButton()
 	{
 		JButton backButton = new JButton("Back");
-		backButton.setBackground(programView.getViewButtonColor());
-		backButton.setForeground(programView.getViewTextColor());
+		backButton.setBackground(viewButtonColor);
+		backButton.setForeground(viewTextColor);
 		backButton.setFocusable(false);
 		backButton.setBounds(20, 20, 70, 40);
 
