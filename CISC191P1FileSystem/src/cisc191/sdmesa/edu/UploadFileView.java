@@ -27,16 +27,20 @@ public class UploadFileView
 	private String fileList;
 	private JPanel fileSelectButtonPanel;
 	private JButton[] fileSelectButtons;
-	private Color viewBackgroundColor = Color.decode("#A67B8A");
-	private Color viewTitleBoxColor = Color.decode("#79BED9");
-	private Color viewButtonColor = Color.decode("#324759");
-	private Color viewTextColor = Color.decode("#EBF2F2");
+	private Color viewBackgroundColor;
+	private Color viewTitleBoxColor;
+	private Color viewButtonColor;
+	private Color viewTextColor;
 	
 	public UploadFileView (UserMenuView userMenuView, ProgramView programView)
 	{
 		this.userMenuView = userMenuView;
 		this.programView = programView;
 		this.fileSelectButtons = new JButton[10];
+		this.viewBackgroundColor = programView.getViewBackgroundColor();
+		this.viewTitleBoxColor = programView.getViewTitleBoxColor();
+		this.viewButtonColor = programView.getViewButtonColor();
+		this.viewTextColor = programView.getViewTextColor();
 		printView();
 	}
 	

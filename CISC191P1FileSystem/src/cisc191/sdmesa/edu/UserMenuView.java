@@ -24,15 +24,19 @@ public class UserMenuView
 	private ProgramView programView;
 	private JPanel buttonPanel;
 	private boolean currentUserIsSuper;
-	private Color viewBackgroundColor = Color.decode("#A67B8A");
-	private Color viewTitleBoxColor = Color.decode("#79BED9");
-	private Color viewButtonColor = Color.decode("#324759");
-	private Color viewTextColor = Color.decode("#EBF2F2");
+	private Color viewBackgroundColor;
+	private Color viewTitleBoxColor;
+	private Color viewButtonColor;
+	private Color viewTextColor;
 	
 	public UserMenuView (ProgramView programView, boolean currentUserIsSuper)
 	{
 		this.programView = programView;
 		this.currentUserIsSuper = currentUserIsSuper;
+		this.viewBackgroundColor = programView.getViewBackgroundColor();
+		this.viewTitleBoxColor = programView.getViewTitleBoxColor();
+		this.viewButtonColor = programView.getViewButtonColor();
+		this.viewTextColor = programView.getViewTextColor();
 		printView();
 	}
 	

@@ -20,15 +20,19 @@ public class LoginView
 	// LoginView has a ProgramView
 	private ProgramView programView;
 	
-	private Color viewBackgroundColor = Color.decode("#A67B8A");
-	private Color viewTitleBoxColor = Color.decode("#79BED9");
-	private Color viewButtonColor = Color.decode("#324759");
-	private Color viewTextColor = Color.decode("#EBF2F2");
+	private Color viewBackgroundColor;
+	private Color viewTitleBoxColor;
+	private Color viewButtonColor;
+	private Color viewTextColor;
 
 	// Constructor
 	public LoginView (ProgramView programView)
 	{
 		this.programView = programView;
+		this.viewBackgroundColor = programView.getViewBackgroundColor();
+		this.viewTitleBoxColor = programView.getViewTitleBoxColor();
+		this.viewButtonColor = programView.getViewButtonColor();
+		this.viewTextColor = programView.getViewTextColor();
 		printView();
 	}
 

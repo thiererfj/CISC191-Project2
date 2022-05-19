@@ -19,11 +19,12 @@ public class QuitView
 {
     private ProgramView programView;
     private int userCloseOption;
-    private Color viewBackgroundColor = Color.decode("#A67B8A");
+    private Color viewBackgroundColor;
 
     public QuitView(ProgramView programView) throws IOException 
     {
 		this.programView = programView;
+		this.viewBackgroundColor = programView.getViewBackgroundColor();
 		
 		printView();
     }

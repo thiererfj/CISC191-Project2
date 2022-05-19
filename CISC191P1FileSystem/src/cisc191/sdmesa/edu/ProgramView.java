@@ -27,10 +27,10 @@ public class ProgramView extends JFrame
 	private final String VERSION = "1.5";
 	private ProgramModel programModel;
 //	private User currentUser;
-	private Color viewBackgroundColor = Color.decode("#A67B8A");
-	private Color viewTitleBoxColor = Color.decode("#79BED9");
-	private Color viewButtonColor = Color.decode("#324759");
-	private Color viewTextColor = Color.decode("#EBF2F2");
+	private Color viewBackgroundColor = Color.decode("#023859");
+	private Color viewTitleBoxColor = Color.decode("#034B8A");
+	private Color viewButtonColor = Color.decode("#B59C8D");
+	private Color viewTextColor = Color.decode("#F2F2F2");
 
 	/**
 	 * Purpose: Constructor for ProgramView that sets information for the JFrame
@@ -301,6 +301,11 @@ public class ProgramView extends JFrame
 		add(titleLabel);
 	}
 	
+	public Color getViewTitleBoxColor() 
+	{
+		return viewTitleBoxColor;
+	}
+	
 	public Color getViewTextColor()
 	{
 		return viewTextColor;
@@ -309,6 +314,11 @@ public class ProgramView extends JFrame
 	public Color getViewButtonColor()
 	{
 		return viewButtonColor;
+	}
+	
+	public Color getViewBackgroundColor() 
+	{
+		return viewBackgroundColor;
 	}
 	
 	public void clickSound() throws LineUnavailableException, UnsupportedAudioFileException, IOException

@@ -24,19 +24,27 @@ public class ViewFilesView
 	
 	// 1 to view their own files, 2 to view another user's files
 	private int viewType;
+	private Color viewBackgroundColor;
+	private Color viewTitleBoxColor;
+	private Color viewButtonColor;
+	private Color viewTextColor;
 	
 	public ViewFilesView (UserMenuView userMenuView, ProgramView programView, int viewType) 
 	{
 		this.userMenuView = userMenuView;
 		this.programView = programView;
 		this.viewType = viewType;
+		this.viewBackgroundColor = programView.getViewBackgroundColor();
+		this.viewTitleBoxColor = programView.getViewTitleBoxColor();
+		this.viewButtonColor = programView.getViewButtonColor();
+		this.viewTextColor = programView.getViewTextColor();
 		printView();
 	}
 	
 	private void printView() 
 	{
 		programView.getContentPane().removeAll();
-		programView.addTitleLabel("View Files", Color.lightGray, Color.white);
+		programView.addTitleLabel("View Files", viewTitleBoxColor, viewTextColor);
 		userMenuView.addBackButton();
 		programView.setVisible(true);
 		initialViewCheck();
@@ -60,7 +68,7 @@ public class ViewFilesView
 			// account to delete file from
 			JLabel userButtonLabel = new JLabel("Select which user you want to view files from: ");
 			userButtonLabel.setBounds(415, 255, 300, 40);
-			userButtonLabel.setForeground(Color.white);
+			userButtonLabel.setForeground(viewTextColor);
 			programView.add(userButtonLabel);
 
 			// Create JPanel for userSelectButtons
@@ -76,9 +84,9 @@ public class ViewFilesView
 			for (int i = 0; i < 10; i++)
 			{
 				selectButtons[i] = new JButton(Integer.toString(i + 1));
-				selectButtons[i].setBackground(Color.gray);
+				selectButtons[i].setBackground(viewButtonColor);
+				selectButtons[i].setForeground(viewTextColor);
 				selectButtons[i].setFocusable(false);
-
 				selectButtons[i].addActionListener(new SelectButtonListener(programView, selectButtons, selectButtons[i]));
 				selectButtonPanel.add(selectButtons[i]);
 			}
@@ -90,13 +98,15 @@ public class ViewFilesView
 			JTextArea userAccountListArea = new JTextArea(userAccountList);
 			userAccountListArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
 			userAccountListArea.setBounds(485, 300, 300, 250);
-			userAccountListArea.setBackground(Color.lightGray);
+			userAccountListArea.setBackground(viewButtonColor);
+			userAccountListArea.setForeground(viewTextColor);
 			userAccountListArea.setEditable(false);
 			programView.add(userAccountListArea);
 
 			// Button to initiate the uploading
 			JButton selectUserExecuteButton = new JButton("Select User");
-			selectUserExecuteButton.setBackground(Color.gray);
+			selectUserExecuteButton.setBackground(viewButtonColor);
+			selectUserExecuteButton.setForeground(viewTextColor);
 			selectUserExecuteButton.setFocusable(false);
 			selectUserExecuteButton.setBounds(425, 600, 345, 65);
 			programView.add(selectUserExecuteButton);

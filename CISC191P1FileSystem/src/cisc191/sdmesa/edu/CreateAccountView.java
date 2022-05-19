@@ -41,10 +41,10 @@ public class CreateAccountView {
     //CreateAccountView has an accountInstanceButton
     private JButton accountInstanceButton;
     
-    private Color viewBackgroundColor = Color.decode("#A67B8A");
-	private Color viewTitleBoxColor = Color.decode("#79BED9");
-	private Color viewButtonColor = Color.decode("#324759");
-	private Color viewTextColor = Color.decode("#EBF2F2");
+    private Color viewBackgroundColor;
+	private Color viewTitleBoxColor;
+	private Color viewButtonColor;
+	private Color viewTextColor;
 	
 	/**
 	 * Purpose: Constructor for CreateAccountView
@@ -54,6 +54,10 @@ public class CreateAccountView {
     public CreateAccountView(ProgramView programView)
 	{
 		this.programView = programView;
+		this.viewBackgroundColor = programView.getViewBackgroundColor();
+		this.viewTitleBoxColor = programView.getViewTitleBoxColor();
+		this.viewButtonColor = programView.getViewButtonColor();
+		this.viewTextColor = programView.getViewTextColor();
 		
 		//Calls the method that shows CreateAccountView's GUI components
 		printView();

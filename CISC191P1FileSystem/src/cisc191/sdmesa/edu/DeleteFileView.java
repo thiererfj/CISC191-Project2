@@ -24,10 +24,10 @@ public class DeleteFileView
 	private JPanel selectButtonPanel;
 	private JButton[] selectButtons;
 	private int deletionUserSerialNumber;
-	private Color viewBackgroundColor = Color.decode("#A67B8A");
-	private Color viewTitleBoxColor = Color.decode("#79BED9");
-	private Color viewButtonColor = Color.decode("#324759");
-	private Color viewTextColor = Color.decode("#EBF2F2");
+	private Color viewBackgroundColor;
+	private Color viewTitleBoxColor;
+	private Color viewButtonColor;
+	private Color viewTextColor;
 	
 	private int viewType;
 	
@@ -37,6 +37,10 @@ public class DeleteFileView
 		this.programView = programView;
 		this.viewType = viewType;
 		this.selectButtons = new JButton[10];
+		this.viewBackgroundColor = programView.getViewBackgroundColor();
+		this.viewTitleBoxColor = programView.getViewTitleBoxColor();
+		this.viewButtonColor = programView.getViewButtonColor();
+		this.viewTextColor = programView.getViewTextColor();
 		printView();
 	}
 	
@@ -87,6 +91,7 @@ public class DeleteFileView
 			{
 				selectButtons[i] = new JButton(Integer.toString(i + 1));
 				selectButtons[i].setBackground(viewButtonColor);
+				selectButtons[i].setForeground(viewTextColor);
 				selectButtons[i].setFocusable(false);
 				
 				selectButtons[i].addActionListener(new SelectButtonListener(programView, selectButtons, selectButtons[i]));
@@ -101,12 +106,14 @@ public class DeleteFileView
 			userAccountListArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
 			userAccountListArea.setBounds(485, 300, 300, 250);
 			userAccountListArea.setBackground(viewButtonColor);
+			userAccountListArea.setForeground(viewTextColor);
 			userAccountListArea.setEditable(false);
 			programView.add(userAccountListArea);
 			
 			// Button to initiate the uploading
 			JButton selectUserExecuteButton = new JButton("Select User");
-			selectUserExecuteButton.setBackground(viewTextColor);
+			selectUserExecuteButton.setBackground(viewButtonColor);
+			selectUserExecuteButton.setForeground(viewTextColor);
 			selectUserExecuteButton.setFocusable(false);
 			selectUserExecuteButton.setBounds(425, 600, 345, 65);
 			programView.add(selectUserExecuteButton);
