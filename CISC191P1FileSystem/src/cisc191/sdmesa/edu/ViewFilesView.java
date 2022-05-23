@@ -20,10 +20,6 @@ import javax.swing.JTextArea;
  * Lead Author(s):
  * @author Anthony Mayoral
  * @author Francis Thierer
- * <<add additional lead authors here, with a full first and last name>>
- * 
- * Other contributors:
- * <<add additional contributors (mentors, tutors, friends) here, with contact information>>
  * 
  * References:
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
@@ -34,7 +30,7 @@ import javax.swing.JTextArea;
  * Retrieved March 10, 2022, from https://www.tutorialspoint.com/design_pattern/factory_pattern.htm 
  *  
  *  
- * Version/date: 4.3 05/22/22
+ * Version/date: 4.4 05/22/22
  * 
  * Responsibilities of class:
  * ViewFilesView is designed to reprint the window with GUI components allowing a user to view a certain user's files.

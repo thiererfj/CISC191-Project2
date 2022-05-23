@@ -31,7 +31,7 @@ import javax.swing.Timer;
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  *  
- * Version/date: 4.3 05/22/22
+ * Version/date: 4.4 05/22/22
  * 
  * Responsibilities of class:
  * ProgramView is designed to initialize the main window that will display all the different views with unique GUI components
@@ -42,7 +42,7 @@ import javax.swing.Timer;
 public class ProgramView extends JFrame 
 {
 	// String to display program version in window title bar
-	private final String VERSION = "4.3";
+	private final String VERSION = "4.4";
 	
 	// ProgramView has a ProgramModel to execute the program functions
 	private ProgramModel programModel;
@@ -158,9 +158,6 @@ public class ProgramView extends JFrame
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					// Run create account visuals 
-					createAccountVisuals();
-					
 					// Try to play click sound
 					try
 					{
@@ -171,6 +168,9 @@ public class ProgramView extends JFrame
 					{
 						// Do nothing, sound will not play 
 					}
+					
+					// Run create account visuals 
+					createAccountVisuals();
 				}
 			});
 		}

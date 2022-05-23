@@ -15,7 +15,7 @@ import java.io.IOException;
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  *  
- * Version/date: 4.3 05/22/22
+ * Version/date: 4.4 05/22/22
  * 
  * Responsibilities of class:
  * DataLoader is designed to enable data persistence in the program by loading FileData objects (files) and User objects (accounts)
@@ -23,8 +23,6 @@ import java.io.IOException;
  */
 public class DataLoader
 {
-	int deleteThis;
-	
 	// DataLoader has the shared single Database instance
 	private final Database DATABASE;
 	
@@ -61,7 +59,7 @@ public class DataLoader
 		}
 		
 		//For every basic user in the users array...
-		for (int i = 1; i < DATABASE.users.length; i++) 
+		for (int i = 1; i < DATABASE.getUsers().length; i++) 
 		{
 			//Creates an abstract file with a filepath as a parameter
 			File savedBasicUserAccountData = new File("SessionData/BasicUser" + i + "Data/BasicUser" + i + "AccountData");
@@ -142,7 +140,7 @@ public class DataLoader
 	private void loadSuperUserFileData() throws IOException
 	{
 		// Loop through the SuperUser's 
-		for (int i = 0; i < DATABASE.globalStorage[0].length; i++) 
+		for (int i = 0; i < DATABASE.getGlobalStorage()[0].length; i++) 
 		{
 			// Create file object with destination path of previously saved file data
 			File savedSuperUserFileData = new File("SessionData/SuperUserData/SuperUserFile" + (i + 1) + "Data");
@@ -185,7 +183,7 @@ public class DataLoader
 				newFile.setContents(buildFileContents);
 				
 				// Create new FileData object in DATABASE[0 for SuperUser][i for file index]
-				DATABASE.globalStorage[0][i] = newFile;
+				DATABASE.getGlobalStorage()[0][i] = newFile;
 			}
 		}
 	}
@@ -199,7 +197,7 @@ public class DataLoader
 	private void loadBasicUserFileData(int index) throws IOException
 	{
 		// Loop through the BasicUser's Database indices 
-		for (int i = 0; i < DATABASE.globalStorage[0].length; i++) 
+		for (int i = 0; i < DATABASE.getGlobalStorage()[0].length; i++) 
 		{
 			// Create file object with destination path of previously saved file data
 			File savedBasicUserFileData = new File("SessionData/BasicUser" + index + "Data/BasicUser" + index + "File" + (i + 1) + "Data");
@@ -242,7 +240,7 @@ public class DataLoader
 				newFile.setContents(buildFileContents);
 				
 				// Create new FileData object in DATABASE[0 for SuperUser][i for file index]
-				DATABASE.globalStorage[index][i] = newFile;
+				DATABASE.getGlobalStorage()[index][i] = newFile;
 			}
 		}
 	}

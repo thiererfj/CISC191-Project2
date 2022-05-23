@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  *  
- * Version/date: 4.3 05/22/22
+ * Version/date: 4.4 05/22/22
  * 
  * Responsibilities of class:
  * Fileable is designed to provide an interface framework for User types to implement, which creates file system-like 

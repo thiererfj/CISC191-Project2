@@ -9,7 +9,7 @@ package cisc191.sdmesa.edu;
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  *  
- * Version/date: 4.3 05/22/22
+ * Version/date: 4.4 05/22/22
  * 
  * Responsibilities of class:
  * Database is designed to be a singleton class which acts as the "database" for storing all User instances (user accounts),
@@ -22,12 +22,12 @@ public class Database
 	// Files[0][n] will always represent the SuperUser
 	// Files[1 - 9][n] will represent the BasicUsers, with each BasicUser's serial number corresponding to their row index 
 	// Columns (n) represent that User's Files objects, ranging 0 - 9 for a total of 10 Files for each User
-	FileData[][] globalStorage;
+	private FileData[][] globalStorage;
 	
 	// Database has Users
 	// User[0] reserved for the SuperUser, if created
 	// User[1 - 9] holds up to 9 BasicUsers, with each BasicUser's serial number corresponding to their index
-	User[] users;
+	private User[] users;
 	
 	/**
 	 *  Create SINGLE instance of Database 

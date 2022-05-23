@@ -4,10 +4,6 @@ package cisc191.sdmesa.edu;
  * Lead Author(s):
  * @author Anthony Mayoral
  * @author Francis Thierer
- * <<add additional lead authors here, with a full first and last name>>
- * 
- * Other contributors:
- * <<add additional contributors (mentors, tutors, friends) here, with contact information>>
  * 
  * References:
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
@@ -18,7 +14,7 @@ package cisc191.sdmesa.edu;
  * Retrieved March 10, 2022, from https://www.tutorialspoint.com/design_pattern/factory_pattern.htm 
  *  
  *  
- * Version/date: 4.3 05/22/22
+ * Version/date: 4.4 05/22/22
  * 
  * Responsibilities of class:
  * UserFactory is designed to create User objects in a factory-design like process, which will be added to the File System Database.   

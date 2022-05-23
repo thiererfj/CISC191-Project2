@@ -19,7 +19,7 @@ import java.util.Scanner;
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  *  
- * Version/date: 4.3 05/22/22
+ * Version/date: 4.4 05/22/22
  * 
  * Responsibilities of class:
  * SuperUser is a User, which is Fileable. SuperUser is designed to be the super user account type in the file 
@@ -29,7 +29,6 @@ import java.util.Scanner;
  */
 public class SuperUser extends User
 {
-	
 	/**
 	 * Implement inherited constructor
 	 * 
