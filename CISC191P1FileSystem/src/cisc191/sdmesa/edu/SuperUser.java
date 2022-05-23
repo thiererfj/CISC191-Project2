@@ -14,36 +14,18 @@ import java.util.Scanner;
  * Lead Author(s):
  * @author Anthony Mayoral
  * @author Francis Thierer
- * <<add additional lead authors here, with a full first and last name>>
- * 
- * Other contributors:
- * <<add additional contributors (mentors, tutors, friends) here, with contact information>>
- * 
  * 
  * References:
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
- * 
- * <<add more references here>>
- * Java bufferedreader class - javatpoint. www.javatpoint.com. (n.d.). 
- * Retrieved March 10, 2022, from https://www.javatpoint.com/java-bufferedreader-class 
- * 
- * Java bufferedwriter class - javatpoint. www.javatpoint.com. (n.d.). 
- * Retrieved March 10, 2022, from https://www.javatpoint.com/java-bufferedwriter-class 
- * 
  *  
- * Version/date: 2.4 04/05/2022
+ * Version/date: 4.3 05/22/22
  * 
  * Responsibilities of class:
- * SuperUser is a User, and is Fileable. SuperUser is designed to be the super user account in the File System Program, 
- * and there will only be one. They have more access to the database than a basic user, a super user is like an administrator account.
- * The things a super user can do are:
- * - Upload a file to the database
- * - Save a database file to the user's machine
- * - Delete a file in the database (any file, from super or basic accounts)
- * - View their own database files
- * - View any basic user's database files
- * - Log out 
+ * SuperUser is a User, which is Fileable. SuperUser is designed to be the super user account type in the file 
+ * system program. There is only one SuperUser. A SuperUser has more access to the database than a BasicUser, like
+ * an administator account. The SuperUser unique functions are to view and delete any files in the database, either 
+ * their own or from another user. 
  */
 public class SuperUser extends User
 {

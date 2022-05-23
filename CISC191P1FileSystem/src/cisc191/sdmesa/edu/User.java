@@ -5,37 +5,34 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Lead Author(s):
  * @author Anthony Mayoral
  * @author Francis Thierer
- * <<add additional lead authors here, with a full first and last name>>
- * 
- * Other contributors:
- * <<add additional contributors (mentors, tutors, friends) here, with contact information>>
  * 
  * References:
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
- * 
- * 
- * <<add more references here>>
- * 
  *  
- * Version/date: 2.4 04/05/2022
+ * Version/date: 4.3 05/22/22
  * 
  * Responsibilities of class:
  * The abstract User class is designed to be the superclass for User subclasses of the File System Program to extend depending on their unique behavior.   
  */
 abstract class User implements Fileable
 {
+	// User has username
 	private String username;
+	
+	// User has password
 	private String password;
+	
+	// User has serial number
 	private int serialNumber;
+	
+	// User has a ProgramView
 	private ProgramView programView;
-//	private boolean isActive = false;
 	
 	// Each User has a Database associated with it (the same one, singleton)
 	private Database DATABASE;
@@ -97,11 +94,21 @@ abstract class User implements Fileable
 		return serialNumber;
 	}
 	
+	/**
+	 * Purpose: Setter method for programView
+	 * 
+	 * @param programView
+	 */
 	public void setProgramView(ProgramView programView) 
 	{
 		this.programView = programView;
 	}
 	
+	/**
+	 * Purpose: Getter method for programView
+	 * 
+	 * @return programView
+	 */
 	public ProgramView getProgramView() 
 	{
 		return programView;
@@ -139,7 +146,8 @@ abstract class User implements Fileable
 	public String uploadFileToDatabase(String filePath, String fileName, int fileNumber)
 	{
 		// Stop upload process if file already exists at chosen location
-		if (getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber] != null) {
+		if (getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber] != null) 
+		{
 			// Return file number error message
 			return "fileNumber";
 		}
@@ -221,11 +229,8 @@ abstract class User implements Fileable
 		}
 		// If file at input index does not exist, don't try writing and prompt user of failure
 		else if (getDatabase().getGlobalStorage()[getSerialNumber()][fileNumber] == null)
-		{
-			// Tell user it failed and why
-			System.out.println("\\_(o_o)_/ --> You chose to save a file that doesn't exist. You make me wish that, like this file, I didn't exist.");
-			System.out.println("Save unsuccessful - returning to File System menu");
-			
+		{	
+			// Return error message
 			return "fileNumber";
 		}
 		
@@ -243,6 +248,7 @@ abstract class User implements Fileable
 		// If no file exists at chosen index
 		if (getDatabase().getGlobalStorage()[userIndex][fileNumber] == null)
 		{
+			// Return error message
 			return "fileNumber";
 		}
 		else 
@@ -250,10 +256,14 @@ abstract class User implements Fileable
 			// "Deleting" a file just sets its array index to null
 			getDatabase().getGlobalStorage()[userIndex][fileNumber] = null;
 			
+			// Return null error message for successful delete
 			return null;
 		}
 	}
 	
+	/**
+	 * Run subclass unique menu view
+	 */
 	abstract void runUserMenuView();
 	
 }

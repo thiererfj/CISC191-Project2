@@ -15,24 +15,65 @@ import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 import javax.swing.Timer;
 
+/**
+ * Lead Author(s):
+ * @author Anthony Mayoral
+ * @author Francis Thierer
+ * 
+ * References:
+ * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
+ * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
+ * 
+ * Tutorialspoint.com. 2022. SWING - WindowEvent Class. 
+ * [online] Available at: <https://www.tutorialspoint.com/swing/swing_window_event.htm> [Accessed 22 May 2022].
+ *  
+ * Version/date: 4.3 05/22/22
+ * 
+ * Responsibilities of class:
+ * QuitView is designed to reprint the window with GUI components allowing a user to exit the program while
+ * saving the data entered during their session. Clicking yes to the dialog box will save and exit, clicking no or the 
+ * upper right "X" will exit but not save. 
+ */
 public class QuitView 
 {
-    private ProgramView programView;
+    // QuitView has a ProgramView
+	private ProgramView programView;
+	
+	// Holds value of user input from dialog box
     private int userCloseOption;
-    private Color viewBackgroundColor;
-
+    
+    // Color object to set the color scheme
+//    private Color viewBackgroundColor;
+    
+    /**
+     * QuitView constructor
+     * 
+     * @param programView
+     * @throws IOException
+     */
     public QuitView(ProgramView programView) throws IOException 
     {
-		this.programView = programView;
-		this.viewBackgroundColor = programView.getViewBackgroundColor();
+		// Set program view
+    	this.programView = programView;
+    	
+    	// Set background color
+//		this.viewBackgroundColor = programView.getViewBackgroundColor();
 		
+		// Call this printView method
 		printView();
     }
-
-    private void printView() throws IOException 
+    
+    /**
+     * Print the quit view to window
+     * 
+     * @throws IOException
+     */
+    private void printView() throws IOException  
     {
-        programView.getContentPane().removeAll();
-        programView.getContentPane().setBackground(viewBackgroundColor);
+        // Reset program view
+    	programView.getContentPane().removeAll();
+//        programView.getContentPane().setBackground(viewBackgroundColor);
+    	programView.setVisible(true);
         programView.getContentPane().repaint();
         
         // Prompt user for program close confirmation
@@ -41,12 +82,16 @@ public class QuitView
         // If user clicks yes
         if (userCloseOption == JOptionPane.YES_OPTION)
         {
+        	// Save session data before program exit
         	programView.getProgramModel().saveDataBeforeExit();
+        	
+        	// Close the program view window
         	programView.dispatchEvent(new WindowEvent(programView, WindowEvent.WINDOW_CLOSING));
         }
         // If user clicks no
         else if (userCloseOption == JOptionPane.NO_OPTION)
         {
+        	// Reset window and reprint main menu
         	programView.getContentPane().removeAll();
         	programView.getContentPane().repaint();
         	programView.printMainMenu(); 
@@ -54,6 +99,7 @@ public class QuitView
         // If user clicks dialog box "x"
         else 
         {
+        	// Reset view and reprint main menu
         	programView.getContentPane().removeAll();
         	programView.getContentPane().repaint();
         	programView.printMainMenu(); 

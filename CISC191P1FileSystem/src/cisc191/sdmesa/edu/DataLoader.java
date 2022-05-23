@@ -15,7 +15,7 @@ import java.io.IOException;
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  *  
- * Version/date: 1.8 05/19/2022
+ * Version/date: 4.3 05/22/22
  * 
  * Responsibilities of class:
  * DataLoader is designed to enable data persistence in the program by loading FileData objects (files) and User objects (accounts)

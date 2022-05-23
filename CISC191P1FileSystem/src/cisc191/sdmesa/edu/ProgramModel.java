@@ -11,54 +11,60 @@ import java.util.Scanner;
  * Lead Author(s):
  * @author Anthony Mayoral
  * @author Francis Thierer
- * <<add additional lead authors here, with a full first and last name>>
- * 
- * Other contributors:
- * <<add additional contributors (mentors, tutors, friends) here, with contact information>>
  * 
  * References:
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
- * 
- * <<add more references here>>
  *  
- *  
- * Version/date: 2.4 04/05/2022
+ * Version/date: 4.3 05/22/22
  * 
  * Responsibilities of class:
- * ProgramMenu is designed to run the File System Program's overarching user interface. It initially allows users to manipulate user accounts within the database,
- * and once logged in, facilitates a unique User's filing system operations.    
+ * ProgramModel is designed to work with the ProgramView, to run the user functions within the program.
+ * There are three main user functions: create a new User account, log into a User account, and
+ * view created User accounts. ProgramModel also runs the save data function when a user exits
+ * out of the program using the "Quit Program (Save Data)" GUI component.    
  */
 public class ProgramModel 
 {
-	// Singleton design pattern, only have ONE database instance throughout program
+	// Singleton design pattern, only have one database instance throughout program
 	private final Database DATABASE = Database.getInstance();
 	
-	// ProgramMenu has a current user
+	// ProgramModel has a current User
 	private User currentUser;
 	
-	// Program menu has a UserFactory to create users
+	// ProgramModel has a UserFactory to create users
 	private UserFactory factory = new UserFactory();
 	
+	// ProgramModel has a ProgramView to display GUI
 	private ProgramView programView;
-
+	
+	/**
+	 * @return single shared Database instance
+	 */
 	public Database getDatabase() 
 	{
 		return DATABASE;
 	}
-
+	
+	/**
+	 * @return User Factory 
+	 */
 	public UserFactory getUserFactory() 
 	{
 		return factory;
 	}
-
+	
+	/**
+	 * @return current User
+	 */
 	public User getCurrentUser() 
 	{
 		return currentUser;
 	}
 	
 	/**
-	 * Purpose: To create a main menu for the user to interact with
+	 * Purpose: Load any previous data, and create ProgramView to begin GUI 
+	 * 
 	 * @throws IOException 
 	 */
 	public void mainMenu() throws IOException
@@ -70,6 +76,7 @@ public class ProgramModel
 		// Create JFrame object to display window
 		programView = new ProgramView(this);
 		
+		// Call display method for ProgramView
 		programView.printMainMenu();
 	}
 	
@@ -112,9 +119,8 @@ public class ProgramModel
 			// Assign current user to new verified login
 			currentUser = loginAttempt;
 			
+			// Give current User the ProgramView
 			currentUser.setProgramView(programView);
-			// Set user activity so File System program can end on log out
-//			currentUser.setIsActive(true);
 			
 			// Return null for successful login
 			return null;
@@ -129,9 +135,8 @@ public class ProgramModel
 	{
 		String users = "";
 		
-		// I changed this method so that we can use it in every view accounts case. Otherwise
-		// we needed a separate method to view user accounts in ViewUserAccountsView
-		if (DATABASE.getUsers()[0] == null) 
+		// If neither SuperUser or first BasicUser exist
+		if (DATABASE.getUsers()[0] == null && DATABASE.getUsers()[1] == null) 
 		{
 			users = "\nNo accounts have been created yet";
 		}
@@ -153,24 +158,9 @@ public class ProgramModel
 					users = users + (i + 1) + " - " + DATABASE.getUsers()[i].getUsername() + "\n";
 				}
 			}
-			
-			// What the code was, but this won't work for the SuperUser delete and view functions
-//			for (int i = 0; i < getDatabase().getUsers().length; i++)
-//			{
-//				if (getDatabase().getUsers()[i] != null)
-//				{
-//					if (i == 0) 
-//					{
-//						users = users + "\n" + getDatabase().getUsers()[i].getUsername();
-//					}
-//					else 
-//					{
-//						users = users + "\n" + getDatabase().getUsers()[i].getUsername();
-//					}
-//				}
-//			}
 		}
 		
+		// Return String of usernames
 		return users;
 	}
 	

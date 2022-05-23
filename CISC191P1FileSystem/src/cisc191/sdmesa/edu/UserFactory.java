@@ -18,7 +18,7 @@ package cisc191.sdmesa.edu;
  * Retrieved March 10, 2022, from https://www.tutorialspoint.com/design_pattern/factory_pattern.htm 
  *  
  *  
- * Version/date: 2.4 04/05/2022
+ * Version/date: 4.3 05/22/22
  * 
  * Responsibilities of class:
  * UserFactory is designed to create User objects in a factory-design like process, which will be added to the File System Database.   

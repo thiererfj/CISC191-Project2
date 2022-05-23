@@ -11,7 +11,7 @@ import java.io.IOException;
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  *  
- * Version/date: 1.8 05/19/2022
+ * Version/date: 4.3 05/22/22
  * 
  * Responsibilities of class:
  * Main is designed to be the entry point of the File System Program. The user will be welcomed to the program,
@@ -19,8 +19,6 @@ import java.io.IOException;
  */
 public class Main 
 {
-	int deleteThis;
-	
 	/**
 	 * Entry point for program
 	 * 
@@ -32,19 +30,7 @@ public class Main
 		// Create ProgramMenu object, which begins the File System
 		ProgramModel fileProgram = new ProgramModel();
 		
-		// Print sweet title art
-//		System.out.println(	
-//				"                                  ____     _       _____           _                 \n " +
-//				"    /\\                          |  __| (_) |    / ____|          | |                \n" +
-//				"    /  \\   _ __   __ _ _ __ _   _| |__   _| | ___| (___  _   _ ___| |_ ___ _ __ ___  \n" +
-//				"   / /\\ \\ |  _ \\ / _  |  __| | | |  __| | | |/ _ \\\\___ \\| | | / __| __/ _ \\  _   _ \\ \n" +
-//				"  / ____ \\| | | | (_| | |  | |_| | |    | | |  __/____) | |_| \\__ \\ ||  __/ | | | | |\n" +
-//				" /_/    \\_\\_| |_|\\__, |_|   \\__, |_|    |_|_|\\___|_____/ \\__  |___/\\__\\___|_| |_| |_|\n" +
-//				"                 __/  |      __/ |                        __/ |                      \n" +
-//				"                 |___/      |___/                        |___/                       \n"
-//				);
-		
-		// Run ProgramMenu mainMenu()
+		// Run ProgramMenu mainMenu
 		fileProgram.mainMenu();
 	}
 	

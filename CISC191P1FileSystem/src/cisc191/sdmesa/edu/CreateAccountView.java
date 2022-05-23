@@ -5,8 +5,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -32,9 +30,7 @@ import javax.swing.JTextArea;
  * This view gathers the required inputs from the user, and communicates with ProgramModel to execute the task.      
  */
 public class CreateAccountView 
-{
-	int deleteThis;
-	
+{	
 	//CreateAccountView has a programView
 	private ProgramView programView;
 	
@@ -60,7 +56,10 @@ public class CreateAccountView
 	 */
     public CreateAccountView(ProgramView programView)
 	{
+		//sets programView to the one in the parameter
 		this.programView = programView;
+
+		//Sets color variables to the ones in programView to allow for cleaner code
 		this.viewBackgroundColor = programView.getViewBackgroundColor();
 		this.viewTitleBoxColor = programView.getViewTitleBoxColor();
 		this.viewButtonColor = programView.getViewButtonColor();
@@ -75,10 +74,11 @@ public class CreateAccountView
      */
     private void printView()
     {
-        programView.getContentPane().removeAll();
+        //Removes all the components from the frame
+		programView.getContentPane().removeAll();
 
+		//Sets the background color of the frame
         programView.getContentPane().setBackground(viewBackgroundColor);
-        //GUI Visual Code for creating an account goes here
         
         // Add back to main menu button functionality
         programView.addBackButton();
@@ -86,39 +86,45 @@ public class CreateAccountView
         // Add title JLabel to window
         programView.addTitleLabel("Create Account", viewTitleBoxColor, viewTextColor);
         
+		//Creates a buttonPanel JPanel with a GridLayout
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 20, 20));
+		//Sets Opaque to true so you can see the panels background color
         buttonPanel.setOpaque(true);
         buttonPanel.setBackground(viewBackgroundColor);
         buttonPanel.setBounds(400, 310, 400, 50);
         
-        // If no super user
+        // If no super user...
         if(!programView.getProgramModel().getDatabase().superUserExists())
         {
+			//Create a superUser Button
         	superUserButton = new JButton("Super User");
             superUserButton.setBackground(viewButtonColor);
             superUserButton.setForeground(viewTextColor);
             superUserButton.setFocusable(false);
+			//Adds the superUserButton to buttonPanel
             buttonPanel.add(superUserButton);
+			
+			//Adds an actionListener to superUserButton
             superUserButton.addActionListener(new ActionListener()
     	    {
-    		      public void actionPerformed(ActionEvent e)
-    		      {
-    		    	  superUserButton.setEnabled(false);
-    		    	  basicUserButton.setEnabled(true);
-    		    	  accountInstanceButton.setEnabled(true);
+    		    public void actionPerformed(ActionEvent e)
+    		    {
+    		    	//Sets this button to false
+					superUserButton.setEnabled(false);
+					//Sets the opposite button, basicUserButton, to true
+    		    	basicUserButton.setEnabled(true);
+					//Enables the accountInstanceButton 
+    		    	accountInstanceButton.setEnabled(true);
     		    	  
-    		    	  try {
+					//We will try to vall the clickSound method  
+    		    	try 
+					{
   						programView.clickSound();
-  					} catch (LineUnavailableException e1) {
-  						// TODO Auto-generated catch block
-  						e1.printStackTrace();
-  					} catch (UnsupportedAudioFileException e1) {
-  						// TODO Auto-generated catch block
-  						e1.printStackTrace();
-  					} catch (IOException e1) {
-  						// TODO Auto-generated catch block
-  						e1.printStackTrace();
-  					}
+  					} 
+					//Will catch any Exception
+					catch (Exception e1) 
+					{
+  					} 
     		    	 
     		      }
     		});
@@ -126,212 +132,239 @@ public class CreateAccountView
         	
         }
         
-        //Click if you want to make basic user account
+        //Creates a basicUserButton that will be clicked on if a user wants to create a basic user
         basicUserButton = new JButton("Basic User");
         basicUserButton.setBackground(viewButtonColor);
         basicUserButton.setForeground(viewTextColor);
         basicUserButton.setFocusable(false);
+		//Adds basicUserButton to buttonPanel
         buttonPanel.add(basicUserButton);
+
+		//Adds an ActionListener to basicUserButton
         basicUserButton.addActionListener(new ActionListener()
 	    {
-		      public void actionPerformed(ActionEvent e)
-		      {
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	//We will try to call the clickSound Method 
+		    	try 
+		    	{
+					programView.clickSound();
+		    	} 
+				//Will catch any Exception
+				catch (Exception e1) 
+				{
+				}
+						
+		    	//Disables the basicUserButton because it was clicked  
+		    	basicUserButton.setEnabled(false);
+				//Allows the accountInstanceButton to be clicked
+		    	accountInstanceButton.setEnabled(true);
 		    	 
-		    	  try 
-		    	  {
-						programView.clickSound();
-		    	  } catch (LineUnavailableException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-		    	  } catch (UnsupportedAudioFileException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-		    	  } catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-		    	  } 
-		    	  
-		    	 basicUserButton.setEnabled(false);
-		    	 accountInstanceButton.setEnabled(true);
-		    	 
-		    	 // If no super user exists
+		    	 // If no super user exists...
 				 if(!programView.getProgramModel().getDatabase().superUserExists())
 		    	 {
+					 //The superUserButton will be enabled because a new super user can be created
 		    		 superUserButton.setEnabled(true);
 		    	 }
 		    	 
 		      }
 		});
         
-        // Add button panel to window
+        //Adds buttonPanel to the frame
         programView.add(buttonPanel);
 
-        // JLabel to ask user for creation username
+        //JLabel to ask user for creation username
 		JLabel enterName = new JLabel("Create a Username:");
 		enterName.setBounds(350, 375, 150, 50);
 		enterName.setForeground(viewTextColor);
+		//Adds enterName to the frame
 		programView.add(enterName);
 		
-		// JLabel to ask user for creation password
+		//JLabel to ask user for creation password
 		JLabel enterPassword = new JLabel("Create a Password:");
 		enterPassword.setBounds(350, 475, 150, 50);
 		enterPassword.setForeground(viewTextColor);
+		//Adds enterPassword to the frame
 		programView.add(enterPassword);
 		
-		// Text box where user enters username
+		//Text box where user enters username
 		JTextArea userName = new JTextArea();
 		userName.setBounds(350, 425, 500, 50);
 		userName.setFont(new Font("Times New Roman", Font.BOLD, 30));	
+		//Adds userName JTextArea to the frame
 		programView.add(userName);
 		
-		// Text box where user enters password
+		//Text box where user enters password
 		JTextArea userPassword = new JTextArea();
 		userPassword.setBounds(350, 525, 500, 50);
 		userPassword.setFont(new Font("Times New Roman", Font.BOLD, 30));
+		//Adds userPassword JTextArea to the frame
 		programView.add(userPassword);
 
+		//Creates a usernameError JTextArea
 		JTextArea usernameError = new JTextArea("");
         usernameError.setBounds(860, 433, 150, 50);
         usernameError.setBackground(viewBackgroundColor);
         usernameError.setForeground(viewTextColor);
+		//Adds usernameError to the frame
         programView.add(usernameError);
         
+		//Creates passwordError JTextArea
         JTextArea passwordError = new JTextArea();
         passwordError.setBounds(860, 533, 150, 50);
         passwordError.setBackground(viewBackgroundColor);
         passwordError.setForeground(viewTextColor);
+		//Adds passwordError to the frame
         programView.add(passwordError);
 		
+		//Creates accountInstanceButton
         accountInstanceButton = new JButton("Create Account");
         accountInstanceButton.setBounds(500, 600, 200, 50);
         accountInstanceButton.setEnabled(false);
         accountInstanceButton.setBackground(viewButtonColor);
         accountInstanceButton.setForeground(viewTextColor);
         accountInstanceButton.setFocusable(false);
+		//Adds accountInstanceButton to the frame
         programView.add(accountInstanceButton);
-        accountInstanceButton.addActionListener(new ActionListener()
-	    {
-		      public void actionPerformed(ActionEvent e)
-		      {
-		    	  try {
-						programView.clickSound();
-					} catch (LineUnavailableException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (UnsupportedAudioFileException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+		//Adds ActionListener to accountInstanceButton
+		accountInstanceButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				//We will try to call the clickSound method
+				try
+				{
+					programView.clickSound();
+				}
+				//Will catch any Exception
+				catch (Exception e1)
+				{
+				}
+
+				//Creates a userType String variable to be used to create a user
+				String userType = "";
+				//Creates a username String that is set to what ever the user puts in the userName JTextArea
+				String username = userName.getText();
+				//Creates a password String that is set to what ever the user puts in the password JTextArea
+				String password = userPassword.getText();
+
+				// If basic user Button is disabled
+				if (!basicUserButton.isEnabled())
+				{
+					//The userType will be basic
+					userType = "basic";
+				}
+				//Else...
+				else
+				{
+					//The userType will be super
+					userType = "super";
+				}
+
+				//If that username hasn't been taken...
+				if (programView.getProgramModel().getDatabase().findUsername(username) == null)
+				{
+					//If the username is empty...
+					if (username.equals(""))
+					{
+						//Send the user an error message
+						usernameError.setText("Please enter a Username");
+
+						//If the password is empty...
+						if (password.equals(""))
+						{
+							//Send the user an error message
+							passwordError.setText("Please enter a password");
+						}
+						//Else...
+						else
+						{
+							//Set the Text to empty so that the user does not see an error message
+							passwordError.setText("");
+						}
+						//Repaints the frame
+						programView.getContentPane().repaint();
+
 					}
-		    	  
-		    	  //Somehow we want a user object to be made.
-		    	  String userType = "";
-		    	  String username = userName.getText();
-		    	  String password = userPassword.getText();
-		    	  
-		    	  //If basic user Button is disabled   (I.E. We are creating a basic user)
-		    	  if(!basicUserButton.isEnabled())
-		    	  {
-		    		  userType = "basic";
-		    	  }
-		    	  else
-		    	  {
-		    		  userType = "super";
-		    	  }
-		    	  
-		    	  
-		    	  //FOR LATER  --> If username and password input is allowed  --> Add user to database
-		    	  if(programView.getProgramModel().getDatabase().findUsername(username) == null)
-		    	  {
-		    		  
-		    		  if(username.equals(""))
-		    		  {
-		    			  usernameError.setText("Please enter a Username");
-		    			  
-		    			  if(password.equals(""))
-		    			  {
-		    				  passwordError.setText("Please enter a password");
-		    			  }
-		    			  else
-		    			  {
-		    				  passwordError.setText("");
-		    			  }
-		    			  programView.getContentPane().repaint();
-		    			  
-		    		  }
-		    		  if(password.equals(""))
-		    		  {
-		    			  passwordError.setText("Please enter a password");
-		    			  if(username.equals(""))
-			    		  {
-			    			  usernameError.setText("Please enter a username");
-			    		  }
-		    			  else
-		    			  {
-		    				  usernameError.setText("");
-		    			  }
-		    			  programView.getContentPane().repaint();
-		    		  }
-		    		  
-		    		  if(username.length() > 15)
-		    		  {
-		    			  usernameError.setText("Username cannot be greater\n than 15 characters");
-		    			  
-		    			  if(password.equals(""))
-		    			  {
-		    				  passwordError.setText("Please enter a password");
-		    			  }
-		    			  else
-		    			  {
-		    				  passwordError.setText("");
-		    			  }
-		    			  programView.getContentPane().repaint();
-		    		  }
-		    		  
-		    		  if(!username.equals("") && !password.equals("") && username.length() < 16)
-		    		  {
-		    			  programView.getProgramModel().createNewAccount(userType, username, password);
-				    	  programView.getContentPane().removeAll();
-				    	  programView.getContentPane().repaint();
-				    	  //System.out.println(DATABASE.getUsers()[0].getUsername());
-				    	  try {
+					//If the password is empty...
+					if (password.equals(""))
+					{
+						//Send the user an error message
+						passwordError.setText("Please enter a password");
+						//If the username is empty...
+						if (username.equals(""))
+						{
+							//Send the user an error message
+							usernameError.setText("Please enter a username");
+						}
+						//Else...
+						else
+						{
+							//Set the usernameError to an empty string so the user does not see an error
+							usernameError.setText("");
+						}
+						//Repaints the frame
+						programView.getContentPane().repaint();
+					}
+
+					//If the length of the given username is over 15...
+					if (username.length() > 15)
+					{
+						//Send the user an error
+						usernameError.setText("Username cannot be greater\n than 15 characters");
+
+						//If the password is empty...
+						if (password.equals(""))
+						{
+							//Send the user an error
+							passwordError.setText("Please enter a password");
+						}
+						//Else...
+						else
+						{
+							//Set the passwordError to an empty string so the user does not see an error
+							passwordError.setText("");
+						}
+						//Repaints the frame
+						programView.getContentPane().repaint();
+					}
+
+					//If the username and the password are not equal and the user name is less than 16 characters long...
+					if (!username.equals("") && !password.equals("") && username.length() < 16)
+					{
+						// Create a new account given the parameters
+						programView.getProgramModel().createNewAccount(userType, username, password);
+						//Removes all of the components from the frame
+						programView.getContentPane().removeAll();
+						
+						// Reprint window
+						programView.getContentPane().repaint();
+
+						//We wil try to call the printMainMenu method
+						try
+						{
 							programView.printMainMenu();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} 
-		    		  }
-		    		  
-		    	  }
-		    	  else
-		    	  {
-		    		 usernameError.setText("That username has \nalready been taken");
-		    		 
-		    		 // This code makes another error message behind usernameError, causing this one
-		    		 // to not show. It's like it's being covered up or something. I tried the above
-		    		 // and it worked how I think this was intended
-//		    		 JTextArea userNameAlreadyTaken = new JTextArea("That Username has \nalready been taken");
-//		    		 userNameAlreadyTaken.setBounds(860, 433, 150, 50);
-//		    		 userNameAlreadyTaken.setBackground(viewBackgroundColor);
-//		    		 userNameAlreadyTaken.setForeground(viewTextColor);
-//		    		 programView.add(userNameAlreadyTaken);
-//		    		 programView.getContentPane().repaint();
-		    	  }
-		    	
-		      }
+						}
+						//Will catch any IOExceptions
+						catch (IOException e1)
+						{
+						}
+					}
+
+				}
+				//Else...
+				else
+				{
+					//Send the user an error message
+					usernameError.setText("That username has \nalready been taken");
+				}
+
+			}
 		});
         
-        
-        //String username = userNameArea.getText(); 
-        //String password = passwordArea.getText();
-        
-        
-        //Set Username / Set Password TextBoxes
-        //Basic and SuperUser JButtons      (Which will disable if Super User is already created)
-        
+        //Allows the frame to be visible
         programView.setVisible(true);
+		//Repaints the frame
         programView.getContentPane().repaint();
     }
 }

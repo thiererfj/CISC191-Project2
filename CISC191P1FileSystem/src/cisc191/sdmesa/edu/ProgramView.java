@@ -31,7 +31,7 @@ import javax.swing.Timer;
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  *  
- * Version/date: 1.8 05/19/2022
+ * Version/date: 4.3 05/22/22
  * 
  * Responsibilities of class:
  * ProgramView is designed to initialize the main window that will display all the different views with unique GUI components
@@ -41,10 +41,8 @@ import javax.swing.Timer;
  */
 public class ProgramView extends JFrame 
 {
-	int deleteThis;
-	
 	// String to display program version in window title bar
-	private final String VERSION = "1.8";
+	private final String VERSION = "4.3";
 	
 	// ProgramView has a ProgramModel to execute the program functions
 	private ProgramModel programModel;
@@ -62,18 +60,26 @@ public class ProgramView extends JFrame
 	 */
 	public ProgramView(ProgramModel programModel)
 	{
+		// Set programModel
 		this.programModel = programModel;
+		
+		// Set final window size
 		setSize(1200, 800);
+		
+		// Set default window closing execution
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		// Do not allow window resizing
 		setResizable(false);
+		
+		// Show window in center of screen
 		setLocationRelativeTo(null);
+		
+		// Set window to have no layout
 		setLayout(null);
+		
+		// Set window title
 		setTitle("Angry File System - Version: " + VERSION);
-
-		// For the first frame
-		// Program Title -->
-		// Create Account/Log in to User Account / View User Accounts / Quit
-		// Program
 	}
 	
 	/**
@@ -82,6 +88,38 @@ public class ProgramView extends JFrame
 	public ProgramModel getProgramModel()
 	{
 		return programModel;
+	}
+	
+	/**
+	 * @return background color
+	 */
+	public Color getViewBackgroundColor() 
+	{
+		return viewBackgroundColor;
+	}
+	
+	/**
+	 * @return title box color
+	 */
+	public Color getViewTitleBoxColor() 
+	{
+		return viewTitleBoxColor;
+	}
+	
+	/**
+	 * @return text color
+	 */
+	public Color getViewTextColor()
+	{
+		return viewTextColor;
+	}
+	
+	/**
+	 * @return button color
+	 */
+	public Color getViewButtonColor()
+	{
+		return viewButtonColor;
 	}
 
 	/**
@@ -97,133 +135,134 @@ public class ProgramView extends JFrame
 		// Add title box label to window
 		addTitleLabel("Angry File System", viewTitleBoxColor, viewTextColor);
 		
-		// Add button panel for user option buttons
+		// Create button panel for user option buttons, set colors, bounds, visibility, and add to window
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 20, 20));
 		buttonPanel.setOpaque(true);
 		buttonPanel.setBackground(viewBackgroundColor);
 		buttonPanel.setBounds(150, 600, 900, 100);
-
-		// Maybe we can rework this? What if there are 9 basic users but no super user
-		// yea if you make 9 basic users, it just goes blank... 
-		if (programModel.getDatabase().getUsers()[9] == null)
+		buttonPanel.setVisible(true);
+		add(buttonPanel);
+		
+		// If not all User accounts have been created yet, create account button will be present
+		if (!programModel.getDatabase().allUsersCreated())
 		{
+			// Create create account button, set colors, set focus, and add to window
 			JButton createAccountButton = new JButton("Create Account");
 			createAccountButton.setBackground(viewButtonColor);
 			createAccountButton.setForeground(viewTextColor);
 			createAccountButton.setFocusable(false);
 			buttonPanel.add(createAccountButton);
-
-			// Add button panel to main window
-			add(buttonPanel);
-
+			
+			// Add action listener to create account button
 			createAccountButton.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e)
 				{
+					// Run create account visuals 
 					createAccountVisuals();
 					
-					try {
+					// Try to play click sound
+					try
+					{
 						clickSound();
-					} catch (LineUnavailableException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (UnsupportedAudioFileException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
 					}
-					
-					
+					// Catch possible exceptions
+					catch (Exception e1)
+					{
+						// Do nothing, sound will not play 
+					}
 				}
 			});
 		}
-
+		
+		// Create log in button, set colors, set focus, and add to window
 		JButton loginButton = new JButton("Log In");
 		loginButton.setBackground(viewButtonColor);
 		loginButton.setForeground(viewTextColor);
 		loginButton.setFocusable(false);
 		buttonPanel.add(loginButton);
-
+		
+		// Add action listener to log in button
 		loginButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				// Run login visuals
 				loginVisuals();
 				
-				try {
+				// Try to play click sound
+				try
+				{
 					clickSound();
-				} catch (LineUnavailableException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (UnsupportedAudioFileException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
+				// Catch possible exceptions
+				catch (Exception e1)
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} 
 			}
 		});
-
+		
+		// Create view accounts button, set colors, set focus, and add to window
 		JButton viewUserAccountsButton = new JButton("View Accounts");
 		viewUserAccountsButton.setBackground(viewButtonColor);
 		viewUserAccountsButton.setForeground(viewTextColor);
 		viewUserAccountsButton.setFocusable(false);
 		buttonPanel.add(viewUserAccountsButton);
-
+		
+		// Add action listener to view accounts button
 		viewUserAccountsButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				// Run view user accounts visuals
 				viewUserAccountsVisuals();
 				
-				try {
+				// Try to play click sound
+				try
+				{
 					clickSound();
-				} catch (LineUnavailableException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (UnsupportedAudioFileException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				}
+				catch (Exception e1)
+				{
+					// Do nothing, sound will not play
 				}
 			}
 		});
-
+		
+		// Create quit program button, set colors, set focus, and add to window
 		JButton quitProgramButton = new JButton("Quit Program (Save Data)");
 		quitProgramButton.setBackground(viewButtonColor);
 		quitProgramButton.setForeground(viewTextColor);
 		quitProgramButton.setFocusable(false);
 		buttonPanel.add(quitProgramButton);
-
+		
+		// Add action listener to quit program button
 		quitProgramButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				try {
+				// Try to play click sound
+				try
+				{
 					clickSound();
-				} catch (LineUnavailableException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (UnsupportedAudioFileException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
-				
+				catch (Exception e1)
+				{
+					// Do nothing, sound will not play
+				}
+	
+				// Try to run close program visuals
 				try
 				{
 					closeProgramVisuals();
 				}
+				// Catch possible exception from data saving function
 				catch (IOException e1)
 				{
-					e1.printStackTrace();
+					// Should not happen, but print error dialog box if so
+					JOptionPane.showMessageDialog(null, "Oopsie! Your data cannot be saved, and you'll have to exit out of the window to quit");
 				}
 			}
 		});
@@ -237,6 +276,7 @@ public class ProgramView extends JFrame
 	 */
 	private void createAccountVisuals()
 	{
+		// Create new CreateAccountView object to display create account functionality
 		CreateAccountView createAccountView = new CreateAccountView(this);
 	}
 
@@ -245,6 +285,7 @@ public class ProgramView extends JFrame
 	 */
 	private void loginVisuals()
 	{
+		// Create new LoginView object to display log in functionality
 		LoginView loginView = new LoginView(this);
 	}
 
@@ -253,7 +294,7 @@ public class ProgramView extends JFrame
 	 */
 	private void viewUserAccountsVisuals()
 	{
-		// Create new VUAV object to display user accounts info
+		// Create new ViewUserAccountsView object to display view user accounts functionality
 		ViewUserAccountsView viewUserAccountsView = new ViewUserAccountsView(this);
 	}
 
@@ -264,6 +305,7 @@ public class ProgramView extends JFrame
 	 */
 	private void closeProgramVisuals() throws IOException
 	{
+		// Create new QuitView object to display quit program functionality
 		QuitView quitView = new QuitView(this);
 	}
 
@@ -272,41 +314,42 @@ public class ProgramView extends JFrame
 	 */
 	public void addBackButton()
 	{
+		// Create back button, set colors, set focus, set bounds, and add to window
 		JButton backButton = new JButton("Back");
 		backButton.setBackground(viewButtonColor);
 		backButton.setForeground(viewTextColor);
 		backButton.setFocusable(false);
 		backButton.setBounds(20, 20, 70, 40);
-
-		// Add widget to this window
 		add(backButton);
-
+		
+		// Add action listener to back button 
 		backButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
+				// Reset window
 				getContentPane().removeAll();
 				getContentPane().repaint();
 				
-				try {
+				// Try to play click sound
+				try
+				{
 					clickSound();
-				} catch (LineUnavailableException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (UnsupportedAudioFileException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				}
+				catch (Exception e1)
+				{
+					// Do nothing, sound will not play
 				}
 				
-				
-				try {
+				// Try to reprint main menu view
+				try
+				{
 					printMainMenu();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				}
+				// Catch possible exceptions, will never happen
+				catch (IOException e1)
+				{
+					// Do nothing
 				}
 			}
 		});
@@ -321,6 +364,7 @@ public class ProgramView extends JFrame
 	 */
 	public void addTitleLabel(String title, Color backgroundColor, Color foregroundColor)
 	{
+		// Create title label, set alignment, set colors, set bounds, set font, and add to window
 		JLabel titleLabel = new JLabel(title);
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
 		titleLabel.setOpaque(true);
@@ -331,32 +375,28 @@ public class ProgramView extends JFrame
 		add(titleLabel);
 	}
 	
-	public Color getViewTitleBoxColor() 
-	{
-		return viewTitleBoxColor;
-	}
-	
-	public Color getViewTextColor()
-	{
-		return viewTextColor;
-	}
-	
-	public Color getViewButtonColor()
-	{
-		return viewButtonColor;
-	}
-	
-	public Color getViewBackgroundColor() 
-	{
-		return viewBackgroundColor;
-	}
-	
+	/**
+	 * Play an audio file containing a clicking sound
+	 * 
+	 * @throws LineUnavailableException
+	 * @throws UnsupportedAudioFileException
+	 * @throws IOException
+	 */
 	public void clickSound() throws LineUnavailableException, UnsupportedAudioFileException, IOException
 	{
-		File barkSound = new File("ClickSound.wav");
-        AudioInputStream audioStream = AudioSystem.getAudioInputStream(barkSound);
+		// Create file object containing audio file
+		File clickSound = new File("ClickSound.wav");
+		
+		// Create audio input stream from audio file
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(clickSound);
+        
+        // Creates clip object instance in order to open and start the audio file
         Clip clip = AudioSystem.getClip();
+        
+        // Open clip in audio stream 
         clip.open(audioStream);
+        
+        // Play the clip 
         clip.start();
 	}
 

@@ -1,47 +1,60 @@
 package cisc191.sdmesa.edu;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
 
 public class UserMenuView 
 {
+	//UserMenuView has a programView
 	private ProgramView programView;
+	//UserMenuView has a buttonPanel
 	private JPanel buttonPanel;
+	//UserMenuView has a variable that determines if currentUserIsSuper
 	private boolean currentUserIsSuper;
+
+	//UserMenuView has Color variables 
 	private Color viewBackgroundColor;
 	private Color viewTitleBoxColor;
 	private Color viewButtonColor;
 	private Color viewTextColor;
 	
+	/**
+	 * Purpose: Constructor for UserMenuView
+	 * 
+	 * @param programView
+	 * @param currentUserIsSuper
+	 */
 	public UserMenuView (ProgramView programView, boolean currentUserIsSuper)
 	{
+		//Sets programView to the one from the parameter
 		this.programView = programView;
+		//Sets currentUserIsSuper to the one from the parameter
 		this.currentUserIsSuper = currentUserIsSuper;
+
+		//Sets color variables to their corresponding variables in programView to allow for cleaner code
 		this.viewBackgroundColor = programView.getViewBackgroundColor();
 		this.viewTitleBoxColor = programView.getViewTitleBoxColor();
 		this.viewButtonColor = programView.getViewButtonColor();
 		this.viewTextColor = programView.getViewTextColor();
+
+		//Calls the printView method
 		printView();
 	}
 	
+	/**
+	 * Purpose: To show the UserMenu
+	 * 
+	 */
 	public void printView() 
 	{
+		//Removes all of the components from the frame
 		programView.getContentPane().removeAll();
     	
     	// Add title JLabel to window
@@ -55,348 +68,236 @@ public class UserMenuView
     	displayCurrentUsername.setBackground(viewBackgroundColor);
     	displayCurrentUsername.setForeground(viewTextColor);
     	displayCurrentUsername.setEditable(false);
+		//Adds displayCurrentUsername to the frame
     	programView.add(displayCurrentUsername);
+    	
+    	// Create button panel for user menu function buttons
+    	buttonPanel = new JPanel(new GridLayout(1, 4, 20, 20));
+        buttonPanel.setOpaque(true);
+        buttonPanel.setBackground(viewBackgroundColor);
+        buttonPanel.setBounds(200, 600, 800, 100);
         
-    	// Set button panel layout depending on user type
-    	if (currentUserIsSuper) 
-    	{
-    		buttonPanel = new JPanel(new GridLayout(1, 6, 20, 20));
-            buttonPanel.setOpaque(true);
-            buttonPanel.setBackground(viewBackgroundColor);
-            buttonPanel.setBounds(100, 600, 1000, 100);
-    	}
-    	else 
-    	{
-    		buttonPanel = new JPanel(new GridLayout(1, 4, 20, 20));
-            buttonPanel.setOpaque(true);
-            buttonPanel.setBackground(viewBackgroundColor);
-            buttonPanel.setBounds(200, 600, 800, 100);
-    	}
         
+        // Create upload file button
         JButton uploadFileButton = new JButton("Upload File");
         uploadFileButton.setBackground(viewButtonColor);
         uploadFileButton.setForeground(viewTextColor);
         uploadFileButton.setFocusable(false);
+		//Adds uploadFileButton to buttonPanel
         buttonPanel.add(uploadFileButton);
             
         // Add button panel to main window
         programView.add(buttonPanel);
 
+		//Adds an actionListener to uploadFileButton
 		uploadFileButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				try {
+				//We will try to call the clickSound method
+				try 
+				{
 					programView.clickSound();
-				} catch (LineUnavailableException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (UnsupportedAudioFileException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} 
+				//Will catch any Exception
+				catch (Exception e1) 
+				{
+					// No sound will play
 				}
 				
+				//Calls the uploadFileVisuals method
 				uploadFileVisuals();
 			}
 		});
        
-        //GOODDDDDD
-
+		// Create download file button
 		JButton downloadFileButton = new JButton("Download File");
 		downloadFileButton.setBackground(viewButtonColor);
 		downloadFileButton.setForeground(viewTextColor);
 		downloadFileButton.setFocusable(false);
+		//Adds downloadFileButton to buttonPanel
 		buttonPanel.add(downloadFileButton);
 
+		//Adds an actionListener to downloadFileButton
 		downloadFileButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				try {
+				//We will try to call the clickSound method
+				try 
+				{
 					programView.clickSound();
-				} catch (LineUnavailableException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (UnsupportedAudioFileException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				} 
+				//Will catch any Exception
+				catch (Exception e1) 
+				{
+					// No sound will play
+				} 
 				
+				//Calls the downloadFileVisuals method
 				downloadFileVisuals();
 			}
 		});
 		
-		// Add extra buttons if current user is super
-		if (currentUserIsSuper)
+		// Create view files button
+		JButton viewFilesButton = new JButton("View Files");
+		viewFilesButton.setForeground(viewTextColor);
+		viewFilesButton.setBackground(viewButtonColor);
+		viewFilesButton.setFocusable(false);
+		//Adds the viewFilesButton to buttonPanel
+		buttonPanel.add(viewFilesButton);
+		
+		//Adds an actionListener to viewFilesButton
+		viewFilesButton.addActionListener(new ActionListener()
 		{
-			
-			// I don't think this is necessary
-			
-//			JButton deleteFileButton = new JButton();
-//			deleteFileButton.setLayout(new BoxLayout(deleteFileButton, BoxLayout.Y_AXIS));
-//			deleteFileButton.add(Box.createRigidArea(new Dimension(0, 30)));
-//			JLabel firstLine = new JLabel("    Delete Your");
-//			firstLine.setForeground(viewTextColor);
-//			JLabel secondLine = new JLabel("       Own File");
-//			secondLine.setForeground(viewTextColor);
-//			deleteFileButton.add(firstLine);
-//			deleteFileButton.add(secondLine);
-//			deleteFileButton.setBackground(viewButtonColor);
-//			deleteFileButton.setFocusable(false);
-//			buttonPanel.add(deleteFileButton);
-//
-//			deleteFileButton.addActionListener(new ActionListener()
-//			{
-//				public void actionPerformed(ActionEvent e)
-//				{
-//					deleteFileVisuals();
-//				}
-//			});
-			
-			JButton deleteUserFilesButton = new JButton("Delete Files");
-			//deleteUserFilesButton.setLayout(new BoxLayout(deleteUserFilesButton, BoxLayout.Y_AXIS));
-			//deleteUserFilesButton.add(Box.createRigidArea(new Dimension(0, 30)));
-			deleteUserFilesButton.setForeground(viewTextColor);
-//			firstLine = new JLabel(" Delete Another");
-//			firstLine.setForeground(viewTextColor);
-//			secondLine = new JLabel("     User's File");
-//			secondLine.setForeground(viewTextColor);
-//			deleteUsersFileButton.add(firstLine);
-//			deleteUsersFileButton.add(secondLine);
-			deleteUserFilesButton.setBackground(viewButtonColor);
-			deleteUserFilesButton.setFocusable(false);
-			buttonPanel.add(deleteUserFilesButton);
+			public void actionPerformed(ActionEvent e)
+			{
+				//We will try to call the clickSound method
+				try 
+				{
+					programView.clickSound();
+				} 
+				//Will catch any Exception
+				catch (Exception e1)
+				{
+					// No sound will play
+				}
+				
+				//Calls the viewFilesVisuals method
+				viewFilesVisuals();
+			}
+		});
+		
+		// Create delete file button
+		JButton deleteFileButton = new JButton("Delete File");
+		deleteFileButton.setBackground(viewButtonColor);
+		deleteFileButton.setForeground(viewTextColor);
+		deleteFileButton.setFocusable(false);
+		//Adds deleteFileButton to buttonPanel
+		buttonPanel.add(deleteFileButton);
 
-			deleteUserFilesButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					try {
-						programView.clickSound();
-					} catch (LineUnavailableException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (UnsupportedAudioFileException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
-					deleteFromAnyUsersFilesVisuals();
-				}
-			});
-			
-			
-			
-			
-			// Is this really necessary?
-			
-//			JButton viewFilesButton = new JButton();
-//			viewFilesButton.setLayout(new BoxLayout(viewFilesButton, BoxLayout.Y_AXIS));
-//			viewFilesButton.add(Box.createRigidArea(new Dimension(0, 30)));
-//			firstLine = new JLabel("     View Your");
-//			firstLine.setForeground(viewTextColor);
-//			secondLine = new JLabel("     Own Files");
-//			secondLine.setForeground(viewTextColor);
-//			viewFilesButton.add(firstLine);
-//			viewFilesButton.add(secondLine);
-//			viewFilesButton.setBackground(viewButtonColor);
-//			viewFilesButton.setFocusable(false);
-//			buttonPanel.add(viewFilesButton);
-//			
-//			viewFilesButton.addActionListener(new ActionListener()
-//			{
-//				public void actionPerformed(ActionEvent e)
-//				{
-//					viewCurrentUserFilesVisuals();
-//				}
-//			});
-			
-			JButton viewFilesButton = new JButton("View Files");
-			;
-			viewFilesButton.setForeground(viewTextColor);
-			viewFilesButton.setBackground(viewButtonColor);
-			viewFilesButton.setFocusable(false);
-			buttonPanel.add(viewFilesButton);
-			
-			viewFilesButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					try {
-						programView.clickSound();
-					} catch (LineUnavailableException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (UnsupportedAudioFileException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
-					viewSelectedUsersFilesVisuals();
-				}
-			});
-		}
-		// Otherwise don't add extra button
-		else 
+		//Adds actionListener to deleteFileButton
+		deleteFileButton.addActionListener(new ActionListener()
 		{
-			JButton deleteFileButton = new JButton("Delete File");
-			deleteFileButton.setBackground(viewButtonColor);
-			deleteFileButton.setForeground(viewTextColor);
-			deleteFileButton.setFocusable(false);
-			buttonPanel.add(deleteFileButton);
-
-			deleteFileButton.addActionListener(new ActionListener()
+			public void actionPerformed(ActionEvent e)
 			{
-				public void actionPerformed(ActionEvent e)
+				//We will try to call the clickSound method
+				try 
 				{
-					try {
-						programView.clickSound();
-					} catch (LineUnavailableException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (UnsupportedAudioFileException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
-					deleteFileVisuals();
-				}
-			});
-			
-			JButton viewFilesButton = new JButton("View Files");
-			viewFilesButton.setBackground(viewButtonColor);
-			viewFilesButton.setForeground(viewTextColor);
-			viewFilesButton.setFocusable(false);
-			buttonPanel.add(viewFilesButton);
-			
-			viewFilesButton.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
+					programView.clickSound();
+				} 
+				//Catches any Exception
+				catch (Exception e1) 
 				{
-					try {
-						programView.clickSound();
-					} catch (LineUnavailableException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (UnsupportedAudioFileException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
-					viewCurrentUserFilesVisuals();
+					// No sound will play
 				}
-			});
-		}
+				
+				//Calls the deleteFileVisuals method
+				deleteFileVisuals();
+			}
+		});
         
+		// Create log out button
         JButton logOutButton = new JButton("Log Out");
         logOutButton.setBackground(viewButtonColor);
         logOutButton.setForeground(viewTextColor);
         logOutButton.setFocusable(false);
+		//Adds logOutButton to buttonPanel
         buttonPanel.add(logOutButton);
         
+		//Adds ActionListener to logOutButtoN
         logOutButton.addActionListener(new ActionListener()
 	    {
-		      public void actionPerformed(ActionEvent e)
-		      {
-		    	  try {
-						programView.clickSound();
-					} catch (LineUnavailableException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (UnsupportedAudioFileException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-		    	  
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	//We will try to call the clickSound method
+				try 
+				{
+					programView.clickSound();
+				} 
+				//Will catch any Exception
+				catch (Exception e1) 
+				{
+				} 
+		    	
+				//Will remove all of the components from the frame
 		    	programView.getContentPane().removeAll();
-		    	programView.repaint();
 		    	
+		    	programView.getContentPane().repaint();
 		    	
-		    	try {
+		    	//We will try to call the printMainMenu method
+		    	try 
+				{
 					programView.printMainMenu();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				
+				} 
+				//Will catch an IOException
+				catch (IOException e1) 
+				{
+					// No sound will play
 				}
-		      }
+		    }
 		});
 		
-		
-		//BasicUser Options
-//		System.out.println("1) Upload a file to the database");
-//		System.out.println("2) Save a database file to your machine");
-//		System.out.println("3) Delete a file in the database");
-//		System.out.println("4) View your database files");
-//		System.out.println("5) Log out of current user");
-		
-		
-		//SuperUser Options
-//		System.out.println("1) Upload a file to the database");
-//		System.out.println("2) Save a database file to your machine");
-//		System.out.println("3) Delete a file in the database");
-//		System.out.println("4) View your database files");
-//		System.out.println("5) View another users database files");
-//		System.out.println("6) Log out of current user");
-		
-		
+		///Repaints the frame
 		programView.repaint();
+		//Allows the frame to be visible
 		programView.setVisible(true);
 	}
 	
+	/**
+	 * Purpose: To make an instance of uploadFileView
+	 *
+	 */
 	private void uploadFileVisuals() 
 	{
 		UploadFileView uploadFileView = new UploadFileView(this, programView);
 	}
 	
+	/**
+	 * Purpose: To make an instance of downloadFileView
+	 *
+	 */
 	private void downloadFileVisuals() 
 	{
 		DownloadFileView downloadFileView = new DownloadFileView(this, programView);
 	}
 	
+	/**
+	 * Purpose: To make an instance of deleteFileView
+	 *
+	 */
 	private void deleteFileVisuals() 
 	{
-		// Pass 1 for basic user view type
-		DeleteFileView deleteFileView = new DeleteFileView(this, programView, 1);
+		// If current User is SuperUser
+		if (currentUserIsSuper)
+		{
+			DeleteFileView deleteFileView = new DeleteFileView(this, programView, 2);
+		}
+		// If current User is BasicUser
+		else 
+		{
+			DeleteFileView deleteFileView = new DeleteFileView(this, programView, 1);
+		}
 	}
 	
-	private void deleteFromAnyUsersFilesVisuals() 
+	/**
+	 * Purpose: To make an instance of viewFilesView
+	 *
+	 */
+	private void viewFilesVisuals() 
 	{
-		// Pass 2 for super user view type
-		DeleteFileView deleteFileView = new DeleteFileView(this, programView, 2);
-	}
-	
-	
-	private void viewCurrentUserFilesVisuals() 
-	{
-		// Pass 1 for basic user view type
-		ViewFilesView viewFilesView = new ViewFilesView(this, programView, 1);
-	}
-	
-	private void viewSelectedUsersFilesVisuals() 
-	{
-		// Pass 2 for super user view type
-		ViewFilesView viewFilesView = new ViewFilesView(this, programView, 2);
+		// If current User is SuperUser
+		if (currentUserIsSuper)
+		{
+			ViewFilesView viewFilesView = new ViewFilesView(this, programView, 2);
+		}
+		// If current User is BasicUser
+		else 
+		{
+			// Pass 1 for basic user view type
+			ViewFilesView viewFilesView = new ViewFilesView(this, programView, 1);
+		}
 	}
 	
 	/**
@@ -404,35 +305,35 @@ public class UserMenuView
 	 */
 	public void addBackButton()
 	{
+		//Creates a backButton that will be used to go back to the previous menu
 		JButton backButton = new JButton("Back");
 		backButton.setBackground(viewButtonColor);
 		backButton.setForeground(viewTextColor);
 		backButton.setFocusable(false);
 		backButton.setBounds(20, 20, 70, 40);
 
-		// Add widget to this window
+		//Adds backButton to the frame
 		programView.add(backButton);
 
+		//Adds an actionListener to backButton
 		backButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				
-				try {
+				//We will try to call the clickSound method
+				try 
+				{
 					programView.clickSound();
-				} catch (LineUnavailableException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (UnsupportedAudioFileException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				} 
+				//Will catch any Exception
+				catch (Exception e1)
+				{
 				}
 				
+				//Removes all of the components from the frame
 				programView.getContentPane().removeAll();
-				programView.getContentPane().repaint();
+
+				//Calls the printView method
 				printView();
 			}
 		});

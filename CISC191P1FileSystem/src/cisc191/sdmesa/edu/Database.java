@@ -1,13 +1,5 @@
 package cisc191.sdmesa.edu;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Objects;
-
 /**
  * Lead Author(s):
  * @author Anthony Mayoral
@@ -17,7 +9,7 @@ import java.util.Objects;
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  *  
- * Version/date: 1.8 05/19/2022
+ * Version/date: 4.3 05/22/22
  * 
  * Responsibilities of class:
  * Database is designed to be a singleton class which acts as the "database" for storing all User instances (user accounts),
@@ -26,8 +18,6 @@ import java.util.Objects;
  */
 public class Database 
 {
-	int deleteThis;
-	
 	// Database has n number of Files per each User
 	// Files[0][n] will always represent the SuperUser
 	// Files[1 - 9][n] will represent the BasicUsers, with each BasicUser's serial number corresponding to their row index 
@@ -147,17 +137,23 @@ public class Database
 	 */
 	public String[] getSuperUsername() 
 	{
+		// Create String array length 1 (for only SuperUser)
 		String[] superUsername = new String[1];
-
+		
+		// If SuperUser does not exist in User[]
 		if (users[0] == null) 
 		{
+			// Set username to "null"
 			superUsername[0] = "null";
 		}
+		// If SuperUser exists
 		else 
 		{
+			// Set username
 			superUsername[0] = users[0].getUsername();
 		}
 		
+		// Return super user username
 		return superUsername;
 	}
 	
@@ -166,20 +162,27 @@ public class Database
 	 */
 	public String[] getBasicUsernames() 
 	{
+		// Create String array length 9 (for nine BasicUsers)
 		String[] basicUsernames = new String[9];
-
+		
+		// Loop through User[] array, begin at index 1 to grab first BasicUser
 		for (int i = 1; i < users.length; i++) 
 		{
+			// If BasicUser does not exist
 			if (users[i] == null) 
 			{
+				// Set username to "null" (i - 1 to handle index change)
 				basicUsernames[i - 1] = "null";
 			}
+			// If BasicUser exists
 			else 
 			{
+				// Set username (i - 1 to handle index change)
 				basicUsernames[i - 1] = users[i].getUsername();
 			}
 		}
-
+		
+		//Return basic user usernames
 		return basicUsernames;
 	}
 	
@@ -188,11 +191,14 @@ public class Database
 	 */
 	public boolean superUserExists() 
 	{
+		// If SuperUser does not exist in User[] array
 		if (users[0] != null)
 		{
+			// Return true
 			return true;
 		}
-
+		
+		// SuperUser does not exist, return false
 		return false;
 	}
 	
@@ -201,11 +207,46 @@ public class Database
 	 */
 	public boolean basicUsersExist() 
 	{
+		// If first instance of BasicUser exists in User[] array
 		if (users[1] != null) 
 		{
+			// Return true
 			return true;
 		}
-
+		
+		// No BasicUsers exist, return false
+		return false;
+	}
+	
+	/**
+	 * @return true if all SuperUser and BasicUser accounts have been created, otherwise false
+	 */
+	public boolean allUsersCreated()
+	{
+		// If SuperUser and last BasicUser exist
+		if (users[9] != null && users[0] != null)
+		{
+			// Return true
+			return true;
+		}
+		
+		// If not all Users have been created, return false
+		return false;
+	}
+	
+	/**
+	 * @return true if all BasicUser accounts have been created, otherwise false
+	 */
+	public boolean allBasicUsersCreated()
+	{
+		// If last BasicUser exists
+		if (users[9] != null)
+		{
+			// Return true
+			return true;
+		}
+		
+		// Return false
 		return false;
 	}
 	
