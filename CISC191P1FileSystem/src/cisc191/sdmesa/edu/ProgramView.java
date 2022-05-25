@@ -79,7 +79,7 @@ public class ProgramView extends JFrame
 		setLayout(null);
 		
 		// Set window title
-		setTitle("Angry File System - Version: " + VERSION);
+		setTitle("GUI File System - Version: " + VERSION);
 	}
 	
 	/**
@@ -133,7 +133,7 @@ public class ProgramView extends JFrame
 		getContentPane().setBackground(viewBackgroundColor);
 
 		// Add title box label to window
-		addTitleLabel("Angry File System", viewTitleBoxColor, viewTextColor);
+		addTitleLabel("GUI File System", viewTitleBoxColor, viewTextColor);
 		
 		// Create button panel for user option buttons, set colors, bounds, visibility, and add to window
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 4, 20, 20));
