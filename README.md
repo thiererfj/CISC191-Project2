@@ -1,2 +1,2 @@
 # CISC191-Project2
-AngryFileSystem with GUI
+File system with GUI
