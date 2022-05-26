@@ -16,7 +16,7 @@ import java.nio.file.Paths;
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  *  
- * Version/date: 4.4 05/22/22
+ * Version/date: 4.5 05/25/22
  * 
  * Responsibilities of class:
  * DataSaver is designed to enable data persistence in the program by saving created FileData objects (files) and User objects (accounts)

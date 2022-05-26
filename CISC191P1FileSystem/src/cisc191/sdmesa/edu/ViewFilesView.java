@@ -30,7 +30,7 @@ import javax.swing.JTextArea;
  * Retrieved March 10, 2022, from https://www.tutorialspoint.com/design_pattern/factory_pattern.htm 
  *  
  *  
- * Version/date: 4.4 05/22/22
+ * Version/date: 4.5 05/25/22
  * 
  * Responsibilities of class:
  * ViewFilesView is designed to reprint the window with GUI components allowing a user to view a certain user's files.

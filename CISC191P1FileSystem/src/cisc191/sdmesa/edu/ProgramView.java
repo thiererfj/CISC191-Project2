@@ -31,7 +31,7 @@ import javax.swing.Timer;
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  *  
- * Version/date: 4.4 05/22/22
+ * Version/date: 4.5 05/25/22
  * 
  * Responsibilities of class:
  * ProgramView is designed to initialize the main window that will display all the different views with unique GUI components
@@ -42,7 +42,7 @@ import javax.swing.Timer;
 public class ProgramView extends JFrame 
 {
 	// String to display program version in window title bar
-	private final String VERSION = "4.4";
+	private final String VERSION = "4.5";
 	
 	// ProgramView has a ProgramModel to execute the program functions
 	private ProgramModel programModel;
@@ -127,7 +127,7 @@ public class ProgramView extends JFrame
 	 * 
 	 * @throws IOException for audio exceptions or data saving exceptions (shouldn't happen)
 	 */
-	public void printMainMenu() throws IOException
+	public void printMainMenu() 
 	{
 		// Set black background here so sub frame doesn't change it when going back to main menu
 		getContentPane().setBackground(viewBackgroundColor);
@@ -341,16 +341,7 @@ public class ProgramView extends JFrame
 					// Do nothing, sound will not play
 				}
 				
-				// Try to reprint main menu view
-				try
-				{
-					printMainMenu();
-				}
-				// Catch possible exceptions, will never happen
-				catch (IOException e1)
-				{
-					// Do nothing
-				}
+				printMainMenu();
 			}
 		});
 	}

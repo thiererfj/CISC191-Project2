@@ -19,7 +19,7 @@ import javax.swing.JTextArea;
  * Morelli, R., & Walde, R. (2016). Java, Java, Java: Object-Oriented Problem Solving.
  * Retrieved from https://open.umn.edu/opentextbooks/textbooks/java-java-java-object-oriented-problem-solving
  *  
- * Version/date: 4.4 05/22/22
+ * Version/date: 4.5 05/25/22
  * 
  * Responsibilities of class:
  * UserMenuView is designed to reprint the window with GUI components allowing a logged in User to interact with the
@@ -239,19 +239,11 @@ public class UserMenuView
 				//Will remove all of the components from the frame
 		    	programView.getContentPane().removeAll();
 		    	
+		    	// Refresh GUI components 
 		    	programView.getContentPane().repaint();
 		    	
-		    	//We will try to call the printMainMenu method
-		    	try 
-				{
-					programView.printMainMenu();
-				
-				} 
-				//Will catch an IOException
-				catch (IOException e1) 
-				{
-					// No sound will play
-				}
+		    	// Print main menu to "log out"
+		    	programView.printMainMenu();
 		    }
 		});
 		

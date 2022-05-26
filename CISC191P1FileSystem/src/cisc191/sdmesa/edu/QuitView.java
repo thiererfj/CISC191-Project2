@@ -27,7 +27,7 @@ import javax.swing.Timer;
  * Tutorialspoint.com. 2022. SWING - WindowEvent Class. 
  * [online] Available at: <https://www.tutorialspoint.com/swing/swing_window_event.htm> [Accessed 22 May 2022].
  *  
- * Version/date: 4.4 05/22/22
+ * Version/date: 4.5 05/25/22
  * 
  * Responsibilities of class:
  * QuitView is designed to reprint the window with GUI components allowing a user to exit the program while
