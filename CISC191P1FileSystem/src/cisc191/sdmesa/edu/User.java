@@ -223,6 +223,7 @@ abstract class User implements Fileable
 			// Catch checked exception if file can't be created on user's machine
 			catch (IOException e) 
 			{	
+				System.out.println("There was a filepath error");
 				// Return error message
 				return "filePath";
 			}

@@ -44,6 +44,8 @@ public class ViewFilesView
 	private ProgramView programView;
 	//ViewFilesView has a fileList
 	private String fileList = "";
+	//ViewFilesView has a user that is selected
+	private int userSelected;
 	
 	// variable for view Type, 1 to view their own files, 2 to view another user's files
 	private int viewType;
@@ -113,6 +115,10 @@ public class ViewFilesView
 		{
 			//fileList is equal to the current users files
 			fileList = programView.getProgramModel().getCurrentUser().viewUserFiles();
+			
+			//Sets user selected to the current user. Since basic users can only access their own files
+			userSelected = programView.getProgramModel().getCurrentUser().getSerialNumber();
+			
 			//Calls the viewFiles method in order to display the appropriate users files
 			viewFiles();
 		}
@@ -143,7 +149,7 @@ public class ViewFilesView
 			//Creates a button array
 			JButton[] selectButtons = new JButton[10];
 
-			// Loop to make file buttons and add to panel
+			// Loop to make user buttons and add to panel
 			for (int i = 0; i < 10; i++)
 			{
 				//This current iteration of the array is equal to a new button that is labeled as i + 1
@@ -199,13 +205,16 @@ public class ViewFilesView
 						// Do nothing, sound will not play
 					} 
 					
-					// Loop through file delete buttons to see which is disabled
+					// Loop through user buttons to see which is disabled
 					// (the selected user)
 					for (int i = 0; i < 10; i++)
 					{
 						// If button is disabled (user clicked)
 						if (!(selectButtons[i].isEnabled()))
 						{
+							//The user selected is set to the button that is disabled
+							userSelected = i;
+							
 							// Try to view and delete selected users files
 							try
 							{
@@ -216,7 +225,7 @@ public class ViewFilesView
 								viewFiles();
 								
 							}
-							// Handle npe if user selected null User account
+							// Handles NullPointerException if user selected null User account
 							catch (NullPointerException e2)
 							{
 								// Print error message to screen
@@ -336,8 +345,10 @@ public class ViewFilesView
 							//Removes all components from the frame
 							programView.getContentPane().removeAll();
 
+							
 							// Creates a variable for currentUserSerialNumber so that the code is more easily readable in later code
-							int currentUserSerialNumber = programView.getProgramModel().getCurrentUser().getSerialNumber();
+							int currentUserSerialNumber = userSelected;
+							
 
 							// String for fileContents so that the code is more
 							// easily readable in later code
